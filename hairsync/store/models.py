@@ -9,7 +9,7 @@ from django.utils.text import slugify
 class Category(models.Model):
     category_id = models.AutoField(primary_key=True)
     name = models.CharField(max_length=255)
-    slug = models.SlugField(max_length=255, unique=True, editable=False, default=slugify('default-category-slug'))
+  #  slug = models.SlugField(max_length=255, unique=True, editable=False)
 
     def __str__(self):
         return self.name
@@ -18,13 +18,13 @@ class Category(models.Model):
         return {
             'category_id': self.category_id,
             'name': self.name,
-            'slug': self.slug,
+          #  'slug': self.slug,
         }
     
-    def save(self, *args, **kwargs):
-        if not self.slug:
-            self.slug = slugify(self.name)
-        super(Category, self).save(*args, **kwargs)
+    # def save(self, *args, **kwargs):
+    #    if not self.slug:
+    #        self.slug = slugify(self.name)
+    #    super(Category, self).save(*args, **kwargs)
 
 
 class Product(models.Model):
