@@ -8,6 +8,7 @@ from django.utils import timezone
 class Category(models.Model):
     category_id = models.AutoField(primary_key=True)
     name = models.CharField(max_length=255)
+    slug = models.SlugField(max_length=255, unique=True, editable=False)
 
     def __str__(self):
         return self.name
@@ -16,16 +17,17 @@ class Category(models.Model):
         return {
             'category_id': self.category_id,
             'name': self.name,
+            'slug': self.slug,
         }
 
 class Product(models.Model):
     product_id = models.AutoField(primary_key=True)
     name = models.CharField(max_length=255, null=False)
     description = models.TextField(null=False)
-    price = models.PositiveIntegerField(null=False)
-    quantity_in_stock = models.PositiveIntegerField(null=False)
+    price = models.DecimalField(max_digits=10, decimal_places=2)
+    quantity_in_stock = models.IntegerField(validators=[MinValueValidator(0)])
     category = models.ForeignKey(Category, on_delete=models.CASCADE, null=False)
-    image = models.ImageField(upload_to='images', null=False, blank=True)
+    image = models.ImageField(upload_to='images', blank=True, null=False)
 
     def __str__(self):
         return f'{self.name} - {self.price}'
