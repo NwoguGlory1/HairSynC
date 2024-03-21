@@ -164,3 +164,36 @@ class OrderItem(models.Model):
             'quantity': self.quantity,
             'unit_price': str(self.unit_price),
         }
+
+
+class Address(models.Model):
+    address_id = models.AutoField(primary_key=True)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    street_address = models.CharField(max_length=255, null=True, blank=True, verbose_name="Street Address")
+    town = models.CharField(max_length=255, null=True, blank=True, verbose_name="Town")
+    zipcode = models.CharField(max_length=10, null=True, blank=True, verbose_name="Zip Code")
+    county = models.CharField(max_length=255, null=True)
+    phone_number_1 = models.CharField(max_length=20, null=True, blank=True, verbose_name="Phone Number 1")
+    phone_number_2 = models.CharField(max_length=20, null=True, blank=True, verbose_name="Phone Number 2")
+    additional_details = models.TextField(null=True, blank=True, verbose_name="Additional Details")
+
+    class Meta:
+        verbose_name = "Address"
+        verbose_name_plural = "Addresses"
+        ordering = ['user', 'street_address']
+
+    def __str__(self):
+        return f'{self.user.username} - {self.street_address}, {self.town}, {self.county}, {self.zipcode}'
+
+    def to_dict(self, request=None):
+        return {
+            'address_id': self.address_id,
+            'user': self.user.id,
+            'street_address': self.street_address,
+            'town': self.town,
+            'zipcode': self.zipcode,
+            'county': self.county,
+            'phone_number_1': self.phone_number_1,
+            'phone_number_2': self.phone_number_2,
+            'additional_details': self.additional_details,
+        }
