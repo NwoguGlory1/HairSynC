@@ -6,9 +6,16 @@ from django.core.validators import MaxValueValidator, MinValueValidator
 from django.utils import timezone
 from django.utils.text import slugify
 
+
+class CategoryManager(models.Manager):
+    def get_all_categories(self):
+        return self.all()
+
+        
 class Category(models.Model):
     category_id = models.AutoField(primary_key=True)
     name = models.CharField(max_length=255)
+    objects = CategoryManager()
   #  slug = models.SlugField(max_length=255, unique=True, editable=False)
 
     def __str__(self):
@@ -82,7 +89,7 @@ class ShoppingCart(models.Model):
         }
 
         cart_items = self.cartitem_set.all()
-        cart_dict['items'] = [item.to_dict() for item in cart_items]
+        cart_dict['items'] = [item.to_dict(exclude_cart=True) for item in cart_items]
 
         return cart_dict
 
@@ -96,14 +103,16 @@ class CartItem(models.Model):
     def __str__(self):
         return f'Item ID: {self.item_id} - Product: {self.product.name} - Quantity: {self.quantity}'
 
-    def to_dict(self):
-        return {
+    def to_dict(self, exclude_cart=False):
+        cart_item_data = {
             'item_id': self.item_id,
-            'cart': self.cart.to_dict() if self.cart else None,
             'product': self.product.to_dict() if self.product else None,
-            'subtotal': self.product.price * self.quantity,
+            'subtotal': self.product.price * self.quantity if self.product else None,
             'quantity': self.quantity,
         }
+        if not exclude_cart:
+            cart_item_data['cart'] = self.cart.to_dict() if self.cart else None
+        return cart_item_data
 
 
 class Order(models.Model):
@@ -139,7 +148,7 @@ class Order(models.Model):
 class OrderItem(models.Model):
     item_id = models.AutoField(primary_key=True)
     order = models.ForeignKey(Order, on_delete=models.CASCADE)
-    cart_item = models.ForeignKey(CartItem, on_delete=models.CASCADE)
+    cart_item = models.ForeignKey(CartItem, on_delete=models.CASCADE, null=True)
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
     quantity = models.PositiveIntegerField()
     unit_price = models.DecimalField(max_digits=10, decimal_places=2)
