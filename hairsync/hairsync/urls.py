@@ -16,7 +16,23 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from django.urls import include
+from django.conf import settings
+from django.conf.urls.static import static
+
+
+handler404 = 'store.views.handler404'
+handler500 = 'store.views.handler500'
+handler403 = 'store.views.handler403'
+handler400 = 'store.views.handler400'
+handler401 = 'store.views.handler401'
+
 
 urlpatterns = [
+    path('store/', include("store.urls")),
     path('admin/', admin.site.urls),
 ]
+
+# Serve media files only during development
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
