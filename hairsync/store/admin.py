@@ -8,10 +8,12 @@ from .models import CartItem
 from .models import Order
 from .models import OrderItem
 from django.contrib.auth.models import User
+from django.contrib.auth.admin import UserAdmin
 
+admin.site.unregister(User)
 
 @admin.register(User)
-class UserAdmin(admin.ModelAdmin):
+class CustomUserAdmin(UserAdmin):
     list_display = ('username', 'email')
     list_filter = ('is_staff', 'is_active')
     search_fields = ('username', 'email')

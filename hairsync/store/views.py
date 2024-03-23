@@ -23,7 +23,6 @@ from django.forms.models import model_to_dict
 from django.core.paginator import Paginator, EmptyPage
 
 
-
 def check_authentication(view_func):
     """
     Decorator to check if a user is authenticated.
