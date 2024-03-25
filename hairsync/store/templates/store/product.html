@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product List</title>
+</head>
+<body>
+
+    <!-- Section to display the list of products -->
+    <section>
+        <h1>All Products</h1>
+        <ul>
+            <!-- Loop through each product in the products list -->
+            {% for product in products %}
+                <li>
+                    <h2>{{ product.name }}</h2>
+                    <p>Price: {{ product.price }}</p>
+                    <p>Category: {{ product.category }}</p>
+                    <p>Quantity: {{ product.quantity }}</p>
+                    <p>Description: {{ product.description }}</p>
+                </li>
+            {% endfor %}
+        </ul>
+    </section>
+
+</body>
+</html>
