@@ -86,8 +86,8 @@ def login_view(request):
             return JsonResponse({"error": "Username and password are required", "code": "invalid_input"}, status=400)
 
         try:
-            user_email_passed_instead = User.objects.get(email=username)
-            username = user_email_passed_instead.username
+            email_passed = User.objects.get(email=username)
+            username = email_passed.username
         except User.DoesNotExist:
             pass
         except MultipleObjectsReturned:
@@ -270,6 +270,7 @@ def search_products_and_categories(request):
         return JsonResponse({"error": f"The form value for attribute {str(e)} is missing."}, status=400)
 
 
+@csrf_exempt
 @require_http_methods(["GET", "POST"])
 def apply_filters_to_search_results(request):
     # Retrieve search results from the session
@@ -295,7 +296,134 @@ def apply_filters_to_search_results(request):
         return JsonResponse(filtered_results_json, safe=False)
     else:
         return JsonResponse({"error": "No search results found in session."}, status=404)
+    
+
+"""THE START OF CATEGORY VIEW/MANAGEMENT"""
+@require_http_methods(["GET"])
+def get_list_of_all_product_categories(request):
+    list_of_all_categories = Category.objects.all()
+
+    if list_of_all_categories.exists():
+        # Serialize the queryset to JSON format
+        categories_json = serialize('json', list_of_all_categories)
+        return JsonResponse(categories_json, safe=False)
+    else:
+        return JsonResponse({"error": "No categories found."}, status=404)
+
+
+@require_http_methods(["GET"])
+def get_list_of_all_products_in_category(request, id):
+    try:
+        category = Category.objects.get(pk=id)
+        products_in_category = Product.objects.filter(category=category)
+
+        # Serialize the queryset to JSON format
+        products_json = serialize('json', products_in_category)
+        return JsonResponse(products_json, safe=False)
+    except Category.DoesNotExist:
+        return JsonResponse({"error": f"Category with ID: {id} was not found."}, status=404)
+    
+
+@require_http_methods(["POST"])
+def create_new_product_category(request):
+    try:
+        name = request.POST["name"]
+
+        new_category = Category(name=name)
+        new_category.save()
+    except MultiValueDictKeyError as e:
+        return JsonResponse({"error": f"The form value for attribute {e} is missing."}, status=400)
+    
+    return JsonResponse({"success": True}, safe=False)
+
+
+@require_http_methods(["PUT"])
+def update_details_of_category_with_category_id(request, id):
+    try:
+        category_to_update = Category.objects.get(pk=id)
+
+        name = QueryDict(request.body).get('name')
+
+        if name:
+            category_to_update.name = name
+            category_to_update.save()
+        else:
+            return JsonResponse({"error": "The 'name' field is required."}, status=400)
+
+    except Category.DoesNotExist:
+        return JsonResponse({"error": f"Category with ID: {id} does not exist."}, status=404)
+
+    return JsonResponse({"success": True}, safe=False)
+
+
+@require_http_methods(["DELETE"])
+def remove_product_category_with_category_id(request, id):
+    try:
+        category_to_delete = Category.objects.get(pk=id)
+
+        # Assuming to_dict is a method on the Category model that serializes the object
+        category_to_delete_details = category_to_delete.to_dict()
+
+        category_to_delete.delete()
+
+    except Category.DoesNotExist:
+        return JsonResponse({"error": f"Category with ID: {id} does not exist."}, status=404)
+    
+    return JsonResponse({"success": True, "deleted_category": category_to_delete_details}, safe=False)
 
 
 
-"""CATEGORY VIEW/MANAGEMENT"""
+"""USER PROFILE MANAGEMENT"""
+@check_authentication
+@require_http_methods(["GET"])
+def get_user_profile(request):
+    try:
+        specific_user = User.objects.get(id=request.user.id)
+        return JsonResponse({
+            'id': specific_user.id,
+            'username': specific_user.username,
+            'email': specific_user.email,
+            'first_name': specific_user.first_name,
+            'last_name': specific_user.last_name
+        }, safe=False)
+    except User.DoesNotExist:
+        return JsonResponse({"error": "User does not exist."}, status=404)
+
+
+@check_authentication
+@require_http_methods(["PUT"])
+def update_user_profile(request):
+    try:
+        user_to_update = User.objects.get(id=request.user.id)
+
+        for field, value in QueryDict(request.body).items():
+            if (hasattr(user_to_update, field) and field == "password"):                
+                try:
+                    user_to_update.set_password(value)
+                except (ValueError, ValidationError) as e:
+                    return JsonResponse({"error": str(e)}, safe=False)
+            
+            elif (hasattr(user_to_update, field)):
+                setattr(user_to_update, field, value)
+
+            else:
+                return JsonResponse({"error": f"There is no field named {field} in users table."}, status=404)
+
+        user_to_update.save()      
+    
+    except User.DoesNotExist:
+        return JsonResponse({"error": "User does not exist."}, status=404)
+
+    return JsonResponse({"success": True}, safe=False)
+
+
+@check_authentication
+@require_http_methods(["GET"])
+def list_orders_placed_by_user(request):
+    try:
+        orders_placed_by_user = Order.objects.filter(user=request.user)
+        
+        orders_data = [order.to_dict() for order in orders_placed_by_user]
+        return JsonResponse({'orders': orders_data}, safe=False)
+    except Order.DoesNotExist:
+        return JsonResponse({"error": "No orders found for the user."}, status=404)

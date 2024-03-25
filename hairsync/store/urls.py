@@ -1,5 +1,6 @@
 from django.urls import path
 from . import views
+from django.contrib.auth import views as auth_views
 
 app_name = "store"
 urlpatterns = [
@@ -11,7 +12,7 @@ urlpatterns = [
     path('login/', views.login_view, name='login'), # User login
     path('logout/', views.logout_view, name='logout'), # User logout
     path('user_status/', views.check_user_authentication, name='user_status'), # Check User Authentication
-
+    # path('accounts/login/', auth_views.LoginView.as_view(), name='login'),
 
     # Product Management
     path('products/', views.list_all_products, name='list-all-products'),
@@ -19,6 +20,26 @@ urlpatterns = [
     path('products/create/', views.create_new_product, name='create-new-product'),
     path('products/<int:id>/update/', views.update_product_id_details, name='update-product-details'),
     path('products/<int:id>/delete/', views.delete_product_by_id, name='delete-product'),
+
+
+    # Search and Filters
+    path('search/', views.search_products_and_categories, name='search-products-and-categories'),
+    path('filters/', views.apply_filters_to_search_results, name='apply-filters'),
+
+
+    # Categories
+    path('categories/', views.get_list_of_all_product_categories, name='list-all-categories'),
+    path('categories/<int:id>/', views.get_list_of_all_products_in_category, name='list-all-products-in-category'),
+    path('categories/create/', views.create_new_product_category, name='create-new-category'),
+    path('categories/<int:id>/update/', views.update_details_of_category_with_category_id, name='update-category-details'),
+    path('categories/<int:id>/delete/', views.remove_product_category_with_category_id, name='delete-category'),
+
+
+    # USER
+    path('users/', views.get_user_profile, name='get-user-profile'),
+    path('users/update/', views.update_user_profile, name='update-user-profile'),
+    path('users/orders/', views.list_orders_placed_by_user, name='list-user-orders'),
+    
     
     ]
 
