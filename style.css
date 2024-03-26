@@ -53,10 +53,11 @@ section{
     background-repeat: no-repeat;
     background-size: cover;
     background-position: left;
+    flex-direction: column;
 }
 
 #home h1{
-    font-size: 60px;
+    font-size: 40px;
     color: white;
     letter-spacing: 2px;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
