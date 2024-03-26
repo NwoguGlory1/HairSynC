@@ -41,6 +41,13 @@ urlpatterns = [
     path('users/orders/', views.list_orders_placed_by_user, name='list-user-orders'),
     
     
+    # Shopping Cart
+    path('users/cart/', views.get_user_shopping_cart_contents, name='get-cart-contents'),
+    path('users/cart/add/<int:productId>/', views.add_product_to_cart, name='add-product-to-cart'),
+    path('users/cart/remove/<int:productId>/', views.remove_product_from_user_cart, name='remove-product-from-cart'),
+    path('users/cart/clear/', views.clear_entire_shopping_cart, name='clear-cart'),
+
+
     ]
 
 
