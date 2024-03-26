@@ -372,6 +372,16 @@ def remove_product_category_with_category_id(request, id):
     return JsonResponse({"success": True, "deleted_category": category_to_delete_details}, safe=False)
 
 
+@require_http_methods(["GET"])
+def get_category_by_name(request, category_name):
+    try:
+        category = Category.objects.get(name=category_name)
+      
+        category_data = category.to_dict()
+        return JsonResponse(category_data, safe=False)
+    except Category.DoesNotExist:
+        return JsonResponse({"error": f"Category with name: {category_name} does not exist."}, status=404)
+
 
 """USER PROFILE MANAGEMENT"""
 @check_authentication
@@ -526,3 +536,69 @@ def clear_entire_shopping_cart(request):
 
     except ShoppingCart.DoesNotExist:
         return JsonResponse({"error": f"User with ID: {user_id} does not have a cart."}, status=404)
+
+
+"""THE START OF ORDER MANAGEMENT"""
+@require_http_methods(["GET"])
+def get_list_of_all_orders(request):
+    all_orders = Order.objects.all()
+
+    if all_orders.exists():
+        # Serialize the queryset to JSON format
+        orders_json = serialize('json', all_orders)
+        return JsonResponse(orders_json, safe=False)
+    else:
+        return JsonResponse({"error": "No orders found, add an order and try again."}, status=404)
+    
+
+@require_http_methods(["GET"])
+def get_details_of_order_with_order_id(request, id):
+    try:
+        specific_order_details = Order.objects.get(order_id=id)
+        return JsonResponse(specific_order_details.to_dict(), safe=False)
+    except Order.DoesNotExist:
+        return JsonResponse({"error": f"Order with ID: {id} does not exist."}, status=404)
+    
+
+@require_http_methods(["POST"])
+def create_new_order(request):
+    try:
+        user_id = request.user.id
+        user_cart = ShoppingCart.objects.get(user=user_id)
+        cart_items = CartItem.objects.filter(cart=user_cart).all()
+
+        if not cart_items:
+            return JsonResponse({"error": "User has no items in cart."}, status=404)
+        
+        total_cost_of_cart_items = CartItem.objects.filter(cart=user_cart).aggregate(total_cost=Sum(ExpressionWrapper(F('quantity') * F('product__price'), output_field=fields.FloatField())))
+        total_cost = total_cost_of_cart_items.get('total_cost', 0) or 0
+
+        new_order = Order(user=User.objects.get(id=user_id), total_amount=total_cost, order_status='ACTIVE')
+        new_order.save()
+
+        new_order_items = list(map(lambda item: OrderItem(order=new_order, product=item.product, quantity=item.quantity, unit_price=item.product.price), [item for item in CartItem.objects.filter(cart=user_cart)]))
+
+        for item in CartItem.objects.filter(cart=user_cart):
+            product_to_update_quantity = Product.objects.get(id=item.product.id)
+            product_to_update_quantity.quantity_in_stock -= item.quantity
+            product_to_update_quantity.save()
+
+        OrderItem.objects.bulk_create(new_order_items)
+
+        clear_entire_shopping_cart(request)
+
+    except ShoppingCart.DoesNotExist:
+        return JsonResponse({"error": f"User with ID: {user_id} has no items in cart."}, status=404)
+
+    return JsonResponse({"success": True}, safe=False)
+
+
+@require_http_methods(["PUT"])
+def cancel_order_with_order_id(request, id):
+    try:
+        order_to_cancel = Order.objects.get(id=id)
+        order_to_cancel.order_status = "CANCELED"
+        order_to_cancel.save()
+        return JsonResponse({"success": True}, safe=False)
+    except Order.DoesNotExist:
+        return JsonResponse({"error": f"Order with ID: {id} does not exist."}, status=404)

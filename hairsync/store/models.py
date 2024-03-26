@@ -24,7 +24,7 @@ class Category(models.Model):
     def to_dict(self, request=None):
         return {
             'category_id': self.category_id,
-            'name': self.name,
+            'category_name': self.name,
           #  'slug': self.slug,
         }
     

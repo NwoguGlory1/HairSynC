@@ -33,7 +33,7 @@ urlpatterns = [
     path('categories/create/', views.create_new_product_category, name='create-new-category'),
     path('categories/<int:id>/update/', views.update_details_of_category_with_category_id, name='update-category-details'),
     path('categories/<int:id>/delete/', views.remove_product_category_with_category_id, name='delete-category'),
-
+    path('categories/<str:category_name>/', views.get_category_by_name, name='get_category_by_name'),
 
     # USER
     path('users/', views.get_user_profile, name='get-user-profile'),
@@ -46,6 +46,13 @@ urlpatterns = [
     path('users/cart/add/<int:productId>/', views.add_product_to_cart, name='add-product-to-cart'),
     path('users/cart/remove/<int:productId>/', views.remove_product_from_user_cart, name='remove-product-from-cart'),
     path('users/cart/clear/', views.clear_entire_shopping_cart, name='clear-cart'),
+
+
+    # Order Management
+    path('orders/', views.get_list_of_all_orders, name='list-all-orders'),
+    path('orders/<int:id>/', views.get_details_of_order_with_order_id, name='get-order-details'),
+    path('users/orders/create/', views.create_new_order, name='create-new-order'),
+    path('orders/<int:id>/cancel/', views.cancel_order_with_order_id, name='cancel-order'),
 
 
     ]
