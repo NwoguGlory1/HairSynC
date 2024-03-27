@@ -15,7 +15,7 @@ from django.urls import reverse
 from urllib.parse import quote_plus, urlencode
 from django.http import JsonResponse, HttpResponse
 from django.http import HttpResponseNotFound, HttpResponseServerError, Http404
-from .models import Product, CategoryManager, Category, User, Order, ShoppingCart, CartItem, Address, OrderItem
+from .models import Product, CategoryManager, Category, User, Order, ShoppingCart, ShippingOption, CartItem, Address, OrderItem
 from django.utils.datastructures import MultiValueDictKeyError
 from django.core.exceptions import ValidationError, MultipleObjectsReturned, PermissionDenied, ObjectDoesNotExist
 from django.http import QueryDict
@@ -602,3 +602,96 @@ def cancel_order_with_order_id(request, id):
         return JsonResponse({"success": True}, safe=False)
     except Order.DoesNotExist:
         return JsonResponse({"error": f"Order with ID: {id} does not exist."}, status=404)
+
+
+
+"""THE START OF SHIPPING MANAGEMENT"""
+@require_http_methods(["GET"])
+def get_available_shipping_options(request):
+    return JsonResponse(dict(request.session), safe=False)
+
+
+@check_authentication
+@require_http_methods(["GET"])
+def get_user_saved_addresses(request):
+    user_id = request.user.id
+    user_saved_addresses = Address.objects.filter(user=user_id)
+
+    if user_saved_addresses.exists():
+        addresses_data = [address.to_dict() for address in user_saved_addresses]
+        return JsonResponse(addresses_data, safe=False)
+    else:
+        return JsonResponse([], safe=False)
+
+
+@check_authentication
+@require_http_methods(["POST"])
+def add_address_to_user_profile(request):
+    try:
+        user_id = request.user.id
+        data = request.POST
+
+        street_address, town, zipcode, county, phone_number_1, phone_number_2, additional_details = [data['street_address'], data['town'], data['zipcode'], data['county'], data['phone_number_1'], data['phone_number_2'], data['additional_details']]
+
+        user = User.objects.get(id=user_id)
+
+        new_address = Address(street_address=street_address, town=town, zipcode=zipcode, county=county, phone_number_1=phone_number_1, phone_number_2=phone_number_2, additional_details=additional_details, user=user)
+
+        new_address.save()
+
+        return JsonResponse({"message": "address created successfully"})
+    
+    except User.DoesNotExist:
+        return JsonResponse({"error": f"User with ID: {user_id} does not exist."}, status=404)
+    
+    except KeyError as e:
+        return JsonResponse({"error": f"The form value for attribute {str(e)} is missing."}, status=400)
+
+
+@check_authentication
+@require_http_methods(["PUT"])
+def update_details_of_address_with_address_id(request, id):
+    try:
+        user_id = request.user.id
+        address_to_update = Address.objects.get(id=id, user=user_id)
+
+        data = QueryDict(request.body)
+
+        for field, value in data.items():
+            if hasattr(address_to_update, field):
+                setattr(address_to_update, field, value)
+            else:
+                return JsonResponse({"error": f"There is no field named {field} in address table."}, safe=False)
+
+        address_to_update.save()
+
+        return JsonResponse({"success": True}, safe=False)
+
+    except Address.DoesNotExist:
+        return JsonResponse({"error": f"Address with ID: {id} does not exist."}, status=404)
+    
+    except User.DoesNotExist:
+        return JsonResponse({"error": f"User with ID: {user_id} does not exist."}, status=404)
+
+
+@check_authentication
+@require_http_methods(["DELETE"])
+def delete_address_with_address_id(request, id):
+    try:
+        user_id = request.user.id
+        address_to_delete = Address.objects.get(id=id, user=user_id)
+
+        address_to_delete.delete()
+
+        return JsonResponse({"success": True}, safe=False)
+    
+    except Address.DoesNotExist:
+        return JsonResponse({"error": f"Address with ID: {id} does not exist."}, status=404)
+    
+
+@check_authentication
+@require_http_methods(["GET"])
+def get_shipping_options(request):
+    shipping_options = ShippingOption.objects.all()
+    options_list = [{"id": option.id, "name": option.name, "price": str(option.price), "delivery_time": option.delivery_time} for option in shipping_options]
+    return JsonResponse(options_list, safe=False)

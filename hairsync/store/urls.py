@@ -55,6 +55,14 @@ urlpatterns = [
     path('orders/<int:id>/cancel/', views.cancel_order_with_order_id, name='cancel-order'),
 
 
-    ]
+    # Shipping and Address
+    path('shipping-options/', views.get_available_shipping_options, name='get-shipping-options'),
+    path('users/addresses/', views.get_user_saved_addresses, name='get-user-addresses'),
+    path('users/addresses/create/', views.add_address_to_user_profile, name='add-address-to-profile'),
+    path('users/addresses/<int:id>/update/', views.update_details_of_address_with_address_id, name='update-address-details'),
+    path('users/addresses/<int:id>/delete/', views.delete_address_with_address_id, name='delete-address'),
+    path('shipping-options/', views.get_shipping_options, name='get_shipping_options'),
+
+]
 
 

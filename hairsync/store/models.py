@@ -197,3 +197,19 @@ class Address(models.Model):
             'phone_number_2': self.phone_number_2,
             'additional_details': self.additional_details,
         }
+
+
+class ShippingOption(models.Model):
+    name = models.CharField(max_length=255)
+    price = models.DecimalField(max_digits=5, decimal_places=2)
+    delivery_time = models.CharField(max_length=255)
+
+    def __str__(self):
+        return self.name
+    
+    def to_dict(self):
+        return {
+            'name': self.name,
+            'price': str(self.price),
+            'delivery_time': self.delivery_time,
+        }
