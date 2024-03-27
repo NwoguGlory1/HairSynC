@@ -61,11 +61,51 @@ section{
     color: white;
     letter-spacing: 2px;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
-    text-shadow: 0px 1px 0px #CCC;
-                    0px 2px 0px #CCC;
-                    0px 3px 0px #CCC;
-                    0px 4px 0px #CCC;
-                    0px 5px 0px #CCC;
-                    0px 6px 0px #CCC;
-                    0px 7px 0px #CCC;
+    text-shadow:    0px 1px 0px #CCC,
+                    0px 2px 0px #CCC,
+                    0px 3px 0px #CCC,
+                    0px 4px 0px #CCC,
+                    0px 5px 0px #CCC,
+                    0px 6px 0px #CCC,
+                    0px 7px 0px #CCC,
 }
+
+#home p{
+    font-size: 18px;
+    color: #fff;
+}
+
+#home .input-group{
+    width: 40%;
+    height: 45px;
+}
+
+.signin{
+    background-color: green !important;
+    color: white !important;
+    box-sizing: 2px 4px 5px rgba(0,0.0. .3);
+}
+
+/****About****/
+#about{
+    background: linear-gradient(to right, #ea1d6f, #eb466b 100%);
+}
+
+#about h1{
+    font-weight: 800;
+    font-size:50px;
+    color: white;
+}
+
+#about p{
+    color: white;
+}
+
+
+
+
+
+
+
+
+
