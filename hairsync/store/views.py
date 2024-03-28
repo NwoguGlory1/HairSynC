@@ -42,7 +42,7 @@ def index(request):
 
 
 """REGISTER, LOGIN, AND LOGOUT VIEWS"""
-# @csrf_exempt
+@csrf_exempt
 @require_http_methods(["POST"])
 def register(request):
     try:
@@ -50,16 +50,20 @@ def register(request):
 
         # Use .get() to safely access keys and provide default values
         username = data.get('username', '')
-        password = data.get('password', '')
         email = data.get('email', '')
         first_name = data.get('first_name', '')
         last_name = data.get('last_name', '')
+        password = data.get('password', '')
+        confirm_password = data.get('confirm_password', '')
 
         # Check if all required fields are provided
-        if not all([username, password, email, first_name, last_name]):
+        if not all([username, email, first_name, last_name, password, confirm_password]):
             return JsonResponse({"error": "All fields are required"}, status=400)
+        
+        if password != confirm_password:
+            return JsonResponse({"error": "Passwords do not match"}, status=400)
 
-        user = User.objects.create_user(username=username, password=password, email=email, first_name=first_name, last_name=last_name)
+        user = User.objects.create_user(username=username, email=email, first_name=first_name, last_name=last_name, password=password,)
         user.save()
 
         user_cart = ShoppingCart(user=user)
