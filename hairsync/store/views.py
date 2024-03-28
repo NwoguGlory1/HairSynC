@@ -1,5 +1,5 @@
 """HairSynC Store Views"""
-"""Using csrf_exempt because the website is for ALX demonstration"""
+"""Using csrf_exempt"""
 from django.contrib.auth import authenticate, login, logout
 from django.db.models import F, ExpressionWrapper, fields, Sum, Q
 from django.db import IntegrityError, transaction
@@ -42,7 +42,7 @@ def index(request):
 
 
 """REGISTER, LOGIN, AND LOGOUT VIEWS"""
-@csrf_exempt
+# @csrf_exempt
 @require_http_methods(["POST"])
 def register(request):
     try:

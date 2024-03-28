@@ -3,64 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login</title>
+    <title>HairSynC</title>
     {% load static %}
-    <link rel="stylesheet" href="{% static 'store/style.css' %}">
+    <!-- static/css/style.css -->
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
 </head>
 <body>
-
-<div class="login-container">
-    <!-- Login Form -->
-    <form method="post" action="{% url 'store:login' %}">
-        {% csrf_token %}
-        <div>
-            <label for="username">Username or Email:</label>
-            <input type="text" id="username" name="username" required>
-        </div>
-        <div>
-            <label for="password">Password:</label>
-            <input type="password" id="password" name="password" required>
-        </div>
-        <div>
-            <button type="submit">Login</button>
-        </div>
-    </form>
-    
-    <!-- Registration Form -->
-    <form method="post" action="{% url 'store:register' %}">
-        {% csrf_token %}
-        <div>
-            <label for="username">Username:</label>
-            <input type="text" id="username" name="username" required>
-        </div>
-        <div>
-            <label for="email">Email:</label>
-            <input type="email" id="email" name="email" required>
-        </div>
-        <div>
-            <label for="password">Password:</label>
-            <input type="password" id="password" name="password" required>
-        </div>
-        <div>
-            <label for="first_name">First Name:</label>
-            <input type="text" id="first_name" name="first_name" required>
-        </div>
-        <div>
-            <label for="last_name">Last Name:</label>
-            <input type="text" id="last_name" name="last_name" required>
-        </div>
-        <div>
-            <button type="submit">Register</button>
-        </div>
-    </form>
-    
-    <div class="registration-link">
-        <p>Don't have an account? <a href="{% url 'store:register' %}">Sign Up</a></p>
-    </div>
-    <div class="logout-link">
-        <p>Already logged in? <a href="{% url 'store:logout' %}">Log Out</a></p>
-    </div>
-</div>
-
+    <header>
+        <h1>Welcome to HairSynC Store</h1>
+    </header>
 </body>
 </html>

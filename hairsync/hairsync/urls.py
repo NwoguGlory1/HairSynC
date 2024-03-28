@@ -21,13 +21,6 @@ from django.conf import settings
 from django.conf.urls.static import static
 
 
-# handler404 = 'store.views.handler404'
-# handler500 = 'store.views.handler500'
-# handler403 = 'store.views.handler403'
-# handler400 = 'store.views.handler400'
-# handler401 = 'store.views.handler401'
-
-
 urlpatterns = [
     path('store/', include('store.urls')),
     path('admin/', admin.site.urls),
