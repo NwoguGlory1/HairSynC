@@ -4,7 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Register</title>
-    <!-- Add your CSS link here -->
+    {% load static %}
+    <!-- static/css/style.css -->
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
 </head>
 <body>
@@ -13,7 +14,8 @@
     </header>
 
     <main>
-        <form action="{% url 'register' %}" method='post'>
+        <form action="{% url 'store:register' %}" method='post'>
+
             {% csrf_token %}
             <label for="username">Username:</label>
             <input type="text" id="username" name="username" required>

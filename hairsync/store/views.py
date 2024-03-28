@@ -76,6 +76,10 @@ def register(request):
 
     except ValidationError as e:
         return JsonResponse({"error": str(e)}, status=400)
+    
+@require_http_methods(["GET"])   
+def register_form(request):
+    return render(request, 'store/register.html')
 
 
 @csrf_exempt
