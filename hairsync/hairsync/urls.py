@@ -24,6 +24,7 @@ from django.conf.urls.static import static
 urlpatterns = [
     path('store/', include('store.urls')),
     path('admin/', admin.site.urls),
+    path("__debug__/", include("debug_toolbar.urls")),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 
 # Serve media files only during development
