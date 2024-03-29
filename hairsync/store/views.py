@@ -69,7 +69,8 @@ def register(request):
         user_cart = ShoppingCart(user=user)
         user_cart.save()
 
-        return JsonResponse({"message": "User created successfully"}, status=200)
+         # Redirect to the index page
+        return redirect('store:index')
 
     except IntegrityError:
         return JsonResponse({"error": "Username or email already exists"}, status=409)
