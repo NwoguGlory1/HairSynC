@@ -8,7 +8,7 @@
 }
 
 .container-fluid{
-background-image: url('background.jpg') ;
+background-image: url('') ;
 background-size: cover;
 background-position: center; 
 min-height: 100vh;
@@ -43,7 +43,7 @@ form{
     border-radius: 4px 4px 0 0;
 }
 
-h4{
+/*h4{
    font-size: 2rem !important;
    font-weight: 700;
 }
@@ -55,7 +55,7 @@ h4{
     form{
         width: 100% !important;
     }
-}
+}*/
 
 #navbar{
     position: sticky;
