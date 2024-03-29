@@ -7,23 +7,28 @@
     font-family: 'Poppins', sans-serif;
 }
 
-.container-fluid{
-background-image: url('') ;
+.login-page{
+background-image: url('backgroundgold.png') ;
 background-size: cover;
 background-position: center; 
 min-height: 100vh;
-height: 80%;
 display: flex;
-flex-direction: column;
+align-items: center;
+justify-content: center;
+height: 80%;
 }
 
-form{
-    width: 30%;
-    height: 80%;
+.login-page form{
+    width: 50%;
+    max-width: 400px; 
+    height: 100%;
     background-color: white;
     padding: 20px;
     border-radius: 20px;
+    border: 2px solid black;
     margin-top: 150px;
+    display: flex;
+    flex-direction: column; 
 }
 
 .btn-primary{
@@ -43,9 +48,10 @@ form{
     border-radius: 4px 4px 0 0;
 }
 
-/*h4{
+h4{
    font-size: 2rem !important;
    font-weight: 700;
+   align-items: center;
 }
 
 .form-label{
@@ -55,7 +61,7 @@ form{
     form{
         width: 100% !important;
     }
-}*/
+}
 
 #navbar{
     position: sticky;
@@ -69,8 +75,20 @@ form{
 
 .navbar .navbar-brand{
     font-size:25px;
-    font-weight:800;
+    font-weight:400;
     color: #29f700 !important;
+}
+
+.navbar-nav{
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
+}
+
+.navbar>.container-fluid{
+    display: flex;
+    /* justify-content: space-between; */
+    flex-direction: row;   
 }
 
 #navbarSupportedContent a{

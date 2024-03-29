@@ -15,21 +15,48 @@
 
   <!-- Template Main CSS File -->
   <link href="style.css" rel="stylesheet">
+  
 
 </head>
 <body>
+  <!--SignUp-->
+  <div class="signup-page container bg-light">
+    <div class="row mt-5">
+      <div class="col-lg-4 bg-white m-auto">
+        <h2 class="text-center pt-3">SignUp Now</h2>
+        <p class="text-center text-muted lead">Its Free and Takes a Minute</p>
+          <!--Form starts-->
+          <form action="#">
+            <div class="input-group mb-4">
+              <span class="input-group-text"><i class="fa fa-user"></i></span>
+              <input type="text" class="form-control" placeholder="First Name" />
+            </div>
+            <div class="input-group mb-4">
+              <span class="input-group-text"><i class="fa fa-user"></i></span>
+              <input type="text" class="form-control" placeholder="Last Name" />
+            </div>
+            <div class="input-group mb-4">
+              <span class="input-group-text"><i class="fa fa-user"></i></span>
+              <input type="text" class="form-control" placeholder="Last Name" />
+            </div>
+          </form>
+          <!--Form close-->
+      </div>
+    </div>
+  </div>
+
   <!--Login-->
-  <div class="container-fluid">
+  <div class="login-page container-fluid">
     <form class="mx-auto">
       <h4 class="text-center">Login</h4>
       <div class="mb-3 mt-5">
-        <label for="exampleInputEmail1"  placeholder="Enter Email Address" class="form-label">User Name</label>
-        <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+        <label for="exampleInputEmail1" class="form-label">User Name</label>
+        <input type="email" class="form-control" placeholder="Enter Email Address" id="exampleInputEmail1" aria-describedby="emailHelp">
         
       </div>
       <div class="mb-3">
-        <label for="exampleInputPassword1" placeholder="Enter four digits of choice" class="form-label">Password</label>
-        <input type="password" class="form-control" id="exampleInputPassword1">
+        <label for="exampleInputPassword1" class="form-label">Password</label>
+        <input type="password" class="form-control" placeholder="Enter four digits of choice" id="exampleInputPassword1">
         <div id="emailHelp" class="form-text mt-3">Forget Password?</div>
       </div>
       
@@ -45,8 +72,8 @@
       <!--<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-expanded="false">
         <span class="navbar-toggler-icon"></span>
       </button> -->
-      <div class="collapse navbar-collapse justify-content-center" id="navbarSupportedContent">
-        <ul class="navbar-nav">
+      <div class="collapse navbar-collapse justify-content-center d-flex" id="navbarSupportedContent">
+        <ul class="navbar-nav d-flex">
           <li class="nav-item">
             <a class="nav-link" href="#home">Home</a>
           </li>
