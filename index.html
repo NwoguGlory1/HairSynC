@@ -15,16 +15,20 @@
 
   <!-- Template Main CSS File -->
   <link href="style.css" rel="stylesheet">
-  
 
+  <!-- Link to boostrap-->
+  <link href="css/all.min.css" rel="stylesheet">
+
+  <link href="css/bootstrap.min.css" rel="stylesheet">
+  
 </head>
 <body>
   <!--SignUp-->
   <div class="signup-page container bg-light">
     <div class="row mt-5">
-      <div class="col-lg-4 bg-white m-auto">
+      <div class="col-lg-4 bg-white m-auto rounded-top wrapper">
         <h2 class="text-center pt-3">SignUp Now</h2>
-        <p class="text-center text-muted lead">Its Free and Takes a Minute</p>
+        <p class="text-center text-muted lead">It only takes a Minute</p>
           <!--Form starts-->
           <form action="#">
             <div class="input-group mb-4">
@@ -36,8 +40,25 @@
               <input type="text" class="form-control" placeholder="Last Name" />
             </div>
             <div class="input-group mb-4">
-              <span class="input-group-text"><i class="fa fa-user"></i></span>
-              <input type="text" class="form-control" placeholder="Last Name" />
+              <span class="input-group-text"><i class="fa fa-envelope"></i></span>
+              <input type="text" class="form-control" placeholder="Email" />
+            </div>
+            <div class="input-group mb-4">
+              <span class="input-group-text"><i class="fa fa-lock"></i></span>
+              <input type="text" class="form-control" placeholder="Password" />
+            </div>
+            <div class="input-group mb-4">
+              <span class="input-group-text"><i class="fa fa-lock"></i></span>
+              <input type="text" class="form-control" placeholder="Confirm Password" />
+            </div>
+            <div class="d-grid">
+              <button type="button" class="btn btn-success">SignUp Now</button>
+              <p class="text-center text-muted mt-3">
+                When You Register by Clicking SignUp Button, You Agree to our <a href="#">Terms and Conditions</a></p>
+              <p class="text-center">
+                Already Have an Account ? <a href="login.html">Login Here</a>
+              </p>
+              <p class="text-center"
             </div>
           </form>
           <!--Form close-->
@@ -47,7 +68,7 @@
 
   <!--Login-->
   <div class="login-page container-fluid">
-    <form class="mx-auto">
+    <form class="mt-4">
       <h4 class="text-center">Login</h4>
       <div class="mb-3 mt-5">
         <label for="exampleInputEmail1" class="form-label">User Name</label>
@@ -72,8 +93,8 @@
       <!--<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-expanded="false">
         <span class="navbar-toggler-icon"></span>
       </button> -->
-      <div class="collapse navbar-collapse justify-content-center d-flex" id="navbarSupportedContent">
-        <ul class="navbar-nav d-flex">
+      <div class="collapse navbar-collapse justify-content-center" id="navbarSupportedContent">
+        <ul class="navbar-nav">
           <li class="nav-item">
             <a class="nav-link" href="#home">Home</a>
           </li>
@@ -91,7 +112,7 @@
     </div>
   </nav>
 
-
+  <script src="js/bootstrap.bundle.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF"></script>
 </body>

@@ -1,10 +1,20 @@
 @import url('https://fonts.googlepis.com/css2?family=Poppins&display=swap');
+@import url('css/bootstrap.min.css');
 
 *{
     margin: 0;
     padding: 0;
     box-sizing: border-box;
     font-family: 'Poppins', sans-serif;
+}
+
+.wrapper{
+    border-top: 2px solid goldenrod ;
+}
+
+{ 
+    background-color: goldenrod;
+    border-color: goldenrod;
 }
 
 .login-page{
@@ -35,7 +45,8 @@ height: 80%;
     width:100%;
     border: none;
     border-radius: 50px;
-    background: goldenrod;
+    background-color: green;
+    border-color: green;
 }
 
 .form-control{
@@ -76,7 +87,7 @@ h4{
 .navbar .navbar-brand{
     font-size:25px;
     font-weight:400;
-    color: #29f700 !important;
+    color: goldenrod !important;
 }
 
 .navbar-nav{
@@ -98,7 +109,7 @@ h4{
 }
 
 #navbarSupportedContent a:hover{
-    border-bottom: 2px solid #29f700 ;
+    border-bottom: 2px solid peru ;
 }
 
 #navbarSupportedContent button{
