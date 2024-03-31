@@ -12,6 +12,15 @@
     border-top: 2px solid goldenrod ;
 }
 
+.wrapper a{
+    text-decoration: none;
+    color: 2px solid goldenrod ;
+}
+
+.text-muted {
+    font-size: 11px;
+}
+
 { 
     background-color: goldenrod;
     border-color: goldenrod;
