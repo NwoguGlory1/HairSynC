@@ -171,39 +171,63 @@ section{
 }
 
 /****About****/
-#straight{
+#about{
     background: linear-gradient(to right, #ea1d6f, #eb466b 100%);
 }
 
-#straight h1{
+#about h1{
     font-weight: 800;
     font-size:50px;
     color: white;
 }
 
-#straight p{
+#about p{
     color: white;
 }
 
-/****Wavy, Coily, HairProducts****/
-#wavy, #coily, #hairproducts {
+/****Wavy, Coily, Straight HairProducts****/
+section {
+    min-height: 100vh;
+  }
+
+#wavy, #coily, #hairproducts, #straight{
     background: #e5e5e5;
     text-align: center;
 }
 
 
-#wavy, #coily, #hairproducts h1{
-    font-size:30px;
+#wavy, #coily, #straight, #hairproducts h1{
+    font-size:20px;
     letter-spacing: 1px;
     font-weight: 600;
 }
 
-#wavy, #coily, #hairproducts img{
-    width: 200px;
-    height:200px;
+#wavy, #coily, #straight, #hairproducts img{
+    width: 100%;
+    height:auto;
+}
+#wavy, #coily, #straight, #hairproducts {
+    background: #e5e5e5;
+    text-align: center;
 }
 
-/*#wavy, #coily, #hairproducts .pro-container{
+.pro-container{
+    display: grid;
+    grid-template-columns: repeat(
+    auto-fill,
+    minmax(200px, 1fr)
+  );
+  gap: 50px;
+  min-height: 100vh;
+}
+
+.pro-container img {
+    width: 100%;
+    height: auto;
+  }
+
+
+/*#wavy, #coily, #hairproducts, #straight .pro-container{
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
     gap: 50px;
@@ -212,10 +236,10 @@ section{
 } */
 
 .card{
-    display: grid;
+    /*display: grid;
     grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-    /* gap: 50px; */
-    position: relative;
+     gap: 50px; */
+    /* position: relative; */
     width: 250px;
     height: 300px;
     background-color: #e5e5e5 !important;
