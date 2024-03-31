@@ -21,10 +21,10 @@
     font-size: 11px;
 }
 
-{ 
+/*{ 
     background-color: goldenrod;
     border-color: goldenrod;
-}
+}*/
 
 .login-page{
 background-image: url('backgroundgold.png') ;
@@ -106,9 +106,9 @@ h4{
 }
 
 .navbar>.container-fluid{
-    display: flex;
+    /* display: flex; */
     /* justify-content: space-between; */
-    flex-direction: row;   
+    /* flex-direction: row;    */
 }
 
 #navbarSupportedContent a{
