@@ -21,11 +21,6 @@
     font-size: 11px;
 }
 
-/*{ 
-    background-color: goldenrod;
-    border-color: goldenrod;
-}*/
-
 .login-page{
 background-image: url('backgroundgold.png') ;
 background-size: cover;
@@ -176,39 +171,39 @@ section{
 }
 
 /****About****/
-#about{
+#straight{
     background: linear-gradient(to right, #ea1d6f, #eb466b 100%);
 }
 
-#about h1{
+#straight h1{
     font-weight: 800;
     font-size:50px;
     color: white;
 }
 
-#about p{
+#straight p{
     color: white;
 }
 
-/****Products****/
-#product{
+/****Wavy, Coily, HairProducts****/
+#wavy, #coily, #hairproducts {
     background: #e5e5e5;
     text-align: center;
 }
 
 
-#product h1{
+#wavy, #coily, #hairproducts h1{
     font-size:30px;
     letter-spacing: 1px;
     font-weight: 600;
 }
 
-#product img{
+#wavy, #coily, #hairproducts img{
     width: 200px;
     height:200px;
 }
 
-/*#product .pro-container{
+/*#wavy, #coily, #hairproducts .pro-container{
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
     gap: 50px;
@@ -277,6 +272,24 @@ footer{
     color: white;
     padding: 3px;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

@@ -85,22 +85,6 @@
     </form>
 
   </div>
-
-  <!--Header
-  <header class="header">
-    <div class="container-fluid logo">
-      <div class="row align-items-center">
-        <div class="col-auto">
-          <a href="#"><img src="Logo.png" alt="" /></a>
-        </div>
-      </div>
-      <div class="col">
-        <div class="brand">
-          <a href="#"> </a>
-        </div>
-      </div>
-    </div>
-  </header> -->
     
   <!--Navbar-->
   <nav class="navbar navbar-expand-lg navbar-dark" id="navbar">
@@ -108,24 +92,34 @@
       <a class="navbar-brand" href="#home">
         <img class="d-inline-block align-text-top" src="Logo.png" alt="logo" width="30" height="24">HairSynC
       </a>
-      <!--<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-expanded="false">
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarScroll" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
-      </button> -->
-      <div class="collapse navbar-collapse flex-grow-0 justify-content-center" id="navbarSupportedContent">
-        <ul class="navbar-nav">
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav m-auto my-2 my-lg-0">
           <li class="nav-item">
-            <a class="nav-link" href="#home">Home</a>
+            <a class="nav-link" href="#home">All Categories</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#about">About</a>
+            <a class="nav-link" href="#straight">Straight</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#product">Products</a>
+            <a class="nav-link" href="#wavy">Wavy</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#coily">Coily</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#hairproducts">Hair Products</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="#contact">Contact</a>
           </li>
-        </ul> 
+        </ul>
+        <form class="d-flex">
+          <input class="me-2" type="search" placeholder="Search" aria-label="Search">
+          <button class="btn" type="submit">Search</button>
+        </form>
         <button class="btn" p-2 my-lg-0 my-2>Sign In</button>
     </div>
   </nav>
@@ -145,16 +139,15 @@
   </div>
 </section>
 
-
- <!-- About-->
-<section id="about">
+ <!-- Straight-->
+<section id="straight">
   <div class="container-fluid">
       <div class="row">
         <div class="col-lg-6 col-md-6 col-12">
           <img src="bonestraight12.png" class="img-fluid">
         </div>
         <div class="col-lg-6 col-md-6 col-12 p-lg-5 p-2 my-5">
-          <h1> About Us</h1>
+          <h1> Straight Hairs</h1>
           <p>ndndndnnnLoremgnnnnnnnnnnnnsmmmmmmmmmsvf  fnsnsnnv ndndndnnnLoremgnnnnnnnnnnnnsmmmmmmmmmsvf  fnsnsnnvndndndnnnLoremgnnnnnnnnnnnnsmmmmmmmmmsvf  fnsnsnnvv ndndndnnnLoremgnnnnnnnnnnnnsmmmmmmmmmsvf  fnsnsnnv ndndndnnnLoremgnnnnnnnnnnnnsmmmmmmmmmsvf  fnsnsnnv ndndndnnnLoremgnnnnnnnnnnnnsmmmmmmmmmsvf  fnsnsnnvndndndnnnLoremgnnnnnnnnnnnnsmmmmmmmmmsvf  fnsnsnnvv ndndndnnnLoremgnnnnnnnnnnnnsmmmmmmmmmsvf  fnsnsnnvndndndnnnLoremgnnnnnnnnnnnnsmmmmmmmmmsvf  fnsnsnnv ndndndnnnLoremgnnnnnnnnnnnnsmmmmmmmmmsvf  fnsnsnnvndndndnnnLoremgnnnnnnnnnnnnsmmmmmmmmmsvf  fnsnsnnvv ndndndnnnLoremgnnnnnnnnnnnnsmmmmmmmmmsvf  fnsnsnnv
             ndndndnnnLoremgnnnnnnnnnnnnsmmmmmmmmmsvf  fnsnsnnv ndndndnnnLoremgnnnnnnnnnnnnsmmmmmmmmmsvf  fnsnsnnvndndndnnnLoremgnnnnnnnnnnnnsmmmmmmmmmsvf  fnsnsnnvv ndndndnnnLoremgnnnnnnnnnnnnsmmmmmmmmmsvf  fnsnsnnvndndndnnnLoremgnnnnnnnnnnnnsmmmmmmmmmsvf  fnsnsnnv ndndndnnnLoremgnnnnnnnnnnnnsmmmmmmmmmsvf  fnsnsnnvndndndnnnLoremgnnnnnnnnnnnnsmmmmmmmmmsvf  fnsnsnnvv ndndndnnnLoremgnnnnnnnnnnnnsmmmmmmmmmsvf  fnsnsnnv
           </p>
@@ -163,9 +156,37 @@
   </div>
  </section>
 
- <section id="product">
+ <section id="wavy">
   <div class="container-fluid m-5">
-    <h1 class="text-center my-3">OUR PRODUCTS</h1>
+    <h1 class="text-center my-3">Wavy Hairs</h1>
+    <div class="row pro-container">
+      <div class="col-lg-4 col-md-4 col-12">
+      <div class="card">
+        <img src="wavvyhair.png" class="card-img-top">
+        <div class="card-body text-center">
+          <h5 class="card-title">Wavy Hair</h5>
+        
+          <a href="#" class="btn signin">Add to Cart</a>
+        </div>
+      </div>
+    <div class="col-lg-4 col-md-4 col-12">
+      <div class="card">
+        <img src="wavyhair.png" class="card-img-top">
+        <div class="card-body text-center">
+          <h5 class="card-title">Wavy Hair</h5>
+          
+            <a href="#" class="btn signin">Add to Cart</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!--Coily -->
+<section id="coily">
+  <div class="container-fluid m-5">
+    <h1 class="text-center my-3">Coily Hairs</h1>
     <div class="row pro-container">
       <div class="col-lg-4 col-md-4 col-12">
       <div class="card">
@@ -178,53 +199,47 @@
       </div>
     <div class="col-lg-4 col-md-4 col-12">
       <div class="card">
-        <img src="doubledrawn.png" class="card-img-top">
+        <img src="watercurl.png" class="card-img-top">
         <div class="card-body text-center">
-          <h5 class="card-title">Card title</h5>
+          <h5 class="card-title">Water curls</h5>
           
             <a href="#" class="btn signin">Add to Cart</a>
-        </div>
-      </div>
-    <div class="col-lg-4 col-md-4 col-12">
-      <div class="card">
-        <img src="HawaiianSilky.png" class="card-img-top">
-        <div class="card-body text-center">
-          <h5 class="card-title">Card title</h5>
-            
-            <a href="#" class="btn signin">Add to Cart</a>
-        </div>
-      </div>
-    <div class="col-lg-4 col-md-4 col-12">
-      <div class="card">
-          <img src="pixiecurlsgold.png" class="card-img-top">
-          <div class="card-body text-center">
-            <h5 class="card-title">Card title</h5>
-            
-              <a href="#" class="btn signin">Add to Cart</a>
           </div>
-        </div>
-    <div class="col-lg-4 col-md-4 col-12">
-      <div class="card">
-        <img src="doubledrawn.png" class="card-img-top">
-        <div class="card-body text-center">
-          <h5 class="card-title">Card title</h5>
-              
-            <a href="#" class="btn signin">Add to Cart</a>
-        </div>
-      </div>
-    <div class="col-lg-4 col-md-4 col-12">
-      <div class="card">
-        <img src="HawaiianSilky.png" class="card-img-top">
-        <div class="card-body text-center">
-          <h5 class="card-title">Card title</h5>
-      
-                <a href="#" class="btn signin">Add to Cart</a>
         </div>
       </div>      
     </div>
   </div>
 </section>
 
+<!--Hair Products-->
+<section id="hairproducts">
+  <div class="container-fluid m-5">
+    <h1 class="text-center my-3">Hair Products</h1>
+    <div class="row pro-container">
+      <div class="col-lg-4 col-md-4 col-12">
+      <div class="card">
+        <img src="HawaiianSilky.png" class="card-img-top">
+        <div class="card-body text-center">
+          <h5 class="card-title">Hawaiian Silky Conditioner</h5>
+        
+          <a href="#" class="btn signin">Add to Cart</a>
+        </div>
+      </div>
+    <div class="col-lg-4 col-md-4 col-12">
+      <div class="card">
+        <img src="orsconditioner.png" class="card-img-top">
+        <div class="card-body text-center">
+          <h5 class="card-title">Ors Conditioner/h5>
+          
+            <a href="#" class="btn signin">Add to Cart</a>
+          </div>
+        </div>
+      </div>      
+    </div>
+  </div>
+</section>
+
+<!--Contacts-->
 <section id="contact">
   <div class="container box">
     <div class="row">
@@ -253,7 +268,6 @@
   <!-- <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
   <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
   <link href="assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet"> -->
-
 <!--
 <header id="header" class="fixed-top d-flex align-items-center header-transparent">
   <div class="container d-flex align-items-center justify-content-between">
@@ -269,9 +283,3 @@
         <li><a class="nav-link scrollto" href="#wavy">Wavy</a></li>
         <li><a class="nav-link scrollto" href="#coily">Coily</a></li>
         <li><a class="nav-link scrollto" href="#hairproducts">Hair Products</a></li>
-      </ul> 
-
-    </nav> 
-  </div>
-</header>
--->
