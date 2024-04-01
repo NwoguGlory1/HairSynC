@@ -94,6 +94,7 @@ h4{
     color: goldenrod !important;
 }
 
+
 .navbar-nav{
     display: flex;
     justify-content: space-between;
@@ -101,9 +102,9 @@ h4{
 }
 
 .navbar>.container-fluid{
-    /* display: flex; */
-    /* justify-content: space-between; */
-    /* flex-direction: row;    */
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;   
 }
 
 #navbarSupportedContent a{
@@ -120,6 +121,14 @@ h4{
     background:#29f700 ;
     width: 5rem;
     border-radius:15px;
+}
+
+/* .btn search{
+    margin-top: 3px;
+} */
+
+.ms-auto sign{
+    margin-right: 3px; 
 }
 
 section{
