@@ -5,12 +5,32 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>HairSynC</title>
     {% load static %}
-    <!-- static/css/style.css -->
-    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <!-- static/store/style.css -->
+    <link rel="stylesheet" href="{% static 'store/style.css' %}">
 </head>
 <body>
     <header>
         <h1>Welcome to HairSynC Store</h1>
     </header>
+
+    {% if messages %}
+    <!-- Iterate over Django messages -->
+    {% for message in messages %}
+        <!-- Display messages using SweetAlert.js -->
+        <script>
+            Swal.fire({
+                icon: '{{ message.tags }}', // Use the message tags as SweetAlert.js icons
+                title: '{{ message.tags|capfirst }}', // Capitalize the first letter of the tag
+                text: '{{ message }}',
+                timer: 10000, // Automatically close after 10 seconds
+                showConfirmButton: false, // Do not show a confirmation button
+                position: 'top-end', // Show notifications at the top-end
+                // Add more options as needed
+            });
+        </script>
+    {% endfor %}
+{% endif %}
+<!-- Include SweetAlert.js -->
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 </body>
 </html>
