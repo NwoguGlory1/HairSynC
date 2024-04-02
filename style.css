@@ -49,8 +49,8 @@ height: 80%;
     width:100%;
     border: none;
     border-radius: 50px;
-    background-color: green;
-    border-color: green;
+    background-color: #29f700;
+    border-color: #29f700;
 }
 
 .form-control{
@@ -118,7 +118,7 @@ h4{
 }
 
 #navbarSupportedContent button{
-    background:#29f700 ;
+    background:#29f700;
     width: 5rem;
     border-radius:15px;
 }
@@ -174,9 +174,15 @@ section{
 }
 
 .signin{
-    background-color: green !important;
+    background-color: green!important;
     color: white !important;
+    border-radius: 50px important;
+    width: 10rem;
     box-shadow: 2px 4px 5px rgba(0,0.0. .3);
+}
+
+.signin button:hover{
+    background-color: white;
 }
 
 /****About****/
