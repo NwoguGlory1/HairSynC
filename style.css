@@ -250,17 +250,20 @@ section {
      gap: 50px; */
     /* position: relative; */
     width: 250px;
-    height: 300px;
+    height: 450px;
     background-color: #e5e5e5 !important;
     border: none !important;
     box-shadow: 15px 20px 20px rgba(0,0,0,.3);
                 inset: 4px 4px 10px white;
     border-radius: 20px !important; 
-    overflow: hidden;  
-    justify-content: center;   
+    overflow: hidden;
+    /* justify-content: space-around;    */
     align-items: center;
     /* margin: 20px 0 ; */
-    margin: 20px 60px ;    
+    margin: 20px 60px ;
+    /* display: flex; */
+    /* flex-wrap: wrap; */
+    /* float: left; */
 }
 
 .card:hover {
