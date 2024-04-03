@@ -83,7 +83,7 @@ h4{
     top: 0;
     left: 0;
     z-index: 100;
-    padding: .5rem 5rem;
+    padding: 0.5rem 3rem 0.5rem 4rem;
     box-shadow: 5px 5px 20px rgba(0,0,0,.5);
     background: black;
 }
@@ -107,6 +107,35 @@ h4{
     flex-direction: row;   
 }
 
+form.search {
+    display: flex;
+    flex-direction: row;
+    margin: 0 3em 0 0 !important;
+    align-items: center;
+    justify-content: center;
+  } 
+
+  .search > input {
+    padding: 0.3em;
+    outline: none;
+    border: 1px solid #29f700;
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+}
+
+.search > button {
+    background-color: #29f700;
+    padding: 0.3em !important;
+    border: 1px solid #29f700;
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+  }
+  @media only screen and (max-width: 1199px) {
+    form.search {
+      margin: 1rem 0 1rem 0 !important;
+    }
+  }
+
 #navbarSupportedContent a{
     color:#ffff;
     text-decoration: none;
@@ -117,7 +146,7 @@ h4{
     border-bottom: 2px solid peru ;
 }
 
-#navbarSupportedContent button{
+#navbarSupportedContent> button{
     background:#29f700;
     width: 5rem;
     border-radius:15px;
