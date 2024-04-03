@@ -404,7 +404,25 @@
   Copyrights @Daraja&Fae 2024
 </footer>
 
-
+{% if messages %}
+<!-- Iterate over Django messages -->
+{% for message in messages %}
+    <!-- Display messages using SweetAlert.js -->
+    <script>
+        Swal.fire({
+            icon: '{{ message.tags }}', // Use the message tags as SweetAlert.js icons
+            title: '{{ message.tags|capfirst }}', // Capitalize the first letter of the tag
+            text: '{{ message }}',
+            timer: 10000, // Automatically close after 10 seconds
+            showConfirmButton: false, // Do not show a confirmation button
+            position: 'top-end', // Show notifications at the top-end
+            // Add more options as needed
+        });
+    </script>
+{% endfor %}
+{% endif %}
+<!-- Include SweetAlert.js -->
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
   <script src="js/bootstrap.bundle.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF"></script>
