@@ -4,13 +4,12 @@ from django.contrib.auth import authenticate, login, logout
 from django.db.models import F, ExpressionWrapper, fields, Sum, Q
 from django.db import IntegrityError, transaction
 from django.contrib.auth.decorators import login_required
-from django.shortcuts import render, HttpResponse, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
 from django.views.decorators.http import require_http_methods
 from django.views.decorators.csrf import csrf_exempt
 from django.contrib.auth.models import User
 from authlib.integrations.django_client import OAuth
 from django.conf import settings
-from django.shortcuts import redirect, render
 from django.urls import reverse
 from urllib.parse import quote_plus, urlencode
 from django.http import JsonResponse, HttpResponse
@@ -21,6 +20,7 @@ from django.core.exceptions import ValidationError, MultipleObjectsReturned, Per
 from django.http import QueryDict
 from django.core.serializers import serialize
 from django.forms.models import model_to_dict
+from django.contrib import messages
 
 
 def check_authentication(view_func):
@@ -69,13 +69,21 @@ def register(request):
         user_cart = ShoppingCart(user=user)
         user_cart.save()
 
-        return JsonResponse({"message": "User created successfully"}, status=200)
+        # return JsonResponse({"message": "User created successfully"}, status=200)
+        user = authenticate(request, username=username, password=password)
+        if user is not None:
+            login(request, user)
+        
+        # Redirect to a success page.
+        messages.success(request, 'User created successfully')
+        return redirect('/store/')
 
     except IntegrityError:
         return JsonResponse({"error": "Username or email already exists"}, status=409)
 
     except ValidationError as e:
         return JsonResponse({"error": str(e)}, status=400)
+    
     
 @require_http_methods(["GET"])   
 def register_form(request):
