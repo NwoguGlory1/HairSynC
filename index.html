@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+ 
+  <title>HairSynC</title>
+  <meta content="" name="description">
+  <meta content="" name="keywords">
+
+  <!-- Favicons -->
+  <link href="favicon.png" rel="icon">
+
+  <!-- Template Main CSS File -->
+  <link href="style.css" rel="stylesheet">
+
+  <!-- Template Main CSS File 
+  <link href="login.html" rel="" > 
+  <link href="signup.html" rel="" > 
+  <link href="home.html" rel="" >
+  <link href="all Categories.html" rel="" >  
+  <link href="straight.html" rel="" > 
+  <link href="wavy.html" rel="">  
+  <link href="coily.html" rel="" > 
+  <link href="contact.html" rel="" >
+  
+-->
+
+  <!-- Link to boostrap-->
+  <link href="css/all.min.css" rel="stylesheet">
+  <link href="css/bootstrap.min.css" rel="stylesheet">
+  
+</head>
+<body>
+  <!--SignUp-->
+  <div class="signup-page container bg-light">
+    <div class="row mt-5">
+      <div class="col-lg-4 bg-white m-auto rounded-top wrapper">
+        <h2 class="text-center pt-3">SignUp Now</h2>
+        <p class="text-center text-muted lead">It only takes a minute.</p>
+          <!--Form starts-->
+          <form action="#">
+            <div class="input-group mb-4">
+              <span class="input-group-text"><i class="fa fa-user"></i></span>
+              <input type="text" class="form-control" placeholder="First Name" />
+            </div>
+            <div class="input-group mb-4">
+              <span class="input-group-text"><i class="fa fa-user"></i></span>
+              <input type="text" class="form-control" placeholder="Last Name" />
+            </div>
+            <div class="input-group mb-4">
+              <span class="input-group-text"><i class="fa fa-envelope"></i></span>
+              <input type="text" class="form-control" placeholder="Email" />
+            </div>
+            <div class="input-group mb-4">
+              <span class="input-group-text"><i class="fa fa-lock"></i></span>
+              <input type="text" class="form-control" placeholder="Password" />
+            </div>
+            <div class="input-group mb-4">
+              <span class="input-group-text"><i class="fa fa-lock"></i></span>
+              <input type="text" class="form-control" placeholder="Confirm Password" />
+            </div>
+            <div class="d-grid">
+              <button type="button" class="btn btn-success">SignUp Now</button>
+              <p class="text-center text-muted mt-3">
+                When You Register by Clicking SignUp Button, You Agree to our <a href="#">Terms and Conditions</a></p>
+              <p class="text-center">
+                Already Have an Account ? <a href="login.html">Login Here</a>
+              </p>
+              <p class="text-center"></p>
+            </div>
+          </form>
+          <!--Form close-->
+      </div>
+    </div>
+  </div>
+
+  <!--Login-->
+  <div class="login-page container-fluid">
+    <form class="mt-4">
+      <h4 class="text-center">Login</h4>
+      <div class="mb-3 mt-5">
+        <label for="exampleInputEmail1" class="form-label">User Name</label>
+        <input type="email" class="form-control" placeholder="Enter Email Address" id="exampleInputEmail1" aria-describedby="emailHelp">
+        
+      </div>
+      <div class="mb-3">
+        <label for="exampleInputPassword1" class="form-label">Password</label>
+        <input type="password" class="form-control" placeholder="Enter password" id="exampleInputPassword1">
+        <div id="emailHelp" class="form-text mt-3">Forget Password?</div>
+      </div>
+      
+      <button type="submit" class="btn btn-primary mt-4">Login</button>
+    </form>
+
+  </div>
+    
+  <!--Navbar-->
+  <nav class="navbar navbar-expand-lg navbar-dark" id="navbar">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#home">
+        <img class="d-inline-block align-text-top" src="Logo.png" alt="logo" width="30" height="24">HairSynC
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarScroll" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+       </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav m-auto my-2 my-lg-0">
+          <li class="nav-item">
+            <a class="nav-link" href="#home"></a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#all_categories">All Categories</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#straight">Straight</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#wavy">Wavy</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#coily">Coily</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#hairproducts">Hair Products</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#contact">Contact</a>
+          </li>
+        </ul>
+        <form class="d-flex">
+          <input class="me-2" type="search" placeholder="Search" aria-label="Search">
+          <button class="btn mt-n4 search ms-auto" type="submit">Search</button>
+        </form>
+        <button class="btn ms-auto sign" p-2 my-lg-0 my-2>Sign In</button>
+    </div>
+  </nav>
+
+  <!-- Home-->
+<section id="home">
+  <h1 class="text-center"> Welcome to Our Luxury Hair Page </h1>
+  <p><i>...connecting hair lovers to the source!!!</i></p>
+  <button class="btn signin m-4">Shop Now</button>
+  <!-- <div class="input-group m-4">
+    <input type="text" class="form-control" placeholder="Email Address">
+      <button class="btn signin">Get Started</button>
+  </div> -->
+</section>
+
+<!--All Categories -->
+<section id="all_categories">
+  <div class="container-fluid m-5">
+    <!-- <div class="m-5"> -->
+    <h1 class="text-center my-3">All Categories</h1>
+    <div class="hairs">
+      <div>
+        <div class="card">
+      <img src="bonestraight12.png" class="card-img-top">
+      <div class="card-body text-center">
+          <h5 class="card-title">Bonestraight Hair $250</h5>
+        
+          <a href="#" class="btn signin">Add to Cart</a>
+        </div>
+      </div>
+    </div>
+    <div>
+      <div class="card">
+        <img src="doubledrawn.png" class="card-img-top">
+        <div class="card-body text-center">
+          <h5 class="card-title">Doubledrawn Hair $120</h5>
+          
+          <a href="#" class="btn signin">Add to Cart</a>
+        </div>
+      </div>
+      <div>
+        <div class="card">
+          <img src="wavvyhair.png" class="card-img-top">
+          <div class="card-body text-center">
+            <h5 class="card-title">Wavy Hair $300</h5>
+          
+            <a href="#" class="btn signin">Add to Cart</a>
+          </div>
+        </div>
+      </div>
+      <div>
+        <div class="card">
+          <img src="wavyhair.png" class="card-img-top">
+          <div class="card-body text-center">
+            <h5 class="card-title">Wavy Hair $320</h5>
+            
+            <a href="#" class="btn signin">Add to Cart</a>
+          </div>
+        </div>
+      </div>
+      <div>
+      <div class="card">
+        <img src="pixiecurlsgold.png" class="card-img-top">
+        <div class="card-body text-center">
+          <h5 class="card-title">Pixie curls $450</h5>
+  
+          <a href="#" class="btn signin">Add to Cart</a>
+        </div>
+      </div>
+    </div>
+    <div>
+      <div class="card">
+    <img src="watercurl.png" class="card-img-top">
+    <div class="card-body text-center">
+        <h5 class="card-title">Water curls $300</h5>
+    
+        <a href="#" class="btn signin">Add to Cart</a>
+      </div>
+    </div>
+  </div>
+  <div>
+  <div class="card">
+  <img src="HawaiianSilky.png" class="card-img-top">
+  <div class="card-body text-center">
+    <h5 class="card-title">Hawaiian Silky Conditioner $90</h5>
+  
+  <a href="#" class="btn signin">Add to Cart</a>
+    </div>
+</div>
+</div>
+<div>
+<div class="card">
+  <img src="orsconditioner.png" class="card-img-top">
+  <div class="card-body text-center">
+    <h5 class="card-title">Ors Conditioner $70 </h5>
+    
+      <a href="#" class="btn signin">Add to Cart</a>
+    </div>
+  </div>
+</div>
+  </div>
+  </div>
+</section>
+
+
+
+<!--Straight -->
+<section id="straight">
+  <div class="container-fluid m-5">
+    <!-- <div class="m-5"> -->
+    <h1 class="text-center my-3">Straight Hair</h1>
+    <div class="hairs">
+      <div>
+        <div class="card">
+      <img src="bonestraight12.png" class="card-img-top">
+      <div class="card-body text-center">
+          <h5 class="card-title">Bonestraight Hair $250</h5>
+        
+          <a href="#" class="btn signin">Add to Cart</a>
+        </div>
+      </div>
+    </div>
+    <div>
+      <div class="card">
+        <img src="doubledrawn.png" class="card-img-top">
+        <div class="card-body text-center">
+          <h5 class="card-title">Doubledrawn Hair $120</h5>
+          
+          <a href="#" class="btn signin">Add to Cart</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  </div>
+</section>
+
+<!--Wavy-->
+<section id="wavy">
+  <div class="container-fluid m-5">
+    <!-- <div class="m-5"> -->
+    <h1 class="text-center my-3">Wavy Hairs</h1>
+    <div class="hairs">
+      <!-- <div class="col-lg-4 col-md-4 col-12"> -->
+        <div>
+          <div class="card">
+            <img src="wavvyhair.png" class="card-img-top">
+            <div class="card-body text-center">
+              <h5 class="card-title">Wavy Hair $300</h5>
+            
+              <a href="#" class="btn signin">Add to Cart</a>
+            </div>
+          </div>
+        </div>
+    <!-- <div class="col-lg-4 col-md-4 col-12"> -->
+        <div>
+          <div class="card">
+            <img src="wavyhair.png" class="card-img-top">
+            <div class="card-body text-center">
+              <h5 class="card-title">Wavy Hair $320</h5>
+              
+              <a href="#" class="btn signin">Add to Cart</a>
+            </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!--Coily -->
+<section id="coily">
+  <div class="container-fluid m-5">
+    <h1 class="text-center my-3">Coily Hairs</h1>
+    <div class="hairs">
+      <!-- <div class="col-lg-4 col-md-4 col-12"> -->
+        <div>
+            <div class="card">
+          <img src="pixiecurlsgold.png" class="card-img-top">
+          <div class="card-body text-center">
+            <h5 class="card-title">Pixie curls $450</h5>
+        
+          <a href="#" class="btn signin">Add to Cart</a>
+        </div>
+      </div>
+    </div>
+    <div>
+      <div class="card">
+        <img src="watercurl.png" class="card-img-top">
+        <div class="card-body text-center">
+          <h5 class="card-title">Water curls $300</h5>
+          
+            <a href="#" class="btn signin">Add to Cart</a>
+          </div>
+        </div>
+      </div>      
+    </div>
+  </div>
+</section>
+
+<!--Hair Products-->
+<section id="hairproducts">
+  <div class="container-fluid m-5">
+    <h1 class="text-center my-3">Hair Products</h1>
+    <div class="hairs">
+      <div>
+        <div class="card">
+        <img src="HawaiianSilky.png" class="card-img-top">
+        <div class="card-body text-center">
+          <h5 class="card-title">Hawaiian Silky Conditioner $90</h5>
+        
+        <a href="#" class="btn signin">Add to Cart</a>
+      </div>
+      </div>
+      </div>
+    <div>
+      <div class="card">
+        <img src="orsconditioner.png" class="card-img-top">
+        <div class="card-body text-center">
+          <h5 class="card-title">Ors Conditioner $70 </h5>
+          
+            <a href="#" class="btn signin">Add to Cart</a>
+          </div>
+        </div>
+      </div>      
+    </div>
+  </div>
+</section>
+
+<!--Contacts-->
+<section id="contact">
+  <div class="container box">
+    <div class="row">
+      <div class="col-lg-6 col-md-6 col-12">
+        <img src="Screenshot 2024-03-27 161447.png" class="img-fluid" alt="Contact Image">
+      </div>
+      <div class="col-lg-6 col-md-6 col-12">
+        <h1>CONTACT US</h1>
+        <form class="mb-3">
+          <input type="text" class="form-control" placeholder="Enter your name">
+          <input type="email" class="form-control" placeholder="Enter your mail">
+          <textarea class="form-control" placeholder="Enter your message"></textarea>
+          <button class="btn signin">Send Message</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- About-->
+<section id="about">
+  <div class="container-fluid">
+      <div class="row">
+        <div class="col-lg-6 col-md-6 col-12">
+          <img src=""  alt="Our pix" class="img-fluid">
+        </div>
+        <div class=" col-lg-6 col-md-6 col-12 p-lg-5 p-2 my-5">
+             <h1> About Us</h1>
+          <p>ndndndnnnLoremgnnnnnnnnnnnnsmmmmmmmmmsvf  fnsnsnnv ndndndnnnLoremgnnnnnnnnnnnnsmmmmmmmmmsvf  fnsnsnnvndndndnnnLoremgnnnnnnnnnnnnsmmmmmmmmmsvf  fnsnsnnvv ndndndnnnLoremgnnnnnnnnnnnnsmmmmmmmmmsvf  fnsnsnnv ndndndnnnLoremgnnnnnnnnnnnnsmmmmmmmmmsvf  fnsnsnnv ndndndnnnLoremgnnnnnnnnnnnnsmmmmmmmmmsvf  fnsnsnnvndndndnnnLoremgnnnnnnnnnnnnsmmmmmmmmmsvf  fnsnsnnvv ndndndnnnLoremgnnnnnnnnnnnnsmmmmmmmmmsvf  fnsnsnnvndndndnnnLoremgnnnnnnnnnnnnsmmmmmmmmmsvf  fnsnsnnv ndndndnnnLoremgnnnnnnnnnnnnsmmmmmmmmmsvf  fnsnsnnvndndndnnnLoremgnnnnnnnnnnnnsmmmmmmmmmsvf  fnsnsnnvv ndndndnnnLoremgnnnnnnnnnnnnsmmmmmmmmmsvf  fnsnsnnv
+            ndndndnnnLoremgnnnnnnnnnnnnsmmmmmmmmmsvf  fnsnsnnv ndndndnnnLoremgnnnnnnnnnnnnsmmmmmmmmmsvf  fnsnsnnvndndndnnnLoremgnnnnnnnnnnnnsmmmmmmmmmsvf  fnsnsnnvv ndndndnnnLoremgnnnnnnnnnnnnsmmmmmmmmmsvf  fnsnsnnvndndndnnnLoremgnnnnnnnnnnnnsmmmmmmmmmsvf  fnsnsnnv ndndndnnnLoremgnnnnnnnnnnnnsmmmmmmmmmsvf  fnsnsnnvndndndnnnLoremgnnnnnnnnnnnnsmmmmmmmmmsvf  fnsnsnnvv ndndndnnnLoremgnnnnnnnnnnnnsmmmmmmmmmsvf  fnsnsnnv
+          </p>
+        </div>
+      </div>
+  </div>
+ </section>
+
+
+<!--Footer-->
+<footer>
+  Copyrights @Daraja&Fae 2024
+</footer>
+
+
+  <script src="js/bootstrap.bundle.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF"></script>
+</body>
+
+ 
+  <!-- Vendor CSS Files -->
+  <!-- <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+  <link href="assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet"> -->
+<!--
+<header id="header" class="fixed-top d-flex align-items-center header-transparent">
+  <div class="container d-flex align-items-center justify-content-between">
+
+    <div class="logo">
+      <h1><a href="index.html"><span>HairSynC</span></a></h1>
+    </div>
+
+    <nav id="navbar" class="navbar">
+      <ul>
+        <li><a class="nav-link scrollto active" href="#hero">All Categories</a></li>
+        <li><a class="nav-link scrollto" href="#straight">Straight</a></li>
+        <li><a class="nav-link scrollto" href="#wavy">Wavy</a></li>
+        <li><a class="nav-link scrollto" href="#coily">Coily</a></li>
+        <li><a class="nav-link scrollto" href="#hairproducts">Hair Products</a></li>
