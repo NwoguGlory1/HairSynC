@@ -22,6 +22,8 @@
   <!-- Link to boostrap-->
   <link href="css/all.min.css" rel="stylesheet">
   <link href="css/bootstrap.min.css" rel="stylesheet">
+  <link href="css/bootstrap-icons.css" rel="stylesheet"> 
+  <!-- <link href="css/bootstrap-icons-1.5.0/bootstrap-icons.css" rel="stylesheet"> -->
   
 </head>
 <body>
@@ -38,50 +40,60 @@
               <ul class="navbar-nav me-auto">
                 <!-- <li class="nav-item"></li> -->
               </ul>  
-              <span class="navbar-text">Total shopping cart value:</span>
+              <span class="navbar-text">Total shopping cart value: &#8377; <span class="totalAmount">0</span></span>
             </div>
         </div>
     </nav>
     <div class="container-fluid ms-auto">
         <!-- <div class="card" style="width: 40rem;"> -->
-        <div style="width: 40rem;">
+        <div id="shopcard">
+        <div class="mx-auto mt-5 shadow-lg rounded-0" width: 40rem;">
+            <div class="card-header">
+                <h3>Cart</h3>
+            </div>
             <div class="card-body">
                 <table class="table table-primary">
                     <thead>
                         <th>#</th>
                         <th>Item</th>
                         <th>Price</th>
-                        <th>Quantity</th>
+                        <th class="text-center">Quantity</th>
                     </thead>
-                    <tbody>
+                    <tbody class="table-light">
                         <tr>
                            <td>1</td>
                            <td>T-shirt</td> 
                            <td>
-                            <span class="price"></span>
-                            <input type="hidden" name="txtPrice">
-                            <input type="hidden" name="totalTxtPrice">
+                            &#8377; <span class="price">250</span>
+                            <input type="hidden" name="txtPrice" value="250">
+                            <input type="hidden" name="totalTxtPrice" value="0">
                         </td>
-                        <td>
-                            <span class="price"></span>
-                            <input type="hidden" name="txtIItem">
+                        <td class="text-center">
+                            <span class="item"></span>
+                            <input type="hidden" name="txtIItem" value="0">
                         </td> 
                         </tr>
                         <tr>
                             <td>2</td>
                             <td>Jean</td> 
                             <td>
-                             <span class="price"></span>
-                             <input type="hidden" name="txtPrice">
-                             <input type="hidden" name="totalTxtPrice">
+                             &#8377; <span class="price">150</span>
+                             <input type="hidden" name="txtPrice" value="150">
+                             <input type="hidden" name="totalTxtPrice" value="0">
                          </td>
-                         <td>
-                             <span class="price"></span>
-                             <input type="hidden" name="txtIItem">
+                         <td class="text-center">
+                             <i class="bi bi-cart-plus-fill"></i><span class="item"></span><i class="bi bi-cart-dash"></i>
+                             <input type="hidden" name="txtIItem" value="0">
                          </td> 
+                         </tr>
+                         <tr>
+                            <td colspan="2" class="text-end">Total Amount:</td>
+                            <td>&#8377;<span class="totalAmount">0</span></td>
+                            <td>Total Quantity: <span class="totalQuantity">0</span></td>
                          </tr>
                     </tbody>
                 </table>
+            </div>
             </div>
         </div>
     </div>
