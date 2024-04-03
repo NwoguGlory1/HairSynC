@@ -69,8 +69,9 @@
                             <input type="hidden" name="totalTxtPrice" value="0">
                         </td>
                         <td class="text-center">
-                            <span class="item"></span>
-                            <input type="hidden" name="txtIItem" value="0">
+                            <i class="bi bi-cart-dash"></i>&nbsp;<input name="item" value=0 size="2">&nbsp;<i class="bi bi-cart-plus-fill text-primary"></i>
+                            <!-- <span class="item"></span> -->
+                            <input type="hidden" name="txtItem" value="0">
                         </td> 
                         </tr>
                         <tr>
@@ -82,7 +83,7 @@
                              <input type="hidden" name="totalTxtPrice" value="0">
                          </td>
                          <td class="text-center">
-                             <i class="bi bi-cart-plus-fill"></i><span class="item"></span><i class="bi bi-cart-dash"></i>
+                            <i class="bi bi-cart-dash"></i>&nbsp;<input name="item" value=0 size="2">&nbsp;<i class="bi bi-cart-plus-fill text-primary"></i>
                              <input type="hidden" name="txtIItem" value="0">
                          </td> 
                          </tr>
@@ -97,6 +98,14 @@
             </div>
         </div>
     </div>
+    <script>
+    var totalAmount = document.querySelectorAll(".totalAmount");
+    var amountByItem = document.querySelectorAll("input[name=txtPrice]");
+    var totalItem = document.querySelectorAll(".totalQuantity");
+    var itemCountByEachProd = document.querySelectorAll("input[name=item]");
+
+    document.querySelectorAll("bi-cart-plus-fill").addEventListener("click", function())
+    </script>
     <script src="js/bootstrap.bundle.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF"></script>
