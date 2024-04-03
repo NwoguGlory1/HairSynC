@@ -185,6 +185,11 @@ section{
     background-color: white;
 }
 
+.btn signin button{
+    border-radius: 50px;
+    width: 10rem;
+}
+
 /****About****/
 #about{
     background: linear-gradient(to right, #ea1d6f, #eb466b 100%);
