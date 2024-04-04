@@ -28,8 +28,9 @@
 </head>
 <body>
     <nav class="navbar navbar-expand-lg navbar-light bg-light p-3">
-        <div class="container-fluid">
+        <div class="container-fluid mt-10">
             <a class="navbar-brand" href="#">Shopping Cart</a>
+            <!-- <a class="navbar-brand" href="#"><small>Keep Shopping...</small></a> -->
             <div class="navbar navbar-collapse">
              <ul class="navbar-nav me-auto">
                  <!-- <li class="nav-item"></li>  -->
@@ -40,13 +41,15 @@
               <ul class="navbar-nav me-auto">
                 <!-- <li class="nav-item"></li> -->
               </ul>  
-              <span class="navbar-text">Total shopping cart value: &#8377; <span class="totalAmount">0</span></span>
+              <span class="navbar-text">Total shopping cart value: $ <span class="totalAmount">0</span></span>
+              <br>
+              <a href="checkout.html"><b>CHECKOUT </b></a>
             </div>
         </div>
     </nav>
     <div class="container-fluid ms-auto">
         <!-- <div class="card" style="width: 40rem;"> -->
-        <div id="shopcard">
+        <div id="shopcard" class="cart-card ">
         <div class="mx-auto mt-5 shadow-lg rounded-0" width: 40rem;">
             <div class="card-header">
                 <h3>Cart</h3>
@@ -56,40 +59,41 @@
                     <thead>
                         <th>#</th>
                         <th>Item</th>
-                        <th>Price</th>
+                        <th>Unit Price</th>
                         <th class="text-center">Quantity</th>
+                        <th class="text-center">Hair Company</th>
                     </thead>
                     <tbody class="table-light">
                         <tr>
                            <td>1</td>
-                           <td>T-shirt</td> 
+                           <td>Bonestraight Hair</td> 
                            <td>
-                            &#8377; <span class="price">250</span>
+                            $ <span class="txtprice">250</span>
                             <input type="hidden" name="txtPrice" value="250">
                             <input type="hidden" name="totalTxtPrice" value="0">
                         </td>
                         <td class="text-center">
-                            <i class="bi bi-cart-dash"></i>&nbsp;<input name="item" value=0 size="2">&nbsp;<i class="bi bi-cart-plus-fill text-primary"></i>
+                            <i class="bi bi-cart-dash"></i><input name="item" value=0 size="2"><i class="bi bi-cart-plus-fill text-primary"></i>
                             <!-- <span class="item"></span> -->
                             <input type="hidden" name="txtItem" value="0">
                         </td> 
                         </tr>
                         <tr>
                             <td>2</td>
-                            <td>Jean</td> 
+                            <td>Doubledrawn Hair</td> 
                             <td>
-                             &#8377; <span class="price">150</span>
-                             <input type="hidden" name="txtPrice" value="150">
+                                $ <span class="txtprice">120</span>
+                             <input type="hidden" name="txtPrice" value="120">
                              <input type="hidden" name="totalTxtPrice" value="0">
                          </td>
                          <td class="text-center">
-                            <i class="bi bi-cart-dash"></i>&nbsp;<input name="item" value=0 size="2">&nbsp;<i class="bi bi-cart-plus-fill text-primary"></i>
-                             <input type="hidden" name="txtIItem" value="0">
+                            <i class="bi bi-cart-dash"></i><input name="item" value=0 size="2"><i class="bi bi-cart-plus-fill text-primary"></i>
+                             <input type="hidden" name="txtItem" value="0">
                          </td> 
                          </tr>
                          <tr>
                             <td colspan="2" class="text-end">Total Amount:</td>
-                            <td>&#8377;<span class="totalAmount">0</span></td>
+                            <td>$<span class="totalAmount">0</span></td>
                             <td>Total Quantity: <span class="totalQuantity">0</span></td>
                          </tr>
                     </tbody>
@@ -100,11 +104,77 @@
     </div>
     <script>
     var totalAmount = document.querySelectorAll(".totalAmount");
-    var amountByItem = document.querySelectorAll("input[name=txtPrice]");
+    var amountByItem = document.querySelectorAll("input[name=totalTxtPrice]");
     var totalItem = document.querySelectorAll(".totalQuantity");
     var itemCountByEachProd = document.querySelectorAll("input[name=item]");
+    
+    document.querySelectorAll(".bi-cart-plus-fill").forEach(item => {
+        item.addEventListener("click", function() {
+            addItemToCart(item);
+        });
+    });
 
-    document.querySelectorAll("bi-cart-plus-fill").addEventListener("click", function())
+    function addItemToCart(item) {
+        var closetTr = item.closest("td").parentNode;
+        var closestPrice = closetTr.cells[2].querySelector("input[name=txtPrice]").value;
+        var closestTotalPrice = closetTr.cells[2].querySelector("input[name=totalTxtPrice]");
+
+        var itemCount = item.closest("td").querySelector("input[name=item]");
+
+        itemCount.value = parseFloat(itemCount.value) + 1;
+
+        closestTotalPrice.value = parseFloat(closestPrice) * parseFloat(itemCount.value);
+
+        var tempTotalAmount = 0;
+        amountByItem.forEach(item => {
+            tempTotalAmount += parseFloat(item.value);
+        });
+        totalAmount.forEach(item => {
+            item.innerHTML = tempTotalAmount.toFixed(2);
+        });
+
+        var tempTotalQuantity = 0;
+        itemCountByEachProd.forEach(item => {
+            tempTotalQuantity += parseFloat(item.value);
+        });
+        totalItem.forEach(item => {
+            item.innerHTML = tempTotalQuantity;
+        });
+    }
+
+    function removeItemFromCart(item) {
+        var closetTr = item.closest("td").parentNode;
+        var closestPrice = closetTr.cells[2].querySelector("input[name=txtPrice]").value;
+        var closestTotalPrice = closetTr.cells[2].querySelector("input[name=totalTxtPrice]");
+
+        var itemCount = item.closest("td").querySelector("input[name=item]");
+
+        itemCount.value = parseFloat(itemCount.value) > 0 ? parseFloat(itemCount.value) - 1 : 0;
+
+        closestTotalPrice.value = parseFloat(closestPrice) * parseFloat(itemCount.value);
+
+        var tempTotalAmount = 0;
+        amountByItem.forEach(item => {
+            tempTotalAmount += parseFloat(item.value);
+        });
+        totalAmount.forEach(item => {
+            item.innerHTML = tempTotalAmount.toFixed(2);
+        });
+
+        var tempTotalQuantity = 0;
+        itemCountByEachProd.forEach(item => {
+            tempTotalQuantity += parseFloat(item.value);
+        });
+        totalItem.forEach(item => {
+            item.innerHTML = tempTotalQuantity;
+        });
+    }
+
+    document.querySelectorAll(".bi-cart-dash").forEach(item => {
+        item.addEventListener("click", function() {
+            removeItemFromCart(item);
+        });
+    });
     </script>
     <script src="js/bootstrap.bundle.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>

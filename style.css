@@ -373,9 +373,21 @@ footer a {
 }
 
 /****Shopping cart****/
-#shopcard > card{
-
+.cart-card{
+    width: 700px;
+    height: 400px;
+    background-color: white;
+    border: none !important;
+    display: flex;
+    /* flex-direction: column; */
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
 }
+
+/* th{
+    padding-left: 20px;
+} */
 
 
 
