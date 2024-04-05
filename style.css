@@ -221,7 +221,7 @@ section{
 
 /****About****/
 #about{
-    background: linear-gradient(to right, #ea1d6f, #eb466b 100%);
+    background: linear-gradient(to right, goldenrod, black 100%);
 }
 
 #about h1{
@@ -358,7 +358,7 @@ form{
 
 /****Shopping cart****/
 .cart-card{
-    width: 700px;
+    width: 900px;
     height: 400px;
     background-color: white;
     border: none !important;
@@ -387,7 +387,7 @@ form{
 footer a {
     color: white;
     text-decoration: none;
-    /* text-align: center; */
+    /* text-align: center;
 } */
 
 
