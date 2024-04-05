@@ -31,16 +31,94 @@
         <div class="py-5 text-center">
             <h2> CHECKOUT PAGE. </h2>
             <div class="form">
-              <div class="group">
-                <label for="">Full Name"</label>
-                <input type="text" name="" id="">
-              </div>
-              <div class="group">
-                <label for="">Phone number"</label>
-                <input type="text" name="" id="">
-              </div>
             </div>
         </div>
+
+        <div class="container checkout">
+          <h4 mb-3> Billing Address</h4>
+          <form novalidate>
+            <div class="row g-3">
+              <div class="col-sm-6">
+                <label for="firstName" class="form-label">First Name</label>
+                <input id="firstName" type="text" class="form-control" placeholder="John" required>
+                <div class="invalid-feedback"> Valid first name is required.</div>
+      </div>
+              </div>
+              <div class="col-sm-6">
+                <label for="lastName" class="form-label">Last Name</label>
+                <input id="lastName" type="text" class="form-control" placeholder="Smith" required>
+                <div class="invalid-feedback"> Valid last name is required.</div>
+              </div>
+              </div>
+              <div class="col-12">
+                <label for="userName" class="form-label">Username</label>
+                <div class="input-group">
+                  <span class="input-group-text">@</span>
+                
+                <input id="username" type="text" class="form-control" placeholder="jsmith" required>
+                </div>
+                  <div class="invalid-feedback"> Valid last name is required.      
+                  </div>
+              </div>
+              <div class="col-md-5">
+                <label for="country" class="form-label">Country</label>
+                  <select id="country" class="form-control">
+                    <option value="">Choose...</option>
+                    <option value="Australia">Australia</option>
+                    <option value="Australia">China</option>
+                    <option value="Australia">USA</option>
+                  </select>
+                  <div class="invalid-feedback"> Valid last name is required.      
+                  </div>
+              </div>
+            <div class="col-md-4">
+              <label for="state" class="form-label">State</label>
+                  <select id="state" class="form-control">
+                    <option value="">Choose...</option>
+                    <option value="Australia">WA/option>
+                    <option value="Australia">NT</option>
+                  </select>
+                  <div class="invalid-feedback"> Valid last name is required.      
+                  </div>
+            </div>
+            <div class="col-md-3">
+              <label for="postcode" class="form-label">Postcode</label>
+              <input id="postcode" type="number" class="form-control" placeholder="1234" required>
+                <div class="invalid-feedback"> Valid last name is required.      
+            </div>
+            </div>
+
+            <hr class="my-4">
+
+            <div class="col-12">
+              <div class="form-check">
+                <input  id="sameAddress" type="checkout" class="form-check-input">
+                <label for="sameAddress" class="form-check-label">Shipping Address is same as billing</label>
+              </div>
+              <div class="form-check">
+                <input  id="sameAddress" type="checkout" class="form-check-input">
+                <label for="sameAddress" class="form-check-label">Shipping Address is same as billing</label>
+              </div>
+              <div class="form-check">
+                <input  id="safeInfo" type="checkout" class="form-check-input">
+                <label for="safeInfo" class="form-check-label">Save this info</label>
+              </div>
+            </div>
+
+            <hr class="my-4">
+            <h4 class="mb-3">Payments</h4>
+
+          <div class="form-check">
+            <input id="creditCard" type="radio" class="form-check-input" checked required><label for="creditCard">Credit Card</label>
+            <label for="safeInfo" class="form-check-label" checked required>Debit</label>
+          </div>
+
+          <div class="form-check">
+            <input  id="creditCard" type="radio" class="form-check-input">
+            <label for="safeInfo" class="form-check-label" checked required>Debit</label>
+          </div>
+
+        </form>
     </div>
 
     <script src="js/bootstrap.bundle.min.js"></script>
