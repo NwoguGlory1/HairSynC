@@ -356,22 +356,6 @@ form{
     margin: 12px, 0px;
 }
 
-/****Footer****/
-footer{
-    width: 100%;
-    height: 50px;
-    background: rgba(0,0,0,.8);
-    margin-top: -30px;
-    color: black;
-    padding: 10px;
-}
-
-footer a {
-    color: white;
-    text-decoration: none;
-    /* text-align: center; */
-}
-
 /****Shopping cart****/
 .cart-card{
     width: 700px;
@@ -388,6 +372,24 @@ footer a {
 /* th{
     padding-left: 20px;
 } */
+
+
+/****Footer****/
+/* footer{
+    width: 100%;
+    height: 50px;
+    background: rgba(0,0,0,.8);
+    margin-top: -30px;
+    color: black;
+    padding: 10px;
+}
+
+footer a {
+    color: white;
+    text-decoration: none;
+    /* text-align: center; */
+} */
+
 
 
 
