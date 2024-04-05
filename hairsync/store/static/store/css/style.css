@@ -84,7 +84,7 @@ h4{
     top: 0;
     left: 0;
     z-index: 100;
-    padding: .5rem 5rem;
+    padding: 0.5rem 3rem 0.5rem 4rem;
     box-shadow: 5px 5px 20px rgba(0,0,0,.5);
     background: black;
 }
@@ -108,6 +108,35 @@ h4{
     flex-direction: row;   
 }
 
+form.search {
+    display: flex;
+    flex-direction: row;
+    margin: 0 3em 0 0 !important;
+    align-items: center;
+    justify-content: center;
+  } 
+
+  .search > input {
+    padding: 0.3em;
+    outline: none;
+    border: 1px solid #29f700;
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+}
+
+.search > button {
+    background-color: #29f700;
+    padding: 0.3em !important;
+    border: 1px solid #29f700;
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+  }
+  @media only screen and (max-width: 1199px) {
+    form.search {
+      margin: 1rem 0 1rem 0 !important;
+    }
+  }
+
 #navbarSupportedContent a{
     color:#ffff;
     text-decoration: none;
@@ -118,7 +147,7 @@ h4{
     border-bottom: 2px solid peru ;
 }
 
-#navbarSupportedContent button{
+#navbarSupportedContent> button{
     background:#29f700;
     width: 5rem;
     border-radius:15px;
@@ -193,7 +222,7 @@ section{
 
 /****About****/
 #about{
-    background: linear-gradient(to right, #ea1d6f, #eb466b 100%);
+    background: linear-gradient(to right, goldenrod, black 100%);
 }
 
 #about h1{
@@ -328,17 +357,39 @@ form{
     margin: 12px, 0px;
 }
 
-footer{
-    width: 100%;
-    height: 20px;
-    background: rgba(0,0,0,.8);
-    margin-top: -30px;
-    text-align: center;
-    color: white;
-    padding: 3px;
+/****Shopping cart****/
+.cart-card{
+    width: 900px;
+    height: 400px;
+    background-color: white;
+    border: none !important;
+    display: flex;
+    /* flex-direction: column; */
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
 }
 
+/* th{
+    padding-left: 20px;
+} */
 
+
+/****Footer****/
+/* footer{
+    width: 100%;
+    height: 50px;
+    background: rgba(0,0,0,.8);
+    margin-top: -30px;
+    color: black;
+    padding: 10px;
+}
+
+footer a {
+    color: white;
+    text-decoration: none;
+    /* text-align: center;
+} */
 
 
 

@@ -22,12 +22,15 @@
   <!-- Link to boostrap-->
   <link href="css/all.min.css" rel="stylesheet">
   <link href="css/bootstrap.min.css" rel="stylesheet">
+  <link href="css/bootstrap-icons.css" rel="stylesheet"> 
+  <!-- <link href="css/bootstrap-icons-1.5.0/bootstrap-icons.css" rel="stylesheet"> -->
   
 </head>
 <body>
     <nav class="navbar navbar-expand-lg navbar-light bg-light p-3">
-        <div class="container-fluid">
+        <div class="container-fluid mt-10">
             <a class="navbar-brand" href="#">Shopping Cart</a>
+            <!-- <a class="navbar-brand" href="#"><small>Keep Shopping...</small></a> -->
             <div class="navbar navbar-collapse">
              <ul class="navbar-nav me-auto">
                  <!-- <li class="nav-item"></li>  -->
@@ -38,52 +41,179 @@
               <ul class="navbar-nav me-auto">
                 <!-- <li class="nav-item"></li> -->
               </ul>  
-              <span class="navbar-text">Total shopping cart value:</span>
+              <span class="navbar-text">Total shopping cart value: $ <span class="totalAmount">0</span></span>
+              <br>
+              <a href="checkout.html"><b>CHECKOUT </b></a>
             </div>
         </div>
     </nav>
-    <div class="container-fluid">
-        <div class="card">
+    <div class="container-fluid ms-auto">
+        <!-- <div class="card" style="width: 40rem;"> -->
+        <div id="shopcard" class="cart-card ">
+        <div class="mx-auto mt-5 shadow-lg rounded-0" width: 40rem;">
+            <div class="card-header">
+                <h3>Cart</h3>
+            </div>
             <div class="card-body">
                 <table class="table table-primary">
                     <thead>
+                        <tr>
                         <th>#</th>
                         <th>Item</th>
-                        <th>Price</th>
-                        <th>Quantity</th>
+                        <th>Unit Price</th>
+                        <th class="text-center">Quantity</th>
+                        <th class="text-center">Hair Company
+                            <select class="form-select">
+                                <option selected>Click to choose</option>
+                                <option value="company1">Vietnamese Straight Hairs A</option>
+                                <option value="company2">Vietnamese Curls B</option>
+                                <option value="company2">China Wavy Hairs A</option>
+                                <option value="company2">China Pixie Curls B</option>
+                            </select>
+                        </th>
+                        </tr>
                     </thead>
-                    <tbody>
+                    <tbody class="table-light">
                         <tr>
                            <td>1</td>
-                           <td>T-shirt</td> 
+                           <td>Bonestraight Hair</td> 
                            <td>
-                            <span class="price"></span>
-                            <input type="hidden" name="txtPrice">
-                            <input type="hidden" name="totalTxtPrice">
+                            $ <span class="txtprice">250</span>
+                            <input type="hidden" name="txtPrice" value="250">
+                            <input type="hidden" name="totalTxtPrice" value="0">
                         </td>
-                        <td>
-                            <span class="price"></span>
-                            <input type="hidden" name="txtIItem">
+                        <td class="text-center">
+                            <i class="bi bi-cart-dash"></i><input name="item" value=0 size="2"><i class="bi bi-cart-plus-fill text-primary"></i>
+                            <!-- <span class="item"></span> -->
+                            <input type="hidden" name="txtItem" value="0">
                         </td> 
                         </tr>
                         <tr>
                             <td>2</td>
-                            <td>Jean</td> 
+                            <td>Doubledrawn Hair</td> 
                             <td>
-                             <span class="price"></span>
-                             <input type="hidden" name="txtPrice">
-                             <input type="hidden" name="totalTxtPrice">
-                         </td>
-                         <td>
-                             <span class="price"></span>
-                             <input type="hidden" name="txtIItem">
+                                $ <span class="txtprice">120</span>
+                             <input type="hidden" name="txtPrice" value="120">
+                             <input type="hidden" name="totalTxtPrice" value="0">
+                            </td>
+                         <td class="text-center">
+                            <i class="bi bi-cart-dash"></i><input name="item" value=0 size="2"><i class="bi bi-cart-plus-fill text-primary"></i>
+                             <input type="hidden" name="txtItem" value="0">
                          </td> 
+                         </tr>
+                         <tr>
+                            <td>3</td>
+                            <td>Wavy Hair</td> 
+                            <td>
+                             $ <span class="txtprice">300</span>
+                             <input type="hidden" name="txtPrice" value="300">
+                             <input type="hidden" name="totalTxtPrice" value="0">
+                         </td>
+                         <td class="text-center">
+                             <i class="bi bi-cart-dash"></i><input name="item" value=0 size="2"><i class="bi bi-cart-plus-fill text-primary"></i>
+                             <!-- <span class="item"></span> -->
+                             <input type="hidden" name="txtItem" value="0">
+                         </td> 
+                         </tr>
+                         <!-- <tr>
+                            <td>4</td>
+                            <td>Blond wavy Hair</td> 
+                            <td>
+                             $ <span class="txtprice">320</span>
+                             <input type="hidden" name="txtPrice" value="320">
+                             <input type="hidden" name="totalTxtPrice" value="0">
+                         </td> -->
+                         <!-- <td class="text-center">
+                             <i class="bi bi-cart-dash"></i><input name="item" value=0 size="2"><i class="bi bi-cart-plus-fill text-primary"></i>
+                              <span class="item"></span>
+                             <input type="hidden" name="txtItem" value="0">
+                         </td> 
+                         </tr> and so on -->
+                         <tr>
+                            <td colspan="3" class="text-end">Total Amount:</td>
+                            <td>$<span class="totalAmount">0</span></td>
+                            <td>Total Quantity: <span class="totalQuantity">0</span></td>
                          </tr>
                     </tbody>
                 </table>
             </div>
+            </div>
         </div>
     </div>
+    <script>
+    var totalAmount = document.querySelectorAll(".totalAmount");
+    var amountByItem = document.querySelectorAll("input[name=totalTxtPrice]");
+    var totalItem = document.querySelectorAll(".totalQuantity");
+    var itemCountByEachProd = document.querySelectorAll("input[name=item]");
+    
+    document.querySelectorAll(".bi-cart-plus-fill").forEach(item => {
+        item.addEventListener("click", function() {
+            addItemToCart(item);
+        });
+    });
+
+    function addItemToCart(item) {
+        var closetTr = item.closest("td").parentNode;
+        var closestPrice = closetTr.cells[2].querySelector("input[name=txtPrice]").value;
+        var closestTotalPrice = closetTr.cells[2].querySelector("input[name=totalTxtPrice]");
+
+        var itemCount = item.closest("td").querySelector("input[name=item]");
+
+        itemCount.value = parseFloat(itemCount.value) + 1;
+
+        closestTotalPrice.value = parseFloat(closestPrice) * parseFloat(itemCount.value);
+
+        var tempTotalAmount = 0;
+        amountByItem.forEach(item => {
+            tempTotalAmount += parseFloat(item.value);
+        });
+        totalAmount.forEach(item => {
+            item.innerHTML = tempTotalAmount.toFixed(2);
+        });
+
+        var tempTotalQuantity = 0;
+        itemCountByEachProd.forEach(item => {
+            tempTotalQuantity += parseFloat(item.value);
+        });
+        totalItem.forEach(item => {
+            item.innerHTML = tempTotalQuantity;
+        });
+    }
+
+    function removeItemFromCart(item) {
+        var closetTr = item.closest("td").parentNode;
+        var closestPrice = closetTr.cells[2].querySelector("input[name=txtPrice]").value;
+        var closestTotalPrice = closetTr.cells[2].querySelector("input[name=totalTxtPrice]");
+
+        var itemCount = item.closest("td").querySelector("input[name=item]");
+
+        itemCount.value = parseFloat(itemCount.value) > 0 ? parseFloat(itemCount.value) - 1 : 0;
+
+        closestTotalPrice.value = parseFloat(closestPrice) * parseFloat(itemCount.value);
+
+        var tempTotalAmount = 0;
+        amountByItem.forEach(item => {
+            tempTotalAmount += parseFloat(item.value);
+        });
+        totalAmount.forEach(item => {
+            item.innerHTML = tempTotalAmount.toFixed(2);
+        });
+
+        var tempTotalQuantity = 0;
+        itemCountByEachProd.forEach(item => {
+            tempTotalQuantity += parseFloat(item.value);
+        });
+        totalItem.forEach(item => {
+            item.innerHTML = tempTotalQuantity;
+        });
+    }
+
+    document.querySelectorAll(".bi-cart-dash").forEach(item => {
+        item.addEventListener("click", function() {
+            removeItemFromCart(item);
+        });
+    });
+    </script>
     <script src="js/bootstrap.bundle.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF"></script>
