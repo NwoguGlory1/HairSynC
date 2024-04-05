@@ -2,44 +2,45 @@
 <html lang="en">
 
 <head>
-  <meta charset="utf-8">
-  <meta content="width=device-width, initial-scale=1.0" name="viewport">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+ {% load static %}
+ <meta charset="utf-8">
+ <meta content="width=device-width, initial-scale=1.0" name="viewport">
+ <meta http-equiv="X-UA-Compatible" content="IE=edge">
  
-  <title>HairSynC</title>
-  <meta content="" name="description">
-  <meta content="" name="keywords">
+ <title>HairSynC</title>
+ <meta content="" name="description">
+ <meta content="" name="keywords">
 
-  <!-- Favicons -->
-  <link href="favicon.png" rel="icon">
+ <!-- Favicons -->
+ <link href="{% static 'store/images/favicon.png' %}" rel="icon">
 
-  <!-- Template Main CSS File -->
-  <link href="style.css" rel="stylesheet">
+ <!-- Template Main CSS File -->
+ <link rel="stylesheet" href="{% static 'store/css/style.css' %}">
 
-  <!-- Link to boostrap-->
-  <link href="css/all.min.css" rel="stylesheet">
-
-  <link href="css/bootstrap.min.css" rel="stylesheet">
-  <link href="store/index.html" rel="">
-  
+ <!-- Link to boostrap-->
+ <link href="{% static 'store/css/all.min.css' %}" rel="stylesheet">
+ <link href="{% static 'store/css/bootstrap.min.css' %}" rel="stylesheet">
 </head>
 
-  <!--Login-->
-  <div class="login-page container-fluid">
-    <form class="mt-4">
+<body>
+ <!--Login-->
+ <div class="login-page container-fluid">
+    <form class="mt-4" method="post" action="{% url 'store:login' %}">
+      {% csrf_token %}
       <h4 class="text-center">Login</h4>
       <div class="mb-3 mt-5">
-        <label for="exampleInputEmail1" class="form-label">User Name</label>
-        <input type="email" class="form-control" placeholder="Enter Email Address" id="exampleInputEmail1" aria-describedby="emailHelp">
-        
+        <label for="username" class="form-label">User Name</label>
+        <input type="text" class="form-control" placeholder="Enter Username" id="username" name="username" required>
       </div>
       <div class="mb-3">
-        <label for="exampleInputPassword1" class="form-label">Password</label>
-        <input type="password" class="form-control" placeholder="Enter password" id="exampleInputPassword1">
+        <label for="password" class="form-label">Password</label>
+        <input type="password" class="form-control" placeholder="Enter password" id="password" name="password" required>
         <div id="emailHelp" class="form-text mt-3">Forget Password?</div>
       </div>
       
       <button type="submit" class="btn btn-primary mt-4">Login</button>
     </form>
-    </div>
+ </div>
+</body>
+
 </html>

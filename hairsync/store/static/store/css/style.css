@@ -23,7 +23,7 @@
 }
 
 .login-page{
-background-image: url('backgroundgold.png') ;
+background-image: url('../images/background.png');
 background-size: cover;
 background-position: center; 
 min-height: 100vh;
@@ -143,7 +143,7 @@ section{
 /****Home****/
 
 #home{
-    background:linear-gradient(rgba(0,0,0,.3), rgba(0,0,0,.4)), url(background.png);
+    background:linear-gradient(rgba(0,0,0,.3), rgba(0,0,0,.4)), url(../images/background.png);
     background-repeat: no-repeat;
     background-size: cover;
     background-position: left;
