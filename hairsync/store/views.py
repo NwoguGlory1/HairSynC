@@ -87,7 +87,7 @@ def register(request):
     
 @require_http_methods(["GET"])   
 def register_form(request):
-    return render(request, 'store/register.html')
+    return render(request, 'store/signup.html')
 
 
 @csrf_exempt
@@ -118,8 +118,10 @@ def login_view(request):
         if user is not None:
             login(request, user)
             request.session.save()
+            next_url = reverse('store:index')
             return JsonResponse({
                 "message": "User logged in successfully",
+                "next_url": next_url,
             })
         else:
             return JsonResponse({
