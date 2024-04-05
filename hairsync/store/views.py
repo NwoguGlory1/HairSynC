@@ -12,7 +12,7 @@ from authlib.integrations.django_client import OAuth
 from django.conf import settings
 from django.urls import reverse
 from urllib.parse import quote_plus, urlencode
-from django.http import JsonResponse, HttpResponse
+from django.http import JsonResponse, HttpResponse, HttpResponseRedirect
 from django.http import HttpResponseNotFound, HttpResponseServerError, Http404
 from .models import Product, CategoryManager, Category, User, Order, ShoppingCart, ShippingOption, CartItem, Address, OrderItem
 from django.utils.datastructures import MultiValueDictKeyError
@@ -87,7 +87,7 @@ def register(request):
     
 @require_http_methods(["GET"])   
 def register_form(request):
-    return render(request, 'store/register.html')
+    return render(request, 'store/signup.html')
 
 
 @csrf_exempt
@@ -118,9 +118,8 @@ def login_view(request):
         if user is not None:
             login(request, user)
             request.session.save()
-            return JsonResponse({
-                "message": "User logged in successfully",
-            })
+            # Redirect to /store/ after successful login
+            return HttpResponseRedirect('/store/')
         else:
             return JsonResponse({
                 "error": "Authentication failed. Please verify your username/email and password.",
@@ -134,6 +133,11 @@ def login_view(request):
             "code": "missing_form_value",
             "details": f"The required field {str(e)} was not provided in the request."
         }, status=400)
+
+    
+@require_http_methods(["GET"])  
+def login_page(request):
+    return render(request, 'store/login.html')
 
 
 @csrf_exempt

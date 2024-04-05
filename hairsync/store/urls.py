@@ -11,6 +11,7 @@ urlpatterns = [
     path('register/', views.register, name='register'), # User registration
     path('register_form/', views.register_form, name='register_form'),
     path('login/', views.login_view, name='login'), # User login
+    path('login_page/', views.login_page, name='login_page'),
     path('logout/', views.logout_view, name='logout'), # User logout
     path('user_status/', views.check_user_authentication, name='user_status'), # Check User Authentication
     # path('accounts/login/', auth_views.LoginView.as_view(), name='login'),

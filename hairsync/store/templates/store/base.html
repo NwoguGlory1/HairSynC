@@ -11,10 +11,10 @@
   <meta content="" name="keywords">
 
   <!-- Favicons -->
-  <link href="favicon.png" rel="icon">
+  <link href="{% static 'store/images/favicon.png' %}" rel="icon">
 
   <!-- Template Main CSS File -->
-  <link href="style.css" rel="stylesheet">
+  <link rel="stylesheet" href="{% static 'store/css/style.css' %}">
 
   <!-- Template Main CSS File 
   <link href="login.html" rel="" > 
@@ -29,9 +29,8 @@
 -->
 
   <!-- Link to boostrap-->
-  <link href="css/all.min.css" rel="stylesheet">
-  <link href="css/bootstrap.min.css" rel="stylesheet">
-  <link href="css/bootstrap-icons.css" rel="stylesheet">
+  <link href="{% static 'store/css/all.min.css' %}" rel="stylesheet">
+  <link href="{% static 'store/css/bootstrap.min.css' %}" rel="stylesheet">
   
 </head>
 <body>
@@ -99,7 +98,7 @@
   </div>
     
   <!--Navbar-->
-  <nav class="navbar navbar-expand-xl navbar-dark" id="navbar">
+  <nav class="navbar navbar-expand-lg navbar-dark" id="navbar">
     <div class="container-fluid">
       <a class="navbar-brand" href="#home">
         <img class="d-inline-block align-text-top" src="Logo.png" alt="logo" width="30" height="24">HairSynC
@@ -127,16 +126,15 @@
           <li class="nav-item">
             <a class="nav-link" href="#hairproducts">Hair Products</a>
           </li>
-          <!-- <li class="nav-item">
+          <li class="nav-item">
             <a class="nav-link" href="#contact">Contact</a>
-          </li> -->
+          </li>
         </ul>
-        <form class="search">
-          <input type="search" placeholder="Search" aria-label="Search">
-          <button type="submit">Search</button>
+        <form class="d-flex">
+          <input class="me-2" type="search" placeholder="Search" aria-label="Search">
+          <button class="btn mt-n4 search ms-auto" type="submit">Search</button>
         </form>
-        <button class="btn ms-auto sign" p-2 my-lg-0 my-2>Log In</button>
-        <button class="btn ms-auto sign" p-2 my-lg-0 my-2>Sign Up</button>
+        <button class="btn ms-auto sign" p-2 my-lg-0 my-2>Sign In</button>
     </div>
   </nav>
 
@@ -144,8 +142,7 @@
 <section id="home">
   <h1 class="text-center"> Welcome to Our Luxury Hair Page </h1>
   <p><i>...connecting hair lovers to the source!!!</i></p>
-  <a href="#all_categories" class="btn signin m-4">Shop Now</a>
-  <!-- <button class="btn signin m-4">Shop Now</button> -->
+  <button class="btn signin m-4">Shop Now</button>
   <!-- <div class="input-group m-4">
     <input type="text" class="form-control" placeholder="Email Address">
       <button class="btn signin">Get Started</button>
@@ -167,15 +164,14 @@
           <a href="#" class="btn signin">Add to Cart</a>
         </div>
       </div>
-      </div>
-      <div>
-        <div class="card">
-          <img src="doubledrawn.png" class="card-img-top">
-          <div class="card-body text-center">
-            <h5 class="card-title">Doubledrawn Hair $120</h5>
+    </div>
+    <div>
+      <div class="card">
+        <img src="doubledrawn.png" class="card-img-top">
+        <div class="card-body text-center">
+          <h5 class="card-title">Doubledrawn Hair $120</h5>
           
-            <a href="#" class="btn signin">Add to Cart</a>
-          </div>
+          <a href="#" class="btn signin">Add to Cart</a>
         </div>
       </div>
       <div>
@@ -190,9 +186,9 @@
       </div>
       <div>
         <div class="card">
-          <img src="Blond Wavy Hair.png" class="card-img-top">
+          <img src="wavyhair.png" class="card-img-top">
           <div class="card-body text-center">
-            <h5 class="card-title">Blond wavy Hair $320</h5>
+            <h5 class="card-title">Wavy Hair $320</h5>
             
             <a href="#" class="btn signin">Add to Cart</a>
           </div>
@@ -294,9 +290,9 @@
     <!-- <div class="col-lg-4 col-md-4 col-12"> -->
         <div>
           <div class="card">
-            <img src="Blond Wavy Hair.png" class="card-img-top">
+            <img src="wavyhair.png" class="card-img-top">
             <div class="card-body text-center">
-              <h5 class="card-title">Blond wavy Hair $320</h5>
+              <h5 class="card-title">Wavy Hair $320</h5>
               
               <a href="#" class="btn signin">Add to Cart</a>
             </div>
@@ -393,108 +389,41 @@
           <img src=""  alt="Our pix" class="img-fluid">
         </div>
         <div class=" col-lg-6 col-md-6 col-12 p-lg-5 p-2 my-5">
-             <h1> About HairSynC</h1>
-          <p> HairSync's E-commerce website serves as a pivotal bridge between buyers and sellers, revolutionizing the traditional ecosystem by bypassing the intermediary role of wholesalers. This innovative platform provides customers with unparalleled access to a vast array of authentic human hair and hair products, all at competitive prices, directly from the manufacturers themselves. By eliminating the middleman, HairSync not only enhances the efficiency of transactions but also ensures that customers receive the highest quality products at the most competitive prices.
-
-            Moreover, HairSync fosters a dynamic and expansive marketplace that connects African customers directly to global authentic hair manufacturers, offering a unique selection of hair types and textures. The platform will provide access to a wide array of customer preferences, from natural to synthetic, from straight to curly, and from short to long. By providing these hair manufacturers with a vast customer base, HairSync significantly expands their market reach into Africa’s market.
-            
-            In essence, HairSync is not just an e-commerce platform; it is a catalyst for change, transforming the way customers and global hair manufacturers interact in the hair industry. By offering direct access to manufacturers and a wide variety of products, HairSync empowers customers to make informed decisions at comfortable prices. This unique model not only benefits the end-users but also promotes a more equitable and efficient marketplace for all involved.</p>
+             <h1> About Us</h1>
+          <p>ndndndnnnLoremgnnnnnnnnnnnnsmmmmmmmmmsvf  fnsnsnnv ndndndnnnLoremgnnnnnnnnnnnnsmmmmmmmmmsvf  fnsnsnnvndndndnnnLoremgnnnnnnnnnnnnsmmmmmmmmmsvf  fnsnsnnvv ndndndnnnLoremgnnnnnnnnnnnnsmmmmmmmmmsvf  fnsnsnnv ndndndnnnLoremgnnnnnnnnnnnnsmmmmmmmmmsvf  fnsnsnnv ndndndnnnLoremgnnnnnnnnnnnnsmmmmmmmmmsvf  fnsnsnnvndndndnnnLoremgnnnnnnnnnnnnsmmmmmmmmmsvf  fnsnsnnvv ndndndnnnLoremgnnnnnnnnnnnnsmmmmmmmmmsvf  fnsnsnnvndndndnnnLoremgnnnnnnnnnnnnsmmmmmmmmmsvf  fnsnsnnv ndndndnnnLoremgnnnnnnnnnnnnsmmmmmmmmmsvf  fnsnsnnvndndndnnnLoremgnnnnnnnnnnnnsmmmmmmmmmsvf  fnsnsnnvv ndndndnnnLoremgnnnnnnnnnnnnsmmmmmmmmmsvf  fnsnsnnv
+            ndndndnnnLoremgnnnnnnnnnnnnsmmmmmmmmmsvf  fnsnsnnv ndndndnnnLoremgnnnnnnnnnnnnsmmmmmmmmmsvf  fnsnsnnvndndndnnnLoremgnnnnnnnnnnnnsmmmmmmmmmsvf  fnsnsnnvv ndndndnnnLoremgnnnnnnnnnnnnsmmmmmmmmmsvf  fnsnsnnvndndndnnnLoremgnnnnnnnnnnnnsmmmmmmmmmsvf  fnsnsnnv ndndndnnnLoremgnnnnnnnnnnnnsmmmmmmmmmsvf  fnsnsnnvndndndnnnLoremgnnnnnnnnnnnnsmmmmmmmmmsvf  fnsnsnnvv ndndndnnnLoremgnnnnnnnnnnnnsmmmmmmmmmsvf  fnsnsnnv
+          </p>
         </div>
       </div>
   </div>
  </section>
 
+
 <!--Footer-->
-<footer class="bg-dark text-white pt-5 pb-4">
-  <div class="container text-center text-md-left">
-    <div class="row text-center text-md text-md-left">
-      <div class="col-md-3 col-lg-3 col-xl-3 mx auto mt-3">
-        <h5 class="mb-4 font-weight-bold text-warning"><a href="about.html" class="text-decoration-none text-warning">ABOUT HairSynC</a></h5>
-        <p> Built by Daraja & Fae </p>
-      </div>
-      <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mt-3">
-        <h5 class="text-uppercase mb-4 font-weight-bold text-warning">Products</h5>
-        <p>
-          <a href="#all_categories" class="text-white" style="text-decoration: none;">All Categories</a>
-        </p>
-        <p>
-          <a href="#straight" class="text-white" style="text-decoration: none;">Straight</a>
-        </p>
-        <p>
-          <a href="#wavy" class="text-white" style="text-decoration: none;">Wavy</a>
-        </p>
-        <p>
-          <a href="#curly" class="text-white" style="text-decoration: none;">Coily</a>
-        </p>
-        <p>
-          <a href="#hairproducts" class="text-white" style="text-decoration: none;">Hair Products</a>
-        </p>
-      </div>
-      <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mt-3">
-        <h5 class="text-uppercase mb-4 font-weight-bold text-warning">Useful Links</h5>
-        <p>
-          <a href="#" class="text-white" style="text-decoration: none;">Your Account</a>
-        </p>
-        <p>
-          <a href="#" class="text-white" style="text-decoration: none;">Become an Affiliates</a>
-        </p>
-        <p>
-          <a href="#" class="text-white" style="text-decoration: none;">SourceCodes</a>
-        </p>
-        <p>
-          <a href="#contact.html" class="text-white" style="text-decoration: none;">Help</a>
-        </p>
-      </div>
-      <div class="col-md-4 col-lg-3 col-xl-2 mx-auto mt-3">
-        <h5 class="text-uppercase mb-4 font-weight-bold text-warning">Contact Us</h5>
-        <p>
-          <i class="fas fa-home mr-3"></i>Lagos, Nigeria
-        </p>
-        <p>
-          <i class="fas fa-envelope mr-3"></i>HairSynC@gmail.com
-        </p>
-        <p>
-          <i class="fas fa-phone mr-3"></i>+234-7031-302-044
-        </p>
-        <p>
-          <i class="fas fa-print mr-3"></i>+234-7032-179-028
-        </p>
-      </div>
-    </div>
-    <hr class="mb-4">
-    <div class="row align-items-center">
-      <div class="col-md-7 col-lg-8">
-        <p>Copyrights ©2024 All rights reserved by:
-        <a href="#" style="text-decoration: none;">
-          <strong class="text-warning">HairSynC</strong>
-        </a></p>
-      </div>
-      <div class="col-md-5 col-lg-4">
-        <div class="text-center text-md-right">
-          <ul class="list-unstyled list-inline">
-            <li class="list-inline-item">
-              <a href="#" class="btn-floating btn-sm text-white" style="font-size: 23px;"><i class="fab fa-facebook"></i></a>
-            </li>
-            <li class="list-inline-item">
-              <a href="#" class="btn-floating btn-sm text-white" style="font-size: 23px;"><i class="fab fa-twitter"></i></a>
-            </li>
-            <li class="list-inline-item">
-              <a href="https://github.com/NwoguGlory1/HairSynC" class="btn-floating btn-sm text-white" style="font-size: 23px;"><i class="fab fa-github"></i></a>
-            </li>
-            <li class="list-inline-item">
-              <a href="#" class="btn-floating btn-sm text-white" style="font-size: 23px;"><i class="fab fa-google-plus"></i></a>
-            </li>
-            <li class="list-inline-item">
-              <a href="#" class="btn-floating btn-sm text-white" style="font-size: 23px;"><i class="fab fa-linkedin-in"></i></a>
-            </li>
-          </ul>
-        </div>
-      </div>
-    </div>
+<footer>
+  Copyrights @Daraja&Fae 2024
 </footer>
 
-
-  <script src="js/bootstrap.bundle.min.js"></script>
+{% if messages %}
+<!-- Iterate over Django messages -->
+{% for message in messages %}
+    <!-- Display messages using SweetAlert.js -->
+    <script>
+        Swal.fire({
+            icon: '{{ message.tags }}', // Use the message tags as SweetAlert.js icons
+            title: '{{ message.tags|capfirst }}', // Capitalize the first letter of the tag
+            text: '{{ message }}',
+            timer: 10000, // Automatically close after 10 seconds
+            showConfirmButton: false, // Do not show a confirmation button
+            position: 'top-end', // Show notifications at the top-end
+            // Add more options as needed
+        });
+    </script>
+{% endfor %}
+{% endif %}
+<!-- Include SweetAlert.js -->
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+  <script src="store/js/bootstrap.bundle.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF"></script>
 </body>
