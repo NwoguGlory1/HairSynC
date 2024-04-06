@@ -18,6 +18,7 @@ from .models import Product, CategoryManager, Category, User, Order, ShoppingCar
 from django.utils.datastructures import MultiValueDictKeyError
 from django.core.exceptions import ValidationError, MultipleObjectsReturned, PermissionDenied, ObjectDoesNotExist
 from django.http import QueryDict
+from django.core import serializers
 from django.core.serializers import serialize
 from django.forms.models import model_to_dict
 from django.contrib import messages
@@ -157,12 +158,12 @@ def check_user_authentication(request):
 def list_all_products(request):
     all_products = Product.objects.all()
 
-    if all_products.exists():
-        # Serialize the queryset to JSON format
-        products_json = serialize('json', all_products)
-        return JsonResponse(products_json, safe=False)
-    else:
-        return JsonResponse({"error": "No products found, add a product and try again."}, status=404)
+    if not all_products.exists():
+        # Raise a Http404 exception if no products are found
+        raise Http404("No products found, add a product and try again.")
+
+    # If products exist, render the all_products.html template
+    return render(request, 'store/all_products.html', {'all_products': all_products})
 
 
 @require_http_methods(["GET"])

@@ -2,6 +2,7 @@
 <html lang="en">
 
 <head>
+  {% load static %}
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -35,11 +36,12 @@
   
 </head>
 <body>
+    
   <!--Navbar-->
   <nav class="navbar navbar-expand-lg navbar-dark" id="navbar">
     <div class="container-fluid">
       <a class="navbar-brand" href="#home">
-        <img class="d-inline-block align-text-top" src="Logo.png" alt="logo" width="30" height="24">HairSynC
+        <img class="d-inline-block align-text-top" src="{% static 'store/images/Logo.png' %}" alt="logo" width="30" height="24">
       </a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarScroll" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -50,7 +52,7 @@
             <a class="nav-link" href="#home"></a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#all_categories">All Categories</a>
+            <a class="nav-link" href="{% url 'store:products' %}">All Products</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="#straight">Straight</a>
@@ -64,7 +66,7 @@
           <li class="nav-item">
             <a class="nav-link" href="#hairproducts">Hair Products</a>
           </li>
-          <!-- <li class="nav-item">
+            <!-- <li class="nav-item">
             <a class="nav-link" href="#contact">Contact</a>
           </li>  -->
         </ul>
@@ -77,95 +79,18 @@
     </div>
   </nav>
 
-<!--All Categories -->
-<section id="all_categories">
-    <div class="container-fluid m-5">
-      <!-- <div class="m-5"> -->
-      <h1 class="text-center my-3">All Categories</h1>
-      <div class="hairs">
-        <div>
-          <div class="card">
-        <img src='store/images/bonestraight12.png' class="card-img-top">
-        <div class="card-body text-center">
-            <h5 class="card-title">Bonestraight Hair $250</h5>
-          
-            <a href="#" class="btn signin">Add to Cart</a>
-          </div>
-        </div>
-      </div>
-      <div>
-        <div class="card">
-          <img src='store/images/doubledrawn.png' class="card-img-top">
-          <div class="card-body text-center">
-            <h5 class="card-title">Doubledrawn Hair $120</h5>
-            
-            <a href="#" class="btn signin">Add to Cart</a>
-          </div>
-        </div>
-        <div>
-          <div class="card">
-            <img src='store/images/wavvyhair.png' class="card-img-top">
-            <div class="card-body text-center">
-              <h5 class="card-title">Wavy Hair $300</h5>
-            
-              <a href="#" class="btn signin">Add to Cart</a>
-            </div>
-          </div>
-        </div>
-        <div>
-          <div class="card">
-            <img src='store/images/wavyhair.png' class="card-img-top">
-            <div class="card-body text-center">
-              <h5 class="card-title">Wavy Hair $320</h5>
-              
-              <a href="#" class="btn signin">Add to Cart</a>
-            </div>
-          </div>
-        </div>
-        <div>
-        <div class="card">
-          <img src='store/images/pixiecurlsgold.png' class="card-img-top">
-          <div class="card-body text-center">
-            <h5 class="card-title">Pixie curls $450</h5>
-    
-            <a href="#" class="btn signin">Add to Cart</a>
-          </div>
-        </div>
-      </div>
-      <div>
-        <div class="card">
-      <img src='store/images/watercurl.png' class="card-img-top">
-      <div class="card-body text-center">
-          <h5 class="card-title">Water curls $300</h5>
-      
-          <a href="#" class="btn signin">Add to Cart</a>
-        </div>
-      </div>
-    </div>
-    <div>
-    <div class="card">
-    <img src='store/images/HawaiianSilky.png' class="card-img-top">
-    <div class="card-body text-center">
-      <h5 class="card-title">Hawaiian Silky Conditioner $90</h5>
-    
-    <a href="#" class="btn signin">Add to Cart</a>
-      </div>
-  </div>
-  </div>
-  <div>
-  <div class="card">
-    <img src='store/images/orsconditioner.png' class="card-img-top">
-    <div class="card-body text-center">
-      <h5 class="card-title">Ors Conditioner $70 </h5>
-      
-        <a href="#" class="btn signin">Add to Cart</a>
-      </div>
-    </div>
-  </div>
-    </div>
-    </div>
-  </section>
-  
+  <!-- Home-->
+<section id="home">
+  <h1 class="text-center"> Welcome to Our Luxury Hair Page </h1>
+  <p><i>...connecting hair lovers to the source!!!</i></p>
+  <a href="{% url 'store:products' %}" class="btn signin m-4">Shop Now</a>
+  <!-- <button class="btn signin m-4">Shop Now</button> -->
+  <!-- <div class="input-group m-4">
+    <input type="text" class="form-control" placeholder="Email Address">
+      <button class="btn signin">Get Started</button>
+  </div> -->
+</section>
+
 <!--Footer-->
 <footer class="bg-dark text-white pt-5 pb-4">
   <div class="container text-center text-md-left">
@@ -250,7 +175,6 @@
               <a href="#" class="btn-floating btn-sm text-white" style="font-size: 23px;"><i class="fab fa-linkedin-in"></i></a>
             </li>
           </ul>
-        </div>
       </div>
     </div>
   </div>
@@ -275,7 +199,7 @@
 {% endif %}
 <!-- Include SweetAlert.js -->
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
-  <script src="store/js/bootstrap.bundle.min.js"></script>
+  <script src="{% static 'store/js/bootstrap.bundle.min.js' %}"></script>
   <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF"></script>
 </body>

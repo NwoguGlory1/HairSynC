@@ -17,7 +17,7 @@ urlpatterns = [
     # path('accounts/login/', auth_views.LoginView.as_view(), name='login'),
 
     # Product Management
-    path('products/', views.list_all_products, name='list-all-products'),
+    path('products/', views.list_all_products, name='products'),
     path('products/<int:id>/', views.fetch_product_by_id, name='get-product-details'),
     path('products/create/', views.create_new_product, name='create-new-product'),
     path('products/<int:id>/update/', views.update_product_id_details, name='update-product-details'),
