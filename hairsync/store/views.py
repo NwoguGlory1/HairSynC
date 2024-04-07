@@ -404,6 +404,26 @@ def get_category_by_name(request, category_name):
         return JsonResponse({"error": f"Category with name: {category_name} does not exist."}, status=404)
 
 
+@require_http_methods(["GET"])
+def straight_category(request):
+    return render(request, 'store/straight.html')
+
+
+@require_http_methods(["GET"])
+def hair_products_category(request):
+    return render(request, 'store/hair_products.html')
+
+
+@require_http_methods(["GET"])
+def coily_category(request):
+    return render(request, 'store/coily.html')
+
+
+@require_http_methods(["GET"])
+def wavy_category(request):
+    return render(request, 'store/wavy.html')
+
+
 """USER PROFILE MANAGEMENT"""
 @check_authentication
 @require_http_methods(["GET"])

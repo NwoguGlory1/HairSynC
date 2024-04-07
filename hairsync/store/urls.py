@@ -36,6 +36,10 @@ urlpatterns = [
     path('categories/<int:id>/update/', views.update_details_of_category_with_category_id, name='update-category-details'),
     path('categories/<int:id>/delete/', views.remove_product_category_with_category_id, name='delete-category'),
     path('categories/<str:category_name>/', views.get_category_by_name, name='get_category_by_name'),
+    path('straight/', views.straight_category, name='straight'),
+    path('hair_products/', views.hair_products_category, name='hair_products'),
+    path('coily/', views.coily_category, name='coily'),
+    path('wavy/', views.wavy_category, name='wavy'),
 
     # USER
     path('users/', views.get_user_profile, name='get-user-profile'),
