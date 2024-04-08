@@ -22,7 +22,7 @@
 }
 
 .login-page{
-background-image: url('../images/background.png');
+background-image: url('../images/backgroundgold.png');
 background-size: cover;
 background-position: center; 
 min-height: 100vh;
@@ -218,6 +218,8 @@ section{
     border-radius: 50px;
     width: 10rem;
 }
+
+
 
 /****About****/
 #about{
