@@ -30,6 +30,16 @@
             <div class="col-lg-4 bg-white m-auto rounded-top wrapper">
                 <h2 class="text-center pt-3">Create an Account</h2>
                 <p class="text-center text-muted lead">It only takes a minute.</p>
+
+                <!-- Messages display -->
+                {% if messages %}
+                <ul class="messages">
+                    {% for message in messages %}
+                    <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+                    {% endfor %}
+                </ul>
+                {% endif %}
+                
                 <!--Form starts-->
                 <form method="post" action="{% url 'store:register' %}">
                     {% csrf_token %}

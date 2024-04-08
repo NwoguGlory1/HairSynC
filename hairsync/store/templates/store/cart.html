@@ -2,6 +2,7 @@
 <html lang="en">
 
 <head>
+  {% load static %}
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -35,36 +36,36 @@
   
 </head>
 <body>
-    <!--Navbar-->
-  <nav class="navbar navbar-expand-lg navbar-dark" id="navbar">
-    <div class="container-fluid">
-      <a class="navbar-brand" href="#home">
-        <img class="d-inline-block align-text-top" src="Logo.png" alt="logo" width="30" height="24">HairSynC
-      </a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarScroll" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-       </button>
-      <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav m-auto my-2 my-lg-0">
-          <li class="nav-item">
-            <a class="nav-link" href="#home"></a>
+<!--Navbar-->
+<nav class="navbar navbar-expand-xl navbar-dark" id="navbar">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="{% url 'store:index' %}">
+      <img class="d-inline-block align-text-top" src="{% static 'store/images/Logo.png' %}" alt="logo" width="30" height="24">HairSynC
+    </a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarScroll" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+     </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav m-auto my-2 my-lg-0">
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'store:index' %}"></a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#all_categories">All Categories</a>
+            <a class="nav-link" href="{% url 'store:products' %}">All Products</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#straight">Straight</a>
+            <a class="nav-link" href="{% url 'store:straight' %}">Straight Hairs</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#wavy">Wavy</a>
+            <a class="nav-link" href="{% url 'store:wavy' %}">Wavy Hairs</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#coily">Coily</a>
+            <a class="nav-link" href="{% url 'store:coily' %}">Coily Hairs</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#hairproducts">Hair Products</a>
+            <a class="nav-link" href="{% url 'store:hair_products' %}">Hair Products</a>
           </li>
-         <!-- <li class="nav-item">
+            <!-- <li class="nav-item">
             <a class="nav-link" href="#contact">Contact</a>
           </li>  -->
         </ul>
@@ -72,10 +73,22 @@
           <input type="search" placeholder="Search" aria-label="Search">
           <button type="submit">Search</button>
         </form>
-        <button class="btn ms-auto sign" p-2 my-lg-0 my-2>Log In</button>
-        <button class="btn ms-auto sign" p-2 my-lg-0 my-2>Sign Up</button>
-    </div>
-  </nav>
+        {% if user.is_authenticated %}
+        <p class="ms-auto my-lg-0 my-2">Welcome, {{ user.username }}!</p>
+        <a href="{% url 'store:logout' %}">
+          <button class="btn ms-auto sign" p-2 my-lg-0 my-2>Logout</button>
+       </a>
+      {% else %}
+        <a href="{% url 'store:login_page' %}">
+          <button class="btn ms-auto sign" p-2 my-lg-0 my-2>Log In</button>
+        </a>
+        <a href="{% url 'store:register_form' %}">
+          <button class="btn ms-auto sign" p-2 my-lg-0 my-2>Sign Up</button>
+        </a>
+      {% endif %}
+
+  </div>
+</nav>
 
  <!--Shopping cart-->
  <nav class="navbar navbar-expand-lg navbar-dark" id="navbar">
@@ -377,7 +390,7 @@
   {% endif %}
   <!-- Include SweetAlert.js -->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
-    <script src="store/js/bootstrap.bundle.min.js"></script>
+    <script src="{% static 'store/js/bootstrap.bundle.min.js' %}"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF"></script>
   </body>
