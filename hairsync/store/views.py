@@ -60,11 +60,11 @@ def register(request):
         # Check if all required fields are provided
         if not all([username, email, first_name, last_name, password, confirm_password]):
             messages.error(request, "All fields are required")
-            return redirect('store:signup.html')
+            return redirect('store:register_form')
         
         if password != confirm_password:
             messages.error(request, "Passwords do not match")
-            return redirect(reverse('store:signup.html'))
+            return redirect(reverse('store:register_form'))
 
         user = User.objects.create_user(username=username, email=email, first_name=first_name, last_name=last_name, password=password,)
         user.save()
@@ -83,11 +83,11 @@ def register(request):
 
     except IntegrityError:
         messages.error(request, "Username or email already exists")
-        return redirect(reverse('store:signup.html'))
+        return redirect(reverse('store:register_form'))
 
     except ValidationError as e:
         messages.error(request, str(e))
-        return redirect(reverse('store:signup.html'))
+        return redirect(reverse('store:register_form'))
     
     
 @require_http_methods(["GET"])   
