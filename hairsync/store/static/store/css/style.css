@@ -156,8 +156,8 @@ form.search {
     margin-top: 3px;
 } */
 
-.ms-auto sign{
-    margin-right: 3px; 
+.log{
+    margin-right: 4px !important ;
 }
 
 section{
@@ -267,6 +267,16 @@ section {
 #wavy, #coily, #straight, #hairproducts {
     background: #e5e5e5;
     text-align: center;
+}
+
+.card-title > a{
+    text-decoration: none;
+    color: goldenrod;
+}
+
+.card-title > a:hover{
+    text-decoration: none;
+    color: black;
 }
 
 /* .pro-container{
