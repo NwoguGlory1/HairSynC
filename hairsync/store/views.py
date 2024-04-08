@@ -59,10 +59,12 @@ def register(request):
 
         # Check if all required fields are provided
         if not all([username, email, first_name, last_name, password, confirm_password]):
-            return JsonResponse({"error": "All fields are required"}, status=400)
+            messages.error(request, "All fields are required")
+            return redirect('store:signup.html')
         
         if password != confirm_password:
-            return JsonResponse({"error": "Passwords do not match"}, status=400)
+            messages.error(request, "Passwords do not match")
+            return redirect(reverse('store:signup.html'))
 
         user = User.objects.create_user(username=username, email=email, first_name=first_name, last_name=last_name, password=password,)
         user.save()
@@ -80,10 +82,12 @@ def register(request):
         return redirect('/store/')
 
     except IntegrityError:
-        return JsonResponse({"error": "Username or email already exists"}, status=409)
+        messages.error(request, "Username or email already exists")
+        return redirect(reverse('store:signup.html'))
 
     except ValidationError as e:
-        return JsonResponse({"error": str(e)}, status=400)
+        messages.error(request, str(e))
+        return redirect(reverse('store:signup.html'))
     
     
 @require_http_methods(["GET"])   
@@ -144,7 +148,7 @@ def login_page(request):
 @csrf_exempt
 def logout_view(request):
     logout(request)
-    return JsonResponse({"message": "success"})
+    return redirect('store:index')
 
 def check_user_authentication(request):
     if request.user.is_authenticated:
@@ -616,6 +620,15 @@ def clear_entire_shopping_cart(request):
 
     except ShoppingCart.DoesNotExist:
         return JsonResponse({"error": f"User with ID: {user_id} does not have a cart."}, status=404)
+
+    
+@require_http_methods(["GET"])   
+def runcheckout(request):
+    return render(request, 'store/checkout.html')
+
+@require_http_methods(["GET"])   
+def runcart(request):
+    return render(request, 'store/cart.html')
 
 
 """THE START OF ORDER MANAGEMENT"""

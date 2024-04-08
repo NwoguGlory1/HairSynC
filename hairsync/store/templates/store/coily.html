@@ -37,7 +37,7 @@
 </head>
 <body>
 <!--Navbar-->
-<nav class="navbar navbar-expand-lg navbar-dark" id="navbar">
+<nav class="navbar navbar-expand-xl navbar-dark" id="navbar">
   <div class="container-fluid">
     <a class="navbar-brand" href="{% url 'store:index' %}">
       <img class="d-inline-block align-text-top" src="{% static 'store/images/Logo.png' %}" alt="logo" width="30" height="24">HairSynC
@@ -73,15 +73,22 @@
           <input type="search" placeholder="Search" aria-label="Search">
           <button type="submit">Search</button>
         </form>
+        {% if user.is_authenticated %}
+        <p class="ms-auto my-lg-0 my-2">Welcome, {{ user.username }}!</p>
+        <a href="{% url 'store:logout' %}">
+          <button class="btn ms-auto sign" p-2 my-lg-0 my-2>Logout</button>
+       </a>
+      {% else %}
         <a href="{% url 'store:login_page' %}">
-          <button class="btn ms-auto sign" p-2 my-lg-0 my-2">Log In</button>
+          <button class="btn ms-auto sign" p-2 my-lg-0 my-2>Log In</button>
         </a>
         <a href="{% url 'store:register_form' %}">
-          <button class="btn ms-auto sign" p-2 my-lg-0 my-2">Sign Up</button>
+          <button class="btn ms-auto sign" p-2 my-lg-0 my-2>Sign Up</button>
         </a>
-      
-    </div>
-  </nav>
+      {% endif %}
+
+  </div>
+</nav>
   
   <!--Coily -->
 <section id="coily">

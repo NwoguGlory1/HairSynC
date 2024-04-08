@@ -24,52 +24,59 @@
   
 </head>
 <body>
-    <!--Navbar-->
-  <nav class="navbar navbar-expand-lg navbar-dark" id="navbar">
-    <div class="container-fluid">
-      <a class="navbar-brand" href="{% url 'store:index' %}">
-        <img class="d-inline-block align-text-top" src="{% static 'store/images/Logo.png' %}" alt="logo" width="30" height="24">HairSynC
-      </a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarScroll" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-       </button>
-      <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav m-auto my-2 my-lg-0">
+<!--Navbar-->
+<nav class="navbar navbar-expand-xl navbar-dark" id="navbar">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="{% url 'store:index' %}">
+      <img class="d-inline-block align-text-top" src="{% static 'store/images/Logo.png' %}" alt="logo" width="30" height="24">HairSynC
+    </a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarScroll" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+     </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav m-auto my-2 my-lg-0">
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'store:index' %}"></a>
+          </li>
           <li class="nav-item">
-            <a class="nav-link" href="{% url 'store:index' %}"></a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="{% url 'store:products' %}">All Products</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="{% url 'store:straight' %}">Straight Hairs</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="{% url 'store:wavy' %}">Wavy Hairs</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="{% url 'store:coily' %}">Coily Hairs</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="{% url 'store:hair_products' %}">Hair Products</a>
-            </li>
-              <!-- <li class="nav-item">
-              <a class="nav-link" href="#contact">Contact</a>
-            </li>  -->
-          </ul>
-          <form class="search">
-            <input type="search" placeholder="Search" aria-label="Search">
-            <button type="submit">Search</button>
-          </form>
-          <a href="{% url 'store:login_page' %}">
-            <button class="btn ms-auto sign" p-2 my-lg-0 my-2">Log In</button>
-          </a>
-          <a href="{% url 'store:register_form' %}">
-            <button class="btn ms-auto sign" p-2 my-lg-0 my-2">Sign Up</button>
-          </a>
-        
-      </div>
-    </nav>
+            <a class="nav-link" href="{% url 'store:products' %}">All Products</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'store:straight' %}">Straight Hairs</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'store:wavy' %}">Wavy Hairs</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'store:coily' %}">Coily Hairs</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'store:hair_products' %}">Hair Products</a>
+          </li>
+            <!-- <li class="nav-item">
+            <a class="nav-link" href="#contact">Contact</a>
+          </li>  -->
+        </ul>
+        <form class="search">
+          <input type="search" placeholder="Search" aria-label="Search">
+          <button type="submit">Search</button>
+        </form>
+        {% if user.is_authenticated %}
+        <p class="ms-auto my-lg-0 my-2">Welcome, {{ user.username }}!</p>
+        <a href="{% url 'store:logout' %}">
+          <button class="btn ms-auto sign" p-2 my-lg-0 my-2>Logout</button>
+       </a>
+      {% else %}
+        <a href="{% url 'store:login_page' %}">
+          <button class="btn ms-auto sign" p-2 my-lg-0 my-2>Log In</button>
+        </a>
+        <a href="{% url 'store:register_form' %}">
+          <button class="btn ms-auto sign" p-2 my-lg-0 my-2>Sign Up</button>
+        </a>
+      {% endif %}
+
+  </div>
+</nav>
 
 <!--All Products -->
 <section id="all_categories">
