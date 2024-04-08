@@ -214,10 +214,10 @@ section{
     background-color: white;
 }
 
-.btn signin button{
+/* .btn signin button{
     border-radius: 50px;
     width: 10rem;
-}
+} */
 
 
 
@@ -381,6 +381,19 @@ form{
     padding: 20px;
 }
 
+.checkout
+{
+    text-decoration: none;
+    background-color:#29f700;
+    padding: 1em 2em;
+    color: black;
+    border-radius: 8px;
+    text-align: center;
+}
+
+.heading{
+    background-color: goldenrod !important; 
+}
 /* th{
     padding-left: 20px;
 } */

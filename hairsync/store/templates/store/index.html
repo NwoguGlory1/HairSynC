@@ -80,11 +80,11 @@
           <button class="btn ms-auto sign" p-2 my-lg-0 my-2>Logout</button>
        </a>
       {% else %}
-        <a class="log" href="{% url 'store:login_page' %}">
-          <button class="btn btn-primary ms-auto">Log In</button>
+        <a style="height: 200px;" href="{% url 'store:login_page' %}">
+          <!-- <button class="">Log In</button> -->
         </a>
         <a href="{% url 'store:register_form' %}">
-          <button class="btn btn-primary ms-auto sign p-2 my-lg-0 my-2">Sign Up</button>
+          <!-- <button class="">Sign Up</button> -->
         </a>
       {% endif %}
 
