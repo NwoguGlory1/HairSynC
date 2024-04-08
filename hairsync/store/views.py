@@ -178,6 +178,45 @@ def fetch_product_by_id(request, id):
         return JsonResponse({"error": f"Product with ID: {id} was not found."}, status=404)
 
 
+@require_http_methods(["GET"])   
+def bonestraight(request):
+    return render(request, 'store/bonestraight.html')
+
+
+@require_http_methods(["GET"])   
+def blondwavyhair(request):
+    return render(request, 'store/blondwavyhair.html')
+
+
+@require_http_methods(["GET"])   
+def doubledrawn(request):
+    return render(request, 'store/doubledrawn.html')
+
+
+@require_http_methods(["GET"])   
+def hawaiiansilky(request):
+    return render(request, 'store/hawaiiansilky.html')
+
+@require_http_methods(["GET"])   
+def pixiecurl(request):
+    return render(request, 'store/pixiecurl.html')
+
+
+@require_http_methods(["GET"])   
+def orsconditioner(request):
+    return render(request, 'store/orsconditioner.html')
+
+
+@require_http_methods(["GET"])   
+def watercurls(request):
+    return render(request, 'store/watercurls.html')
+
+
+@require_http_methods(["GET"])   
+def wavyhair(request):
+    return render(request, 'store/wavyhair.html')
+
+
 @csrf_exempt
 @require_http_methods(["POST"])
 def create_new_product(request):

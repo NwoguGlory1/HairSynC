@@ -16,12 +16,20 @@ urlpatterns = [
     path('user_status/', views.check_user_authentication, name='user_status'), # Check User Authentication
     # path('accounts/login/', auth_views.LoginView.as_view(), name='login'),
 
-    # Product Management
+    # Products Management
     path('products/', views.list_all_products, name='products'),
     path('products/<int:id>/', views.fetch_product_by_id, name='get-product-details'),
     path('products/create/', views.create_new_product, name='create-new-product'),
     path('products/<int:id>/update/', views.update_product_id_details, name='update-product-details'),
     path('products/<int:id>/delete/', views.delete_product_by_id, name='delete-product'),
+    path('bonestraight/', views.bonestraight, name='bonestraight'),
+    path('blondwavyhair/', views.blondwavyhair, name='blondwavyhair'),
+    path('watercurls/', views.watercurls, name='watercurls'),
+    path('orsconditioner/', views.orsconditioner, name='orsconditioner'),
+    path('wavyhair/', views.wavyhair, name='wavyhair'),
+    path('hawaiiansilky/', views.hawaiiansilky, name='hawaiiansilky'),
+    path('doubledrawn/', views.doubledrawn, name='doubledrawn'),
+    path('pixiecurls/', views.pixiecurl, name='pixiecurls'),
 
 
     # Search and Filters
