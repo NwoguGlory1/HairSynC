@@ -53,6 +53,7 @@ urlpatterns = [
     path('users/', views.get_user_profile, name='get-user-profile'),
     path('users/update/', views.update_user_profile, name='update-user-profile'),
     path('users/orders/', views.list_orders_placed_by_user, name='list-user-orders'),
+    path('userprofile/', views.userprofile, name='userprofile'),
     
     
     # Shopping Cart
