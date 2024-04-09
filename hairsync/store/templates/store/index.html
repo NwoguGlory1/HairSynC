@@ -81,10 +81,15 @@
        </a>
       {% else %}
         <a style="height: 200px;" href="{% url 'store:login_page' %}">
-          <!-- <button class="">Log In</button> -->
+          <button class="">Log In</button>
+          <!-- <button class="btn btn-primary signin">Log In</button> -->
+
+
         </a>
         <a href="{% url 'store:register_form' %}">
-          <!-- <button class="">Sign Up</button> -->
+          <button class="">Sign Up</button>
+          <!-- <button class="btn btn-primary sign p-2 my-lg-0 my-2">Sign Up</button> -->
+
         </a>
       {% endif %}
 
