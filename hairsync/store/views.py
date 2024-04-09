@@ -218,7 +218,7 @@ def watercurls(request):
 
 @require_http_methods(["GET"])   
 def wavyhair(request):
-    return render(request, 'store/wavyhair.html')
+    return render(request, 'store/blackwavyhair.html')
 
 
 @csrf_exempt
