@@ -521,6 +521,12 @@ def list_orders_placed_by_user(request):
         return JsonResponse({'orders': orders_data}, safe=False)
     except Order.DoesNotExist:
         return JsonResponse({"error": "No orders found for the user."}, status=404)
+    
+
+@require_http_methods(["GET"])
+def userprofile(request):
+    return render(request, 'store/userprofile.html')
+
 
 
 
