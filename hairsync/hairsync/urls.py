@@ -19,6 +19,7 @@ from django.urls import path
 from django.urls import include
 from django.conf import settings
 from django.conf.urls.static import static
+from django.http import Http404
 
 
 urlpatterns = [
@@ -30,3 +31,13 @@ urlpatterns = [
 # Serve media files only during development
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
+
+# Catch-all URL pattern
+def catch_all(request, *args, **kwargs):
+    raise Http404("Page not found")
+
+# Add the catch-all URL pattern at the end
+urlpatterns += [
+    path('<path:path>', catch_all),
+]
