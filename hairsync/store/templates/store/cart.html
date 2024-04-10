@@ -74,44 +74,23 @@
           <button type="submit">Search</button>
         </form>
         {% if user.is_authenticated %}
-        <p class="ms-auto my-lg-0 my-2">Welcome, {{ user.username }}!</p>
-        <a href="{% url 'store:logout' %}">
-          <button class="btn ms-auto sign" p-2 my-lg-0 my-2>Logout</button>
-       </a>
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'store:userprofile' %}">{{ user.username }} Profile</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'store:logout' %}">Logout</a>
+        </li>
       {% else %}
-        <a href="{% url 'store:login_page' %}">
-          <button class="btn ms-auto sign" p-2 my-lg-0 my-2>Log In</button>
-        </a>
-        <a href="{% url 'store:register_form' %}">
-          <button class="btn ms-auto sign" p-2 my-lg-0 my-2>Sign Up</button>
-        </a>
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'store:login_page' %}">Log In</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'store:register_form' %}">Sign Up</a>
+        </li>
       {% endif %}
-
-  </div>
+    </div>
+ </div>
 </nav>
-
- <!--Shopping cart-->
- <!-- <nav class="navbar navbar-expand-lg navbar-dark" id="navbar">
-  <div class="container-fluid"> -->
-    <nav class="navbar navbar-expand-lg navbar-light bg-light p-3 mt-14">
-        <div class="container-fluid">
-            <a class="navbar-brand text-center" href="#">Shopping Cart</a>
-            <!-- <a class="navbar-brand" href="#"><small>Keep Shopping...</small></a> -->
-            <div class="navbar navbar-collapse">
-             <ul class="navbar-nav me-auto">
-                 <!-- <li class="nav-item"></li>  -->
-              </ul>
-              <ul class="navbar-nav me-auto">
-                <!-- <li class="nav-item"></li> -->
-              </ul> 
-              <ul class="navbar-nav me-auto">
-                <!-- <li class="nav-item"></li> -->
-              </ul>  
-              <span class="navbar-text">Total shopping cart value: $ <span class="totalAmount">0</span></span>
-              <br>
-            </div>
-        </div>
-    </nav>
 
     <div class="container-fluid ms-auto">
       <div style="text-align: right; width: 100%; margin-right: 5em; margin-top: 30px;">

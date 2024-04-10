@@ -74,20 +74,22 @@
           <button type="submit">Search</button>
         </form>
         {% if user.is_authenticated %}
-        <p class="ms-auto my-lg-0 my-2">Welcome, {{ user.username }}!</p>
-        <a href="{% url 'store:logout' %}">
-          <button class="btn ms-auto sign" p-2 my-lg-0 my-2>Logout</button>
-       </a>
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'store:userprofile' %}">{{ user.username }} Profile</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'store:logout' %}">Logout</a>
+        </li>
       {% else %}
-        <a href="{% url 'store:login_page' %}">
-          <button class="btn ms-auto sign" p-2 my-lg-0 my-2>Log In</button>
-        </a>
-        <a href="{% url 'store:register_form' %}">
-          <button class="btn ms-auto sign" p-2 my-lg-0 my-2>Sign Up</button>
-        </a>
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'store:login_page' %}">Log In</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'store:register_form' %}">Sign Up</a>
+        </li>
       {% endif %}
-
-  </div>
+    </div>
+ </div>
 </nav>
 
 <!--Hair Products-->
