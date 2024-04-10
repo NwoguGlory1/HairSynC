@@ -471,17 +471,15 @@ def wavy_category(request):
 @check_authentication
 @require_http_methods(["GET"])
 def get_user_profile(request):
-    try:
-        specific_user = User.objects.get(id=request.user.id)
-        return JsonResponse({
+    specific_user = User.objects.get(id=request.user.id)
+    user_details = {
             'id': specific_user.id,
             'username': specific_user.username,
             'email': specific_user.email,
             'first_name': specific_user.first_name,
-            'last_name': specific_user.last_name
-        }, safe=False)
-    except User.DoesNotExist:
-        return JsonResponse({"error": "User does not exist."}, status=404)
+            'last_name': specific_user.last_name,
+    }
+    return render(request, 'store/userprofile.html', {'user': user_details})
 
 
 @check_authentication
@@ -522,12 +520,6 @@ def list_orders_placed_by_user(request):
     except Order.DoesNotExist:
         return JsonResponse({"error": "No orders found for the user."}, status=404)
     
-
-@require_http_methods(["GET"])
-def userprofile(request):
-    return render(request, 'store/userprofile.html')
-
-
 
 
 """THE START OF SHOPPING CART MANAGEMENT"""
