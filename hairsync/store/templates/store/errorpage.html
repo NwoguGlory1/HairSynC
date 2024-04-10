@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <title>Error page</title>
+
+     <!-- Favicons -->
+     <link href="{% static 'store/images/favicon.png' %}" rel="icon">
+
+    <!-- Include CSS files or stylesheets here -->
+    <link href="{% static 'store/css/all.min.css' %}" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'store/css/style.css' %}">
+
+</head>
+
+<body>
+    <div class="container">
+        <div class="row">
+          <div class="col-md-6 offset-md-3 text-center">
+            <h1>Error Page</h1>
+            <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" fill="currentColor" class="bi bi-exclamation-triangle" viewBox="0 0 16 16">
+              <path d="M.232 13.156a.5.5 0 0 1 .536-.848L8 14.797l7.232-2.489a.5.5 0 0 1 .536.848l-7.5 2.5a.5.5 0 0 1-.464 0l-7.5-2.5a.5.5 0 0 1-.072-.691z"/>
+              <path fill-rule="evenodd" d="M7.5 1.227a1 1 0 0 1 .993.883l.25 6.013a.999.999 0 0 1-.993.887h-.507a.999.999 0 0 1-.993-.887l-.25-6.013a1 1 0 0 1 .993-.883zM8 12a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/>
+            </svg>
+            <p>Oops! Sorry...We have not set up this page.</p>
+            <a href="{% url 'store:index' %}" class="btn btn-primary">Go back to Home</a>
+          </div>
+        </div>
+      </div>
+</body>
+</html>
