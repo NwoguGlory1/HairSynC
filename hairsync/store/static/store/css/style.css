@@ -315,7 +315,7 @@ section {
      gap: 50px; */
     /* position: relative; */
     width: 250px;
-    height: 800px;
+    height: 500px;
     background-color: #e5e5e5 !important;
     border: none !important;
     /* border: 1px solid green; */
@@ -396,6 +396,33 @@ form{
 }
 /* th{
     padding-left: 20px;
+} */
+
+/****Userprofile****/
+.navbar-links{
+    align-items: right;
+
+}
+
+.carder{
+    position: relative;
+    display: flex;
+    flex-direction: column;
+}
+
+/* .sidebar{
+    background-color: #333;
+    color: white;
+    height: 100%;
+}
+
+.sidebar a{
+    margin-left: 10px;
+    display: block;
+    color: white;
+    padding-bottom: 10px;
+    font-size: 30px;
+    text-decoration: none;
 } */
 
 

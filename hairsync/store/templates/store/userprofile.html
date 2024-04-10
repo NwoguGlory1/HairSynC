@@ -1,14 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
-
+    
 <head>
+    {% load static %}
     <meta charset="UTF-8">
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
  
-  <title>HairSynC</title>
-  <meta content="" name="description">
-  <meta content="" name="keywords">
+    <title>HairSynC</title>
+    <meta content="" name="description">
+    <meta content="" name="keywords">
 
   <!-- Favicons -->
   <link href="{% static 'store/images/favicon.png' %}" rel="icon">
@@ -38,43 +39,27 @@
 <!--Navbar-->
 <nav class="navbar navbar-expand-xl navbar-dark" id="navbar">
     <div class="container-fluid">
-        <a class="navbar-brand" href="{% url 'store:index' %}">
-            <img class="d-inline-block align-text-top" src="{% static 'store/images/Logo.png' %}" alt="logo" width="30" height="24">HairSynC
-          </a>
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarScroll" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-           </button>
-          <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav m-auto my-2 my-lg-0">
-              <li class="nav-item">
-                <a class="nav-link" href="{% url 'store:index' %}"></a>
-                </li>
-                <!-- <li class="nav-item">
-                  <a class="nav-link" href="{% url 'store:products' %}">All Products</a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="{% url 'store:straight' %}">Straight Hairs</a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="{% url 'store:wavy' %}">Wavy Hairs</a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="{% url 'store:coily' %}">Coily Hairs</a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="{% url 'store:hair_products' %}">Hair Products</a>
-                </li>
-              </ul>
-              <form class="search">
-                <input type="search" placeholder="Search" aria-label="Search">
-                <button type="submit">Search</button>
-              </form> -->
-        <ul class="navbar-links">
-            <li><a href="/orders">View Order</a></li>
-            <li><a href="/logout">Logout</a></li>
-        </ul>
+      <a class="navbar-brand" href="{% url 'store:index' %}">
+        <img class="d-inline-block align-text-top" src="{% static 'store/images/Logo.png' %}" alt="logo" width="30" height="24">HairSynC
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarScroll" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+       </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav m-auto my-2 my-lg-0">
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'store:index' %}"></a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="">View Orders</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="">Log Out</a>
+            </li>
+          </ul> 
     </div>
-</nav>
+  </nav>
+  
 
 <!-- Main content area for user profile -->
 <div class="container">
@@ -87,9 +72,9 @@
         </div> -->
         <div class="row">
             <div class="col-md-4 mt-1">
-                <div class="card text-center sidebar">
-                    <div class="card-body">
-                        <img src="38.png" class="rounded-circle" width="150">
+                <div class="carder text-center sidebar">
+                    <div class="carder-body">
+                        <img src="{% static 'store/images/bonestraight12.png' %}" class="rounded-circle" width="150">
                         <div class="mt-3">
                             <h3>BurkMacklino</h3>
                             <!-- <a href="">Home</a>
@@ -102,9 +87,9 @@
                 </div>
             </div>
         <div class="col-md-8 mt-1">
-            <div class="card mb-3 content">
+            <div class="carder mb-3 content">
                 <h1 class="m-3 pt-3">User Profile</h1>
-                <div class="card-body">
+                <div class="carder-body">
                     <div class="row">
                         <div class="col-md-3">
                             <h5>First Name</h5>
