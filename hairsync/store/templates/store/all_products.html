@@ -25,6 +25,16 @@
 </head>
 <body>
 <!--Navbar-->
+<!-- <div class="container">
+  <header>
+      <h1> Shopping </h1>
+      <div aria-valuemax="shopping">
+          <i class="fa-solid fa-bag-shopping"></i>
+          <span class="quantity">0</span>
+      </div>
+  </header>
+</div> -->
+
 <nav class="navbar navbar-expand-xl navbar-dark" id="navbar">
   <div class="container-fluid">
     <a class="navbar-brand" href="{% url 'store:index' %}">
@@ -61,6 +71,11 @@
           <input type="search" placeholder="Search" aria-label="Search">
           <button type="submit">Search</button>
         </form>
+        <!-- <div class="container"> -->
+        <div aria-valuemax="shopping">
+            <i class="fa-solid fa-bag-shopping"  style="color:#29f700;"></i>
+              <span class="quantity">0</span>
+        </div>
         {% if user.is_authenticated %}
         <li class="nav-item">
           <a class="nav-link" href="{% url 'store:userprofile' %}">{{ user.username }} Profile</a>
