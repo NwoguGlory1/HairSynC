@@ -73,9 +73,12 @@
         </form>
         <!-- <div class="container"> -->
         <div aria-valuemax="shopping">
-            <i class="fa-solid fa-bag-shopping"  style="color:#29f700;"></i>
+          <a href="{% url 'store:cart' %}">
+              <i class="fa-solid fa-bag-shopping" style="color:#29f700;"></i>
               <span class="quantity">0</span>
+          </a>
         </div>
+
         {% if user.is_authenticated %}
         <li class="nav-item">
           <a class="nav-link" href="{% url 'store:userprofile' %}">{{ user.username }} Profile</a>
