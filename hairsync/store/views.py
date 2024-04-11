@@ -468,7 +468,7 @@ def wavy_category(request):
 
 
 """USER PROFILE MANAGEMENT"""
-@check_authentication
+#@check_authentication
 @require_http_methods(["GET"])
 def get_user_profile(request):
     specific_user = User.objects.get(id=request.user.id)
