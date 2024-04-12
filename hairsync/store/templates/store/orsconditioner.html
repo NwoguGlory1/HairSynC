@@ -73,6 +73,13 @@
           <input type="search" placeholder="Search" aria-label="Search">
           <button type="submit">Search</button>
         </form>
+        <!-- <div class="container"> -->
+          <div aria-valuemax="shopping">
+            <a href="{% url 'store:cart' %}">
+                <i class="fa-solid fa-bag-shopping" style="color:#29f700;"></i>
+                <span class="quantity">0</span>
+            </a>
+          </div>
         {% if user.is_authenticated %}
         <li class="nav-item">
           <a class="nav-link" href="{% url 'store:userprofile' %}">{{ user.username }} Profile</a>
@@ -116,7 +123,7 @@
           <h5 class="card-title"><a href="{% url 'store:orsconditioner' %}">Ors Conditioner </a> $70 </h5>
           <h6>Ors Olive Oil Strengthen & Nourishes</h6>
           
-            <a href="#" class="btn signin">Add to Cart</a>
+          <a href="{% url 'store:add-product-to-cart' productId=9 %}" class="btn signin">Add to Cart</a>
           </div>
         </div>
       </div>      
