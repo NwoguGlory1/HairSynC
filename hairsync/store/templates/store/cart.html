@@ -156,148 +156,135 @@
                         </th>
                         </tr>
                     </thead>
+                    <!-- Cart Items -->
                     <tbody class="table-light">
+                        {% for item in cart_items %}
                         <tr>
-                           <td>1</td>
-                           <td>Bonestraight Hair</td> 
-                           <td>
-                            $ <span class="txtprice">250</span>
-                            <input type="hidden" name="txtPrice" value="250">
-                            <input type="hidden" name="totalTxtPrice" value="0">
-                        </td>
-                        <td class="text-center">
-                            <i class="bi bi-cart-dash"></i><input name="item" value=0 size="2"><i class="bi bi-cart-plus-fill text-primary"></i>
-                            <!-- <span class="item"></span> -->
-                            <input type="hidden" name="txtItem" value="0">
-                        </td> 
-                        </tr>
-                        <tr>
-                            <td>2</td>
-                            <td>Doubledrawn Hair</td> 
+                            <td>{{ forloop.counter }}</td>
+                            <td>{{ item.product.name }}</td>
                             <td>
-                                $ <span class="txtprice">120</span>
-                             <input type="hidden" name="txtPrice" value="120">
-                             <input type="hidden" name="totalTxtPrice" value="0">
+                                $ <span class="txtprice">{{ item.product.price }}</span>
+                                <input type="hidden" name="txtPrice" value="{{ item.product.price }}">
+                                <input type="hidden" name="csrfmiddlewaretoken" value="{{ csrf_token }}">
                             </td>
-                         <td class="text-center">
-                            <i class="bi bi-cart-dash"></i><input name="item" value=0 size="2"><i class="bi bi-cart-plus-fill text-primary"></i>
-                             <input type="hidden" name="txtItem" value="0">
-                         </td> 
-                         </tr>
-                         <tr>
-                            <td>3</td>
-                            <td>Wavy Hair</td> 
-                            <td>
-                             $ <span class="txtprice">300</span>
-                             <input type="hidden" name="txtPrice" value="300">
-                             <input type="hidden" name="totalTxtPrice" value="0">
-                         </td>
-                         <td class="text-center">
-                             <i class="bi bi-cart-dash"></i><input name="item" value=0 size="2"><i class="bi bi-cart-plus-fill text-primary"></i>
-                             <!-- <span class="item"></span> -->
-                             <input type="hidden" name="txtItem" value="0">
-                         </td> 
-                         </tr>
-                         <!-- <tr>
-                            <td>4</td>
-                            <td>Blond wavy Hair</td> 
-                            <td>
-                             $ <span class="txtprice">320</span>
-                             <input type="hidden" name="txtPrice" value="320">
-                             <input type="hidden" name="totalTxtPrice" value="0">
-                         </td> -->
-                         <!-- <td class="text-center">
-                             <i class="bi bi-cart-dash"></i><input name="item" value=0 size="2"><i class="bi bi-cart-plus-fill text-primary"></i>
-                              <span class="item"></span>
-                             <input type="hidden" name="txtItem" value="0">
-                         </td> 
-                         </tr> and so on -->
-                         <tr>
-                            <td colspan="3" class="text-end">Total Amount:</td>
-                            <td>$<span class="totalAmount">0</span></td>
-                            <td>Total Quantity: <span class="totalQuantity">0</span></td>
-                         </tr>
-                    </tbody>
+                            <td class="text-center">
+                                <i class="bi bi-cart-dash"></i><input name="item" value="{{ item.quantity }}" size="2"><i class="bi bi-cart-plus-fill text-primary"></i>
+                                <input type="hidden" name="txtItem" value="{{ item.quantity }}">
+                                <button class="btn btn-danger remove-item" data-product-id="{{ item.product.id }}">Remove</button>
+                                <button id="clear-cart-btn" class="btn btn-danger">Clear Cart</button>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    <tr>
+                      <td colspan="3" class="text-end">Total Amount:</td>
+                      <td>$<span class="totalAmount">{{ total_amount }}</span></td>
+                      <td>Total Quantity: <span class="totalQuantity">{{ cart_item_count }}</span></td>
+                    </tr>
+                </tbody>
                 </table>
             </div>
             </div>
         </div>
     </div>
     <script>
-    var totalAmount = document.querySelectorAll(".totalAmount");
-    var amountByItem = document.querySelectorAll("input[name=totalTxtPrice]");
-    var totalItem = document.querySelectorAll(".totalQuantity");
-    var itemCountByEachProd = document.querySelectorAll("input[name=item]");
-    
-    document.querySelectorAll(".bi-cart-plus-fill").forEach(item => {
-        item.addEventListener("click", function() {
-            addItemToCart(item);
-        });
-    });
+      document.addEventListener('DOMContentLoaded', function() {
+          updateCartTotals();
+  
+          document.querySelectorAll(".bi-cart-plus-fill").forEach(item => {
+              item.addEventListener("click", function() {
+                  updateItemQuantity(item, true);
+              });
+          });
+  
+          document.querySelectorAll(".bi-cart-dash").forEach(item => {
+              item.addEventListener("click", function() {
+                  updateItemQuantity(item, false);
+              });
+          });
+      });
+  
+      function updateItemQuantity(item, isIncrease) {
+          var closestTr = item.closest("tr");
+          var closestPrice = parseFloat(closestTr.querySelector(".txtprice").textContent.replace('$', ''));
+          var closestQuantityInput = closestTr.querySelector("input[name=item]");
+          var closestTotalPriceInput = closestTr.querySelector("input[name=totalTxtPrice]");
+  
+          var currentQuantity = parseInt(closestQuantityInput.value);
+          var newQuantity = isIncrease ? currentQuantity + 1 : currentQuantity - 1;
+          if (newQuantity < 0) newQuantity = 0; // Ensure quantity cannot be negative
+  
+          closestQuantityInput.value = newQuantity;
+          closestTotalPriceInput.value = closestPrice * newQuantity;
+  
+          updateCartTotals();
+      }
+  
+      function updateCartTotals() {
+          var totalAmount = 0;
+          var totalQuantity = 0;
+  
+          document.querySelectorAll("input[name=totalTxtPrice]").forEach(function(input) {
+              totalAmount += parseFloat(input.value);
+          });
+  
+          document.querySelectorAll("input[name=item]").forEach(function(input) {
+              totalQuantity += parseInt(input.value);
+          });
+  
+          document.querySelector(".totalAmount").textContent = totalAmount.toFixed(2);
+          document.querySelector(".totalQuantity").textContent = totalQuantity;
+      }
+  </script>  
 
-    function addItemToCart(item) {
-        var closetTr = item.closest("td").parentNode;
-        var closestPrice = closetTr.cells[2].querySelector("input[name=txtPrice]").value;
-        var closestTotalPrice = closetTr.cells[2].querySelector("input[name=totalTxtPrice]");
-
-        var itemCount = item.closest("td").querySelector("input[name=item]");
-
-        itemCount.value = parseFloat(itemCount.value) + 1;
-
-        closestTotalPrice.value = parseFloat(closestPrice) * parseFloat(itemCount.value);
-
-        var tempTotalAmount = 0;
-        amountByItem.forEach(item => {
-            tempTotalAmount += parseFloat(item.value);
-        });
-        totalAmount.forEach(item => {
-            item.innerHTML = tempTotalAmount.toFixed(2);
-        });
-
-        var tempTotalQuantity = 0;
-        itemCountByEachProd.forEach(item => {
-            tempTotalQuantity += parseFloat(item.value);
-        });
-        totalItem.forEach(item => {
-            item.innerHTML = tempTotalQuantity;
-        });
-    }
-
-    function removeItemFromCart(item) {
-        var closetTr = item.closest("td").parentNode;
-        var closestPrice = closetTr.cells[2].querySelector("input[name=txtPrice]").value;
-        var closestTotalPrice = closetTr.cells[2].querySelector("input[name=totalTxtPrice]");
-
-        var itemCount = item.closest("td").querySelector("input[name=item]");
-
-        itemCount.value = parseFloat(itemCount.value) > 0 ? parseFloat(itemCount.value) - 1 : 0;
-
-        closestTotalPrice.value = parseFloat(closestPrice) * parseFloat(itemCount.value);
-
-        var tempTotalAmount = 0;
-        amountByItem.forEach(item => {
-            tempTotalAmount += parseFloat(item.value);
-        });
-        totalAmount.forEach(item => {
-            item.innerHTML = tempTotalAmount.toFixed(2);
-        });
-
-        var tempTotalQuantity = 0;
-        itemCountByEachProd.forEach(item => {
-            tempTotalQuantity += parseFloat(item.value);
-        });
-        totalItem.forEach(item => {
-            item.innerHTML = tempTotalQuantity;
-        });
-    }
-
-    document.querySelectorAll(".bi-cart-dash").forEach(item => {
-        item.addEventListener("click", function() {
-            removeItemFromCart(item);
+  <script >
+    document.addEventListener('DOMContentLoaded', function() {
+        document.querySelectorAll('.remove-item').forEach(function(button) {
+            button.addEventListener('click', function() {
+                var productId = this.getAttribute('data-product-id');
+                fetch(`/store/users/cart/remove/${productId}/`, {
+                    method: 'DELETE',
+                    headers: {
+                        'X-CSRFToken': document.querySelector('[name=csrfmiddlewaretoken]').value,
+                    },
+                })
+                .then(response => {
+                    if (response.ok) {
+                        // If the request was successful, reload the cart page
+                        location.reload();
+                    } else {
+                        // Handle errors
+                        console.error('Failed to remove item from cart');
+                    }
+                })
+                .catch(error => console.error('Error:', error));
+            });
         });
     });
     </script>
 
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+          document.getElementById('clear-cart-btn').addEventListener('click', function() {
+              fetch('/store/users/cart/clear/', {
+                  method: 'DELETE',
+                  headers: {
+                      'X-CSRFToken': document.querySelector('[name=csrfmiddlewaretoken]').value,
+                  },
+              })
+              .then(response => {
+                  if (response.ok) {
+                      // If the request was successful, reload the cart page
+                      location.reload();
+                  } else {
+                      // Handle errors
+                      console.error('Failed to clear cart');
+                  }
+              })
+              .catch(error => console.error('Error:', error));
+          });
+      });
+      </script>
+      
 <!--Footer-->
 <footer class="bg-dark text-white pt-5 pb-4">
     <div class="container text-center text-md-left">
@@ -388,25 +375,7 @@
     </div>
   </footer>
   
-  {% if messages %}
-  <!-- Iterate over Django messages -->
-  {% for message in messages %}
-      <!-- Display messages using SweetAlert.js -->
-      <script>
-          Swal.fire({
-              icon: '{{ message.tags }}', // Use the message tags as SweetAlert.js icons
-              title: '{{ message.tags|capfirst }}', // Capitalize the first letter of the tag
-              text: '{{ message }}',
-              timer: 10000, // Automatically close after 10 seconds
-              showConfirmButton: false, // Do not show a confirmation button
-              position: 'top-end', // Show notifications at the top-end
-              // Add more options as needed
-          });
-      </script>
-  {% endfor %}
-  {% endif %}
-  <!-- Include SweetAlert.js -->
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+
     <script src="{% static 'store/js/bootstrap.bundle.min.js' %}"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF"></script>

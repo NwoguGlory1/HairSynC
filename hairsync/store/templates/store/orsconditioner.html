@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-
+<input type="hidden" id="csrfToken" value="{{ csrf_token }}">
 <head>
   {% load static %}
   <meta charset="utf-8">
@@ -73,13 +73,11 @@
           <input type="search" placeholder="Search" aria-label="Search">
           <button type="submit">Search</button>
         </form>
-        <!-- <div class="container"> -->
-          <div aria-valuemax="shopping">
-            <a href="{% url 'store:cart' %}">
-                <i class="fa-solid fa-bag-shopping" style="color:#29f700;"></i>
-                <span class="quantity">0</span>
-            </a>
-          </div>
+        <!-- cart icon on the nav bar -->
+        <a href="/store/users/cart/" class="cart-icon">
+        <i class="fa-solid fa-bag-shopping"></i>
+        <span class="quantity">0</span> <!-- This will display the number of items in the cart -->
+        </a>
         {% if user.is_authenticated %}
         <li class="nav-item">
           <a class="nav-link" href="{% url 'store:userprofile' %}">{{ user.username }} Profile</a>
@@ -122,8 +120,10 @@
         <div class="card-body text-center">
           <h5 class="card-title"><a href="{% url 'store:orsconditioner' %}">Ors Conditioner </a> $70 </h5>
           <h6>Ors Olive Oil Strengthen & Nourishes</h6>
-          
-          <a href="{% url 'store:add-product-to-cart' productId=9 %}" class="btn signin">Add to Cart</a>
+          <form id="addToCartForm" method="post">
+            <input type="hidden" name="product_id" value="9">
+            <button type="submit" class="btn signin">Add to Cart</button>
+          </form>
           </div>
         </div>
       </div>      
@@ -131,6 +131,56 @@
   </div>
 </section>
 
+<script>
+  var csrfToken = document.getElementById('csrfToken').value; // Define csrfToken globally
+ 
+  function updateCartCount() {
+       fetch(`/store/users/cart/item-count/`, {
+           headers: {
+             'X-CSRFToken': csrfToken
+           }
+       })
+       .then(response => response.json())
+       .then(data => {
+           var cartQuantity = document.querySelector('.quantity');
+           cartQuantity.textContent = data.cart_item_count;
+       })
+       .catch(error => {
+           console.error('An error occurred:', error);
+       });
+  }
+   
+  document.getElementById('addToCartForm').addEventListener('submit', function(event) {
+       event.preventDefault(); // Prevent the form from submitting normally
+       var productId = this.elements.product_id.value; // Get the product ID from the form
+       var quantity = 1; // Set the quantity to add
+   
+       fetch(`/store/users/cart/add/${productId}/`, {
+           method: 'POST',
+           headers: {
+               'Content-Type': 'application/x-www-form-urlencoded',
+               'X-CSRFToken': csrfToken
+           },
+           body: `quantity=${quantity}`
+       })
+       .then(response => response.json())
+       .then(data => {
+           if (data.success) {
+               // Update the cart icon with the current quantity from the server response
+               updateCartCount(); // Call the function to update the cart count
+           } else {
+               // Handle error
+               console.error('Failed to add product to cart.');
+           }
+       })
+       .catch(error => {
+           console.error('An error occurred:', error);
+       });
+  });
+ </script>    
+  
+  <!-- CSRF Token -->
+  <input type="hidden" id="csrfToken" value="{{ csrf_token }}">
 
 <!--Footer-->
 <footer class="bg-dark text-white pt-5 pb-4">
@@ -242,6 +292,7 @@
 <!-- Include SweetAlert.js -->
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
   <script src="{% static 'store/js/bootstrap.bundle.min.js' %}"></script>
+  <script src="{% static 'store/js/cart.js' %}"></script>
   <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF"></script>
 </body>

@@ -530,11 +530,34 @@ def get_user_shopping_cart_contents(request):
         user_id = request.user.id
         cart_contents = ShoppingCart.objects.get(user=user_id)
         cart_items = CartItem.objects.filter(cart=cart_contents)
-        total_price = sum(item.product.price * item.quantity for item in cart_items)
-        return render(request, 'store/cart.html', {'cart_items': cart_items, 'total_price': total_price})
+        # Calculate total price for each item here
+        for item in cart_items:
+            item.total_price = item.product.price * item.quantity
+        total_amount = sum(item.total_price for item in cart_items)
+        print("Total Amount:", total_amount)
+        return render(request, 'store/cart.html', {
+            'cart_items': cart_items,
+            'total_amount': total_amount,
+            'cart_item_count': cart_items.count()
+        })
     except ShoppingCart.DoesNotExist:
-        return render(request, 'store/cart.html', {'cart_items': [], 'total_price': 0})
+        return render(request, 'store/cart.html', {
+            'cart_items': [],
+            'total_amount': 0,
+            'cart_item_count': 0
+        })
 
+
+@require_http_methods(["GET"])
+def get_cart_item_count(request):
+    try:
+        user_id = request.user.id
+        cart_contents = ShoppingCart.objects.get(user=user_id)
+        cart_items = CartItem.objects.filter(cart=cart_contents)
+        cart_item_count = cart_items.count()
+        return JsonResponse({'cart_item_count': cart_item_count})
+    except ShoppingCart.DoesNotExist:
+        return JsonResponse({'cart_item_count': 0})
 
 
 #@check_authentication
@@ -546,14 +569,15 @@ def add_product_to_cart(request, productId):
 
         product = Product.objects.get(product_id=productId)
         if quantity > product.quantity_in_stock:
-           messages.error(request, f"Please reduce the quantity to {product.quantity_in_stock} or less, as the current stock is {quantity} items.")
+            messages.error(request, f"Please reduce the quantity to {product.quantity_in_stock} or less, as the current stock is {quantity} items.")
+            return redirect('store:cart') # Redirect back to the cart page with an error message
 
         try:
             # Try to get an existing cart item
             existing_cart_item = CartItem.objects.get(cart=ShoppingCart.objects.get(user=user_id), product=product)
             existing_cart_item.quantity += quantity
             existing_cart_item.save()
-            return JsonResponse(existing_cart_item.to_dict(), safe=False)
+            messages.success(request, f"Updated quantity of {product.name} in your cart.")
         except CartItem.DoesNotExist:
             # If no existing cart item, create a new one
             try:
@@ -564,17 +588,20 @@ def add_product_to_cart(request, productId):
                 cart.save()
             new_cart_item = CartItem(cart=cart, product=product, quantity=quantity)
             new_cart_item.save()
-            return JsonResponse({"success": True}, safe=False)
+            messages.success(request, f"{product.name} added to your cart.")
+
+        return redirect('store:cart') # Redirect to the cart page
 
     except Product.DoesNotExist:
         messages.error(request, f"Product with ID: {productId} not found.")
+        return redirect('store:cart') # Redirect back to the cart page with an error message
     except MultiValueDictKeyError as e:
         messages.error(request, f"The form value for attribute {str(e)} is missing.")
-
-    return redirect('store:cart')
+        return redirect('store:cart') # Redirect back to the cart page with an error message
 
 
 #@check_authentication
+@csrf_exempt
 @require_http_methods(["DELETE"])
 def remove_product_from_user_cart(request, productId):
     try:
