@@ -72,6 +72,7 @@
           <button type="submit">Search</button>
         </form>
         <!-- <div class="container"> -->
+<<<<<<< HEAD
         <!-- <div aria-valuemax="shopping">
             <i class="fa-solid fa-bag-shopping"  style="color:#29f700;"></i>
               <span class="quantity">0</span>
@@ -79,6 +80,15 @@
         <button type="button" class="nav-link scrollto bg-danger" id="popcart" data-container="body" data-toggle="popover" data-placement="bottom" data-html="true" style="background-color: #1B1A55; color: #fff; border: none; border-radius: 8px; padding: 10px 20px; font-size: 16px; font-weight: bold; cursor: pointer;">
           <i class="fa-solid fa-cart-shopping" style="margin-right: 10px;"></i>Cart (<span id="cart" style="font-weight: normal;">0</span>)
       </button>
+=======
+        <div aria-valuemax="shopping">
+          <a href="{% url 'store:cart' %}">
+              <i class="fa-solid fa-bag-shopping" style="color:#29f700;"></i>
+              <span class="quantity">0</span>
+          </a>
+        </div>
+
+>>>>>>> fde24660f58d06aeba96b3c27f00c26ef05fdb62
         {% if user.is_authenticated %}
         <li class="nav-item">
           <a class="nav-link" href="{% url 'store:userprofile' %}">{{ user.username }} Profile</a>

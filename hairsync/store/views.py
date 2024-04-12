@@ -523,28 +523,21 @@ def list_orders_placed_by_user(request):
 
 
 """THE START OF SHOPPING CART MANAGEMENT"""
-@check_authentication
+#@check_authentication
 @require_http_methods(["GET"])
 def get_user_shopping_cart_contents(request):
     try:
         user_id = request.user.id
         cart_contents = ShoppingCart.objects.get(user=user_id)
-
         cart_items = CartItem.objects.filter(cart=cart_contents)
-
-        # Serialize the cart items to JSON format
-        cart_items_json = serialize('json', cart_items)
-
-        return JsonResponse(cart_items_json, safe=False)
-
+        total_price = sum(item.product.price * item.quantity for item in cart_items)
+        return render(request, 'store/cart.html', {'cart_items': cart_items, 'total_price': total_price})
     except ShoppingCart.DoesNotExist:
-        return JsonResponse({"error": "Shopping cart not found for the user."}, status=404)
-
-    except TypeError:
-        return JsonResponse({"error": "An error occurred while retrieving the shopping cart contents."}, status=500)
+        return render(request, 'store/cart.html', {'cart_items': [], 'total_price': 0})
 
 
-@check_authentication
+
+#@check_authentication
 @require_http_methods(["POST"])
 def add_product_to_cart(request, productId):
     try:
@@ -553,8 +546,7 @@ def add_product_to_cart(request, productId):
 
         product = Product.objects.get(product_id=productId)
         if quantity > product.quantity_in_stock:
-           return JsonResponse({"error": f"Please reduce the quantity to {product.quantity_in_stock} or less, as the current stock is {quantity} items."}, safe=False)
-
+           messages.error(request, f"Please reduce the quantity to {product.quantity_in_stock} or less, as the current stock is {quantity} items.")
 
         try:
             # Try to get an existing cart item
@@ -575,49 +567,55 @@ def add_product_to_cart(request, productId):
             return JsonResponse({"success": True}, safe=False)
 
     except Product.DoesNotExist:
-        return JsonResponse({"error": f"Product with ID: {productId} not found."}, status=404)
+        messages.error(request, f"Product with ID: {productId} not found.")
     except MultiValueDictKeyError as e:
-        return JsonResponse({"error": f"The form value for attribute {str(e)} is missing."}, status=400)
+        messages.error(request, f"The form value for attribute {str(e)} is missing.")
+
+    return redirect('store:cart')
 
 
-@check_authentication
+#@check_authentication
 @require_http_methods(["DELETE"])
 def remove_product_from_user_cart(request, productId):
     try:
         user_id = request.user.id
         cart_item_to_delete = CartItem.objects.get(cart=ShoppingCart.objects.get(user=user_id), product=Product.objects.get(product_id=productId))
 
-        cart_item_to_delete_details = cart_item_to_delete.to_dict()
 
         cart_item_to_delete.delete()
 
-        return JsonResponse({"message": "Item deleted", "item_details": cart_item_to_delete_details}, safe=False)
+        messages.success(request, "Item removed from cart.")
 
     except ShoppingCart.DoesNotExist:
-        return JsonResponse({"error": f"User with ID: {user_id} does not have an active cart."}, status=404)
+        messages.error(request, f"User with ID: {user_id} does not have an active cart.")
 
     except Product.DoesNotExist:
-        return JsonResponse({"error": f"Product with ID: {productId} not found in cart."}, status=404)
+        messages.error(request, f"Product with ID: {productId} not found in cart.")
 
     except CartItem.DoesNotExist:
-        return JsonResponse({"error": f"CartItem does not exist."}, status=404)
+        messages.error(request, f"CartItem does not exist.")
+
+    return redirect('store:cart')
 
 
-@check_authentication
+#@check_authentication
 @require_http_methods(["DELETE", "POST"])
 def clear_entire_shopping_cart(request):
     try:
         user_id = request.user.id
+
         cart_to_clear = ShoppingCart.objects.get(user=user_id)
 
         cart_to_clear_items = CartItem.objects.filter(cart=cart_to_clear)
 
         cart_to_clear_items.delete()
 
-        return JsonResponse({"message": "Cart cleared"}, safe=False)
+        messages.success(request, "Cart cleared.")
 
     except ShoppingCart.DoesNotExist:
-        return JsonResponse({"error": f"User with ID: {user_id} does not have a cart."}, status=404)
+        messages.error(request, f"User with ID: {user_id} does not have a cart.")
+
+    return redirect('store:cart')
 
     
 @require_http_methods(["GET"])   
