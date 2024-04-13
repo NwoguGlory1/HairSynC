@@ -102,8 +102,10 @@
         <img src="{% static 'store/images/HawaiianSilky.png' %}" class="card-img-top">
         <div class="card-body text-center">
           <h5 class="card-title"><a href="{% url 'store:hawaiiansilky' %}">Hawaiian Silky Conditioner </a> $90</h5>
-        
-        <a href="#" class="btn signin">Add to Cart</a>
+          <form id="addToCartForm" method="post">
+            <input type="hidden" name="product_id" value="10">
+            <button type="submit" class="btn signin">Add to Cart</button>
+          </form>
       </div>
       </div>
       </div>
@@ -112,8 +114,10 @@
         <img src="{% static 'store/images/orsconditioner.png' %}" class="card-img-top">
         <div class="card-body text-center">
           <h5 class="card-title"><a href="{% url 'store:orsconditioner' %}">Ors Conditioner </a> $70 </h5>
-          
-            <a href="#" class="btn signin">Add to Cart</a>
+          <form id="addToCartForm" method="post">
+            <input type="hidden" name="product_id" value="9">
+            <button type="submit" class="btn signin">Add to Cart</button>
+          </form>
           </div>
         </div>
       </div>      

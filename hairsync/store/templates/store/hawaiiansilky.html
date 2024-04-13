@@ -103,8 +103,10 @@
         <div class="card-body text-center">
           <h5 class="card-title"><a href="{% url 'store:hawaiiansilky' %}">Hawaiian Silky Conditioner </a> $90</h5>
           <h6>Hawaiian Silky Miracle Worker 14 In 1 16 Oz.</h6>
-        
-          <a href="{% url 'store:cart' %}">View Cart ({{ cart_items|length }})</a>
+          <form id="addToCartForm" method="post">
+            <input type="hidden" name="product_id" value="10">
+            <button type="submit" class="btn signin">Add to Cart</button>
+          </form>
       </div>
       </div>
       </div>

@@ -105,8 +105,10 @@
                 <h5 class="card-title"><a href="{% url 'store:pixiecurls' %}">Pixie curls </a> $450</h5>
                 <h6>14" Superdouble drawn Gold pixie curls with 5x5 closure.
                     Density: 400g</h6>
-        
-          <a href="#" class="btn signin">Add to Cart</a>
+                    <form id="addToCartForm" method="post">
+                      <input type="hidden" name="product_id" value="3">
+                      <button type="submit" class="btn signin">Add to Cart</button>
+                    </form>
         </div>
       </div>
     </div>

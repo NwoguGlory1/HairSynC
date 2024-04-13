@@ -113,10 +113,11 @@
         <img src="{% static 'store/images/doubledrawn.png' %}" class="card-img-top">
         <div class="card-body text-center">
           <h5 class="card-title"><a href="{% url 'store:doubledrawn' %}">Doubledrawn Hair </a> $120</h5>
-          <h6>300g with  4 x4 closure size. 
-            Length: 10"</h6>
-          
-          <a href="#" class="btn signin">Add to Cart</a>
+          <h6>300g with  4 x4 closure size. Length: 10"</h6>
+          <form id="addToCartForm" method="post">
+            <input type="hidden" name="product_id" value="2">
+            <button type="submit" class="btn signin">Add to Cart</button>
+          </form>
         </div>
       </div>
     </div>

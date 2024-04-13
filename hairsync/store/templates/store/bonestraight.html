@@ -104,8 +104,10 @@
             <div class="card-body text-center">
               <h5 class="card-title"><a href="{% url 'store:bonestraight' %}">Bonestraight Hair </a> $250</h5>
               <h6>12" 300g with 5x 5 closure</h6>
-          
-            <a href="#" class="btn signin">Add to Cart</a>
+              <form id="addToCartForm" method="post">
+                <input type="hidden" name="product_id" value="1">
+                <button type="submit" class="btn signin">Add to Cart</button>
+              </form>
           </div>
         </div>
       </div>
