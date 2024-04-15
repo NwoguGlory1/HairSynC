@@ -446,7 +446,7 @@ def get_category_by_name(request, category_name):
     except Category.DoesNotExist:
         return JsonResponse({"error": f"Category with name: {category_name} does not exist."}, status=404)
 
-
+@csrf_exempt
 @require_http_methods(["GET"])
 def straight_category(request):
     return render(request, 'store/straight.html')
@@ -523,7 +523,8 @@ def list_orders_placed_by_user(request):
 
 
 """THE START OF SHOPPING CART MANAGEMENT"""
-#@check_authentication
+@csrf_exempt
+@check_authentication
 @require_http_methods(["GET"])
 def get_user_shopping_cart_contents(request):
     try:
@@ -548,6 +549,7 @@ def get_user_shopping_cart_contents(request):
         })
 
 
+@csrf_exempt
 @require_http_methods(["GET"])
 def get_cart_item_count(request):
     try:
@@ -560,7 +562,8 @@ def get_cart_item_count(request):
         return JsonResponse({'cart_item_count': 0})
 
 
-#@check_authentication
+@check_authentication
+@csrf_exempt
 @require_http_methods(["POST"])
 def add_product_to_cart(request, productId):
     try:
@@ -599,8 +602,8 @@ def add_product_to_cart(request, productId):
         messages.error(request, f"The form value for attribute {str(e)} is missing.")
         return redirect('store:cart') # Redirect back to the cart page with an error message
 
-
-#@check_authentication
+@csrf_exempt
+@check_authentication
 @csrf_exempt
 @require_http_methods(["DELETE"])
 def remove_product_from_user_cart(request, productId):
@@ -625,7 +628,8 @@ def remove_product_from_user_cart(request, productId):
     return redirect('store:cart')
 
 
-#@check_authentication
+@csrf_exempt
+@check_authentication
 @require_http_methods(["DELETE", "POST"])
 def clear_entire_shopping_cart(request):
     try:

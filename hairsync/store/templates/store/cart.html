@@ -238,59 +238,53 @@
 
   <script >
     document.addEventListener('DOMContentLoaded', function() {
-        document.querySelectorAll('.remove-item').forEach(function(button) {
-            button.addEventListener('click', function() {
-                var productId = this.getAttribute('data-product-id');
-                fetch(`/store/users/cart/remove/${productId}/`, {
-                    method: 'DELETE',
-                    headers: {
-                        'X-CSRFToken': document.querySelector('[name=csrfmiddlewaretoken]').value,
-                    },
-                })
-                .then(response => {
-                    if (response.ok) {
-                        // If the request was successful, reload the cart page
-                        location.reload();
-                    } else {
-                        // Handle errors
-                        console.error('Failed to remove item from cart');
-                    }
-                })
-                .catch(error => console.error('Error:', error));
-            });
-        });
-    });
-    </script>
-
-    <script>
-      document.addEventListener('DOMContentLoaded', function() {
-          document.getElementById('clear-cart-btn').addEventListener('click', function() {
-              fetch('/store/users/cart/clear/', {
+      document.querySelectorAll('.remove-item').forEach(function(button) {
+          button.addEventListener('click', function() {
+              var productId = this.getAttribute('data-product-id');
+              fetch(`/store/users/cart/remove/${productId}`, {
                   method: 'DELETE',
                   headers: {
                       'X-CSRFToken': document.querySelector('[name=csrfmiddlewaretoken]').value,
                   },
               })
               .then(response => {
-            if (response.ok) {
-                // If the request was successful, clear the cart in the UI
-                document.querySelector('.totalQuantity').textContent = 0; // Update the cart counter in the navbar
-                localStorage.setItem('cartCount', 0); // Update the cart count in local storage
-                // Optionally, you can also clear the cart items list in the cart page if it's dynamically generated
-                // For example, if you have a function to clear the cart items list, you can call it here
-            } else {
-              // .then(response => {
-              //     if (response.ok) {
-              //         // If the request was successful, reload the cart page
-              //         location.reload();
-              //     } else {
+                  if (response.ok) {
+                      // If the request was successful, reload the cart page
+                      location.reload();
+                  } else {
                       // Handle errors
-                      console.error('Failed to clear cart');
+                      console.error('Failed to remove item from cart');
                   }
               })
               .catch(error => console.error('Error:', error));
           });
       });
+  });  
+  </script>
+
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+        document.getElementById('clear-cart-btn').addEventListener('click', function() {
+            fetch('/store/users/cart/clear/', {
+                method: 'DELETE',
+                headers: {
+                    'X-CSRFToken': document.querySelector('[name=csrfmiddlewaretoken]').value,
+                },
+            })
+            .then(response => {
+                if (response.ok) {
+                    // If the request was successful, clear the cart in the UI
+                    document.querySelector('.totalQuantity').textContent = 0; // Update the cart counter in the navbar
+                    // Optionally, you can also clear the cart items list in the cart page if it's dynamically generated
+                    // For example, if you have a function to clear the cart items list, you can call it here
+                } else {
+                    // Handle errors
+                    console.error('Failed to clear cart');
+                }
+            })
+            .catch(error => console.error('Error:', error));
+        });
+    });    
       </script>
       
 <!--Footer-->

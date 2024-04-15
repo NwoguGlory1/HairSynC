@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-<input type="hidden" id="csrfToken" value="{{ csrf_token }}">
+
 <head>
   {% load static %}
   <meta charset="utf-8">
@@ -97,195 +97,90 @@
  </div>
 </nav>
 
-<!-- All Products -->
-<section id="all_categories">
+<!--Hair Products-->
+<section id="hairproducts">
   <div class="container-fluid m-5">
-      <h1 class="text-center my-3">All Products</h1>
-      <div class="hairs">
-          <!-- Product Cards -->
-          <div>
-              <div class="card">
-                  <img src="{% static 'store/images/bonestraight12.png' %}" class="card-img-top">
-                  <div class="card-body text-center">
-                      <h5 class="card-title">
-                          <a href="{% url 'store:bonestraight' %}">Bonestraight Hair</a> $250
-                      </h5>
-                      <form class="addToCartForm" method="post">
-                          {% csrf_token %}
-                          <input type="hidden" name="product_id" value="1">
-                          <button type="submit" class="btn signin" onclick="addToCart('Bonestraight Hair', 250)">Add to Cart</button>
-                      </form>
-                  </div>
-              </div>
-          </div>
-          <div>
-              <div class="card">
-                  <img src="{% static 'store/images/doubledrawn.png' %}" class="card-img-top">
-                  <div class="card-body text-center">
-                      <h5 class="card-title">
-                          <a href="{% url 'store:doubledrawn' %}">Doubledrawn Hair</a> $120
-                      </h5>
-                      <form class="addToCartForm" method="post">
-                          {% csrf_token %}
-                          <input type="hidden" name="product_id" value="2">
-                          <button type="submit" class="btn signin" onclick="addToCart('Doubledrawn Hair', 120)">Add to Cart</button>
-                      </form>
-                  </div>
-              </div>
-          </div>
-          <div class="card">
-              <img src="{% static 'store/images/wavvyhair.png' %}" class="card-img-top">
-              <div class="card-body text-center">
-                  <h5 class="card-title">
-                      <a href="{% url 'store:wavyhair' %}">Wavy Hair</a> $300
-                  </h5>
-                  <form class="addToCartForm" method="post">
-                      {% csrf_token %}
-                      <input type="hidden" name="product_id" value="6">
-                      <button type="submit" class="btn signin">Add to Cart</button>
-                  </form>
-              </div>
-          </div>
-          <div>
-              <div class="card">
-                  <img src="{% static 'store/images/blondewavy.png' %}" class="card-img-top">
-                  <div class="card-body text-center">
-                      <h5 class="card-title">
-                          <a href="{% url 'store:blondwavyhair' %}">Blond wavy Hair</a> $320
-                      </h5>
-                      <form class="addToCartForm" method="post">
-                          {% csrf_token %}
-                          <input type="hidden" name="product_id" value="5">
-                          <button type="submit" class="btn signin">Add to Cart</button>
-                      </form>
-                  </div>
-              </div>
-          </div>
-          <div>
-              <div class="card">
-                  <img src="{% static 'store/images/pixiecurlsgold.png' %}" class="card-img-top">
-                  <div class="card-body text-center">
-                      <h5 class="card-title">
-                          <a href="{% url 'store:pixiecurls' %}">Pixie curls</a> $450
-                      </h5>
-                      <form class="addToCartForm" method="post">
-                          {% csrf_token %}
-                          <input type="hidden" name="product_id" value="3">
-                          <button type="submit" class="btn signin" onclick="addToCart('Pixie curls', 450)">Add to Cart</button>
-                      </form>
-                  </div>
-              </div>
-          </div>
-          <div>
-              <div class="card">
-                  <img src="{% static 'store/images/watercurl.png' %}" class="card-img-top">
-                  <div class="card-body text-center">
-                      <h5 class="card-title">
-                          <a href="{% url 'store:watercurls' %}">Water curls</a> $300
-                      </h5>
-                      <form class="addToCartForm" method="post">
-                          {% csrf_token %}
-                          <input type="hidden" name="product_id" value="4">
-                          <button type="submit" class="btn signin" onclick="addToCart('Water Curls', 300)">Add to Cart</button>
-                      </form>
-                  </div>
-              </div>
-          </div>
-          <div>
-              <div class="card">
-                  <img src="{% static 'store/images/HawaiianSilky.png' %}" class="card-img-top">
-                  <div class="card-body text-center">
-                      <h5 class="card-title">
-                          <a href="{% url 'store:hawaiiansilky' %}">Hawaiian Silky Conditioner</a> $90
-                      </h5>
-                      <form class="addToCartForm" method="post">
-                          {% csrf_token %}
-                          <input type="hidden" name="product_id" value="10">
-                          <button type="submit" class="btn signin" onclick="addToCart('Hawaiian Silky Conditioner', 90)">Add to Cart</button>
-                      </form>
-                  </div>
-              </div>
-          </div>
-          <div>
-              <div class="card">
-                  <img src="{% static 'store/images/orsconditioner.png' %}" class="card-img-top">
-                  <div class="card-body text-center">
-                      <h5 class="card-title">
-                          <a href="{% url 'store:orsconditioner' %}">Ors Conditioner</a> $70
-                      </h5>
-                      <form class="addToCartForm" method="post">
-                          {% csrf_token %}
-                          <input type="hidden" name="product_id" value="9">
-                          <button type="submit" class="btn signin" onclick="addToCart('Ors Conditioner', 70)">Add to Cart</button>
-                      </form>
-                  </div>
-              </div>
-          </div>
+    <!-- <h1 class="text-center my-3">Hair Products</h1> -->
+    <div class="hairs">
+      <div>
+        <div class="card">
+        <img src="{% static 'store/images/HawaiianSilky.png' %}" class="card-img-top">
+        <div class="card-body text-center">
+          <h5 class="card-title" style="color: goldenrod">Hawaiian Silky Conditioner $90</h5>
+          <h6>Hawaiian Silky Miracle Worker 14 In 1 16 Oz.</h6>
+          <form id="addToCartForm" method="post">
+            <input type="hidden" name="product_id" value="10">
+            <button type="submit" class="btn signin"onclick="addToCart('Hawaiian Silky', 90)">Add to Cart</button>
+          </form>
       </div>
+      </div>
+      </div>
+      </div>      
+    </div>
   </div>
 </section>
- 
- <script>
+
+<script>
   var csrfToken = document.getElementById('csrfToken').value; // Define csrfToken globally
-  
+ 
   function updateCartCount() {
-        fetch(`/store/users/cart/item-count/`, {
-            headers: {
-              'X-CSRFToken': csrfToken
-            }
-        })
-        .then(response => response.json())
-        .then(data => {
-            var cartQuantity = document.querySelector('.quantity');
-            cartQuantity.textContent = data.cart_item_count;
-        })
-        .catch(error => {
-            console.error('An error occurred:', error);
-        });
+       fetch(`/store/users/cart/item-count/`, {
+           headers: {
+             'X-CSRFToken': csrfToken
+           }
+       })
+       .then(response => response.json())
+       .then(data => {
+           var cartQuantity = document.querySelector('.quantity');
+           cartQuantity.textContent = data.cart_item_count;
+       })
+       .catch(error => {
+           console.error('An error occurred:', error);
+       });
   }
-    
-  document.querySelectorAll('.addToCartForm').forEach(function(form) {
-     form.addEventListener('submit', function(event) {
-         event.preventDefault(); // Prevent the form from submitting normally
-         var productId = this.elements.product_id.value; // Get the product ID from the form
-         var quantity = 1; // Set the quantity to add
- 
-         Swal.fire({
-             icon: 'success',
-             title: 'Added to Cart',
-             text: 'Added',
-             timer: 2000, // Automatically close after 2 seconds
-             showConfirmButton: false,
-             position: 'top-end'
-         });
- 
-         fetch(`/store/users/cart/add/${productId}/`, {
-             method: 'POST',
-             headers: {
-                 'Content-Type': 'application/x-www-form-urlencoded',
-                 'X-CSRFToken': csrfToken // Use the CSRF token retrieved earlier
-             },
-             body: `quantity=${quantity}`
-         })
-         .then(response => response.json())
-         .then(data => {
-             if (data.success) {
-                 // Update the cart icon with the current quantity from the server response
-                 updateCartCount(); // Call the function to update the cart count
-             } else {
-                 // Handle error
-                 console.error('Failed to add product to cart.');
-             }
-         })
-         .catch(error => {
-             console.error('An error occurred:', error);
-         });
-     });
- });
- </script>    
    
- <!-- CSRF Token -->
- <input type="hidden" id="csrfToken" value="{{ csrf_token }}">
+  document.getElementById('addToCartForm').addEventListener('submit', function(event) {
+       event.preventDefault(); // Prevent the form from submitting normally
+       var productId = this.elements.product_id.value; // Get the product ID from the form
+       var quantity = 1; // Set the quantity to add
+      
+       
+       Swal.fire({
+        icon: 'success',
+        title: 'Added to Cart',
+        text: 'Added',
+        timer: 2000, // Automatically close after 2 seconds
+        showConfirmButton: false,
+        position: 'top-end'
+      });
+
+   
+       fetch(`/store/users/cart/add/${productId}/`, {
+           method: 'POST',
+           headers: {
+               'Content-Type': 'application/x-www-form-urlencoded',
+               'X-CSRFToken': csrfToken
+           },
+           body: `quantity=${quantity}`
+       })
+       .then(response => response.json())
+       .then(data => {
+           if (data.success) {
+               // Update the cart icon with the current quantity from the server response
+               updateCartCount(); // Call the function to update the cart count
+           } else {
+               // Handle error
+               console.error('Failed to add product to cart.');
+           }
+       })
+       .catch(error => {
+           console.error('An error occurred:', error);
+       });
+  });
+ </script>    
+  
+<!-- CSRF Token -->
+<input type="hidden" id="csrfToken" value="{{ csrf_token }}">
 
 <!--Footer-->
 <footer class="bg-dark text-white pt-5 pb-4">
@@ -397,7 +292,6 @@
 <!-- Include SweetAlert.js -->
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
   <script src="{% static 'store/js/bootstrap.bundle.min.js' %}"></script>
-  <script src="{% static 'store/js/cart.js' %}"></script>
   <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF"></script>
 </body>

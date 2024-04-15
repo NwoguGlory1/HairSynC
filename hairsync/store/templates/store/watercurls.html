@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-
+<input type="hidden" id="csrfToken" value="{{ csrf_token }}">
 <head>
   {% load static %}
   <meta charset="utf-8">
@@ -96,106 +96,92 @@
     </div>
  </div>
 </nav>
-  
+
+
   <!--Coily -->
-<section id="coily">
-  <div class="container-fluid m-5">
-    <!-- <h1 class="text-center my-3">Coily Hairs</h1> -->
-    <div class="hairs">
-      <!-- <div class="col-lg-4 col-md-4 col-12"> -->
-        <!-- <div>
-            <div class="card">
-              <img src="{% static 'store/images/pixiecurlsgold.png' %}" class="card-img-top">
-              <div class="card-body text-center">
-                <h5 class="card-title"><a href="{% url 'store:pixiecurls' %}">Pixie curls </a> $450</h5>
-        
-          <a href="#" class="btn signin">Add to Cart</a>
-        </div>
-      </div>
-    </div>
-    <div> -->
-      <div class="card">
-        <img src="{% static 'store/images/watercurl.png' %}" class="card-img-top">
-        <div class="card-body text-center">
-          <h5 class="card-title" style="color: goldenrod">Water curls $300</h5>
-          <h6>12" watercurls with 13 x 2 Lace frontal
-            </h6>
-          
-            <a href="#" class="btn signin">Add to Cart</a>
-          <h5 class="card-title"><a href="">Water curls </a> $300</h5>
-          <h6>12" watercurls with 13 x 2 Lace frontal</h6>
-          <form id="addToCartForm" method="post">
-            <input type="hidden" name="product_id" value="4">
-            <button type="submit" class="btn signin">Add to Cart</button>
-          </form>
-          </div>
-        </div>
-      </div>      
-    </div>
+  <section id="coily">
+    <div class="container-fluid m-5">
+      <!-- <h1 class="text-center my-3">Coily Hairs</h1> -->
+      <div class="hairs">
+        <!-- <div class="col-lg-4 col-md-4 col-12"> -->
+          <div>
+              <div class="card">
+                <img src="{% static 'store/images/watercurl.png' %}" class="card-img-top">
+                <div class="card-body text-center">
+                  <h5 class="card-title"><a href="{% url 'store:watercurls' %}">Water curls </a> $300</h5>
+                  <form class="addToCartForm" method="post">
+                    {% csrf_token %}
+                    <input type="hidden" name="product_id" value="4">
+                    <button type="submit" class="btn signin" onclick="addToCart('Water Curls', 300)">Add to Cart</button>
+                  </form>
+           </div>
+         </div>
+       </div>      
+     </div>
   </div>
-</section>
-
-<script>
-  var csrfToken = document.getElementById('csrfToken').value; // Define csrfToken globally
+ </section>
  
-  function updateCartCount() {
-       fetch(`/store/users/cart/item-count/`, {
-           headers: {
-             'X-CSRFToken': csrfToken
-           }
-       })
-       .then(response => response.json())
-       .then(data => {
-           var cartQuantity = document.querySelector('.quantity');
-           cartQuantity.textContent = data.cart_item_count;
-       })
-       .catch(error => {
-           console.error('An error occurred:', error);
-       });
-  }
-   
-  document.getElementById('addToCartForm').addEventListener('submit', function(event) {
-       event.preventDefault(); // Prevent the form from submitting normally
-       var productId = this.elements.product_id.value; // Get the product ID from the form
-       var quantity = 1; // Set the quantity to add
-      
-       
-       Swal.fire({
-        icon: 'success',
-        title: 'Added to Cart',
-        text: 'Added',
-        timer: 2000, // Automatically close after 2 seconds
-        showConfirmButton: false,
-        position: 'top-end'
-      });
-
-   
-       fetch(`/store/users/cart/add/${productId}/`, {
-           method: 'POST',
-           headers: {
-               'Content-Type': 'application/x-www-form-urlencoded',
-               'X-CSRFToken': csrfToken
-           },
-           body: `quantity=${quantity}`
-       })
-       .then(response => response.json())
-       .then(data => {
-           if (data.success) {
-               // Update the cart icon with the current quantity from the server response
-               updateCartCount(); // Call the function to update the cart count
-           } else {
-               // Handle error
-               console.error('Failed to add product to cart.');
-           }
-       })
-       .catch(error => {
-           console.error('An error occurred:', error);
-       });
-  });
- </script>    
+ <script>
+  var csrfToken = document.getElementById('csrfToken').value; // Define csrfToken globally
   
-  <!-- CSRF Token -->
-  <input type="hidden" id="csrfToken" value="{{ csrf_token }}">
+  function updateCartCount() {
+        fetch(`/store/users/cart/item-count/`, {
+            headers: {
+              'X-CSRFToken': csrfToken
+            }
+        })
+        .then(response => response.json())
+        .then(data => {
+            var cartQuantity = document.querySelector('.quantity');
+            cartQuantity.textContent = data.cart_item_count;
+        })
+        .catch(error => {
+            console.error('An error occurred:', error);
+        });
+  }
+    
+  document.querySelectorAll('.addToCartForm').forEach(function(form) {
+     form.addEventListener('submit', function(event) {
+         event.preventDefault(); // Prevent the form from submitting normally
+         var productId = this.elements.product_id.value; // Get the product ID from the form
+         var quantity = 1; // Set the quantity to add
+ 
+         Swal.fire({
+             icon: 'success',
+             title: 'Added to Cart',
+             text: 'Added',
+             timer: 2000, // Automatically close after 2 seconds
+             showConfirmButton: false,
+             position: 'top-end'
+         });
+ 
+         fetch(`/store/users/cart/add/${productId}/`, {
+             method: 'POST',
+             headers: {
+                 'Content-Type': 'application/x-www-form-urlencoded',
+                 'X-CSRFToken': csrfToken // Include the CSRF token in the request headers
+             },
+             body: `quantity=${quantity}`
+         })
+         .then(response => response.json())
+         .then(data => {
+             if (data.success) {
+                 // Update the cart icon with the current quantity from the server response
+                 updateCartCount(); // Call the function to update the cart count
+             } else {
+                 // Handle error
+                 console.error('Failed to add product to cart.');
+             }
+         })
+         .catch(error => {
+             console.error('An error occurred:', error);
+         });
+     });
+  });
+  </script>    
+   
+ <!-- CSRF Token -->
+ <input type="hidden" id="csrfToken" value="{{ csrf_token }}">
 
 <!--Footer-->
 <footer class="bg-dark text-white pt-5 pb-4">
@@ -203,7 +189,7 @@
     <div class="row text-center text-md text-md-left">
       <div class="col-md-3 col-lg-3 col-xl-3 mx auto mt-3">
         <h5 class="mb-4 font-weight-bold text-warning"><a href="about.html" class="text-decoration-none text-warning">ABOUT HairSynC</a>
-          <p> Built by Daraja & Fae </p>
+          <h6> Built by Daraja & Fae </h6>
         </div>
         <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mt-3">
           <h5 class="text-uppercase mb-4 font-weight-bold text-warning">Products</h5>
