@@ -73,6 +73,11 @@
           <input type="search" placeholder="Search" aria-label="Search">
           <button type="submit">Search</button>
         </form>
+        <!-- cart icon on the nav bar -->
+        <a href="/store/users/cart/" class="cart-icon">
+          <i class="fa-solid fa-bag-shopping"></i>
+          <span id="cartCounter" class="quantity">0</span> <!-- This will display the number of items in the cart -->
+        </a>
         {% if user.is_authenticated %}
         <li class="nav-item">
           <a class="nav-link" href="{% url 'store:userprofile' %}">{{ user.username }} Profile</a>

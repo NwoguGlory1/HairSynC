@@ -71,15 +71,20 @@
           <input type="search" placeholder="Search" aria-label="Search">
           <button type="submit">Search</button>
         </form>
+        <!-- cart icon on the nav bar -->
+        <a href="/store/users/cart/" class="cart-icon">
+          <i class="fa-solid fa-bag-shopping"></i>
+          <span id="cartCounter" class="quantity">0</span> <!-- This will display the number of items in the cart -->
+        </a>
         <!-- <div class="container"> -->
         <!-- <div aria-valuemax="shopping">
             <i class="fa-solid fa-bag-shopping"  style="color:#29f700;"></i>
               <span class="quantity">0</span>
         </div> -->
-        <button type="button" class="nav-link scrollto bg-danger" id="popcart" data-container="body" data-toggle="popover" data-placement="bottom" data-html="true" style="background-color: #1B1A55; color: #fff; border: none; border-radius: 8px; padding: 10px 20px; font-size: 16px; font-weight: bold; cursor: pointer;">
+        <!-- <button type="button" class="nav-link scrollto bg-danger" id="popcart" data-container="body" data-toggle="popover" data-placement="bottom" data-html="true" style="background-color: #1B1A55; color: #fff; border: none; border-radius: 8px; padding: 10px 20px; font-size: 16px; font-weight: bold; cursor: pointer;">
           <a href="{ % url store:runcart' %}" style="color: inherit; text-decoration: none;">
           <i class="fa-solid fa-cart-shopping" style="margin-right: 10px;"></i>Cart (<span id="cart" style="font-weight: normal;">0</span>)</a>
-        </button>
+        </button> -->
         {% if user.is_authenticated %}
         <li class="nav-item">
           <a class="nav-link" href="{% url 'store:userprofile' %}">{{ user.username }} Profile</a>
