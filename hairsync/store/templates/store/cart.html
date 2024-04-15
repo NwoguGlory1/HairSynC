@@ -170,7 +170,7 @@
                             <td class="text-center">
                                 <i class="bi bi-cart-dash"></i><input name="item" value="{{ item.quantity }}" size="2"><i class="bi bi-cart-plus-fill text-primary"></i>
                                 <input type="hidden" name="txtItem" value="{{ item.quantity }}">
-                                <button class="btn btn-danger remove-item" data-product-id="{{ item.product.id }}">Remove</button>
+                                <!--<button class="btn btn-danger remove-item" data-product-id="{{ item.product.id }}">Remove</button> -->
                                 <button id="clear-cart-btn" class="btn btn-danger">Clear Cart</button>
                             </td>
                         </tr>
@@ -235,32 +235,6 @@
           document.querySelector(".totalQuantity").textContent = totalQuantity;
       }
   </script>  
-
-  <script >
-    document.addEventListener('DOMContentLoaded', function() {
-      document.querySelectorAll('.remove-item').forEach(function(button) {
-          button.addEventListener('click', function() {
-              var productId = this.getAttribute('data-product-id');
-              fetch(`/store/users/cart/remove/${productId}`, {
-                  method: 'DELETE',
-                  headers: {
-                      'X-CSRFToken': document.querySelector('[name=csrfmiddlewaretoken]').value,
-                  },
-              })
-              .then(response => {
-                  if (response.ok) {
-                      // If the request was successful, reload the cart page
-                      location.reload();
-                  } else {
-                      // Handle errors
-                      console.error('Failed to remove item from cart');
-                  }
-              })
-              .catch(error => console.error('Error:', error));
-          });
-      });
-  });  
-  </script>
 
     <script>
       document.addEventListener('DOMContentLoaded', function() {
