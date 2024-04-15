@@ -65,6 +65,11 @@ urlpatterns = [
     path('runcheckout/', views.runcheckout, name='runcheckout'),
 
 
+    # Checkout
+    path('checkout/', views.checkout, name='checkout'),
+    path('checkout/process/', views.process_checkout, name='process_checkout'),
+
+
     # Order Management
     path('orders/', views.get_list_of_all_orders, name='list-all-orders'),
     path('orders/<int:id>/', views.get_details_of_order_with_order_id, name='get-order-details'),
@@ -75,7 +80,8 @@ urlpatterns = [
     # Shipping and Address
     path('shipping-options/', views.get_available_shipping_options, name='get-shipping-options'),
     path('users/addresses/', views.get_user_saved_addresses, name='get-user-addresses'),
-    path('users/addresses/create/', views.add_address_to_user_profile, name='add-address-to-profile'),
+    path('users/addresses/create/', views.add_address, name='add-address'),
+    path('add_address', views.add_address, name='add_address'),
     path('users/addresses/<int:id>/update/', views.update_details_of_address_with_address_id, name='update-address-details'),
     path('users/addresses/<int:id>/delete/', views.delete_address_with_address_id, name='delete-address'),
     path('shipping-options/', views.get_shipping_options, name='get_shipping_options'),
