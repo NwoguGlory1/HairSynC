@@ -653,9 +653,6 @@ def clear_entire_shopping_cart(request):
 def runcheckout(request):
     return render(request, 'store/checkout.html')
 
-@require_http_methods(["GET"])   
-def runcart(request):
-    return render(request, 'store/cart.html')
 
 
 """THE START OF ORDER MANAGEMENT"""
