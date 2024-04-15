@@ -73,8 +73,8 @@
         </form>
         <!-- cart icon on the nav bar -->
         <a href="/store/users/cart/" class="cart-icon">
-          <i class="fa-solid fa-bag-shopping"></i>
-          <span id="cartCounter" class="quantity">0</span> <!-- This will display the number of items in the cart -->
+        <i class="fa-solid fa-bag-shopping"></i>
+        <!-- <span class="quantity">0</span> This will display the number of items in the cart -->
         </a>
         <!-- <div class="container"> -->
         <!-- <div aria-valuemax="shopping">
@@ -233,6 +233,17 @@
            event.preventDefault(); // Prevent the form from submitting normally
            var productId = this.elements.product_id.value; // Get the product ID from the form
            var quantity = 1; // Set the quantity to add
+          
+           
+           Swal.fire({
+            icon: 'success',
+            title: 'Added to Cart',
+            text: 'Added',
+            timer: 2000, // Automatically close after 2 seconds
+            showConfirmButton: false,
+            position: 'top-end'
+          });
+    
        
            fetch(`/store/users/cart/add/${productId}/`, {
                method: 'POST',
@@ -257,7 +268,10 @@
            });
       });
      </script>    
-
+      
+      <!-- CSRF Token -->
+      <input type="hidden" id="csrfToken" value="{{ csrf_token }}">
+    
 <!--Footer-->
 <footer class="bg-dark text-white pt-5 pb-4">
   <div class="container text-center text-md-left">

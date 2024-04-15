@@ -76,7 +76,7 @@
         <!-- cart icon on the nav bar -->
         <a href="/store/users/cart/" class="cart-icon">
         <i class="fa-solid fa-bag-shopping"></i>
-        <span class="quantity">0</span> <!-- This will display the number of items in the cart -->
+        <!-- <span class="quantity">0</span> This will display the number of items in the cart -->
         </a>
         {% if user.is_authenticated %}
         <li class="nav-item">
@@ -122,7 +122,7 @@
           <h6>Ors Olive Oil Strengthen & Nourishes</h6>
           <form id="addToCartForm" method="post">
             <input type="hidden" name="product_id" value="9">
-            <button type="submit" class="btn signin">Add to Cart</button>
+            <button type="submit" class="btn signin"onclick="addToCart('Ors Conditioner', 70)">Add to Cart</button>
           </form>
           </div>
         </div>
@@ -154,6 +154,17 @@
        event.preventDefault(); // Prevent the form from submitting normally
        var productId = this.elements.product_id.value; // Get the product ID from the form
        var quantity = 1; // Set the quantity to add
+      
+       
+       Swal.fire({
+        icon: 'success',
+        title: 'Added to Cart',
+        text: 'Added',
+        timer: 2000, // Automatically close after 2 seconds
+        showConfirmButton: false,
+        position: 'top-end'
+      });
+
    
        fetch(`/store/users/cart/add/${productId}/`, {
            method: 'POST',

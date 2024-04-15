@@ -73,6 +73,11 @@
           <input type="search" placeholder="Search" aria-label="Search">
           <button type="submit">Search</button>
         </form>
+        <!-- cart icon on the nav bar -->
+        <a href="/store/users/cart/" class="cart-icon">
+        <i class="fa-solid fa-bag-shopping"></i>
+        <!-- <span class="quantity">0</span> This will display the number of items in the cart -->
+        </a>
         {% if user.is_authenticated %}
         <li class="nav-item">
           <a class="nav-link" href="{% url 'store:userprofile' %}">{{ user.username }} Profile</a>
@@ -124,6 +129,112 @@
   </div>
 </section>
 
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+      updateCartTotals();
+
+      document.querySelectorAll(".bi-cart-plus-fill").forEach(item => {
+          item.addEventListener("click", function() {
+              updateItemQuantity(item, true);
+          });
+      });
+
+      document.querySelectorAll(".bi-cart-dash").forEach(item => {
+          item.addEventListener("click", function() {
+              updateItemQuantity(item, false);
+          });
+      });
+  });
+
+  function updateItemQuantity(item, isIncrease) {
+      var closestTr = item.closest("tr");
+      var closestPrice = parseFloat(closestTr.querySelector(".txtprice").textContent.replace('$', ''));
+      var closestQuantityInput = closestTr.querySelector("input[name=item]");
+      var closestTotalPriceInput = closestTr.querySelector("input[name=totalTxtPrice]");
+
+      var currentQuantity = parseInt(closestQuantityInput.value);
+      var newQuantity = isIncrease ? currentQuantity + 1 : currentQuantity - 1;
+      if (newQuantity < 0) newQuantity = 0; // Ensure quantity cannot be negative
+
+      closestQuantityInput.value = newQuantity;
+      closestTotalPriceInput.value = closestPrice * newQuantity;
+
+      updateCartTotals();
+  }
+
+  function updateCartTotals() {
+      var totalAmount = 0;
+      var totalQuantity = 0;
+
+      document.querySelectorAll("input[name=totalTxtPrice]").forEach(function(input) {
+          totalAmount += parseFloat(input.value);
+      });
+
+      document.querySelectorAll("input[name=item]").forEach(function(input) {
+          totalQuantity += parseInt(input.value);
+      });
+
+      document.querySelector(".totalAmount").textContent = totalAmount.toFixed(2);
+      document.querySelector(".totalQuantity").textContent = totalQuantity;
+  }
+</script>  
+
+<script >
+document.addEventListener('DOMContentLoaded', function() {
+    document.querySelectorAll('.remove-item').forEach(function(button) {
+        button.addEventListener('click', function() {
+            var productId = this.getAttribute('data-product-id');
+            fetch(`/store/users/cart/remove/${productId}/`, {
+                method: 'DELETE',
+                headers: {
+                    'X-CSRFToken': document.querySelector('[name=csrfmiddlewaretoken]').value,
+                },
+            })
+            .then(response => {
+                if (response.ok) {
+                    // If the request was successful, reload the cart page
+                    location.reload();
+                } else {
+                    // Handle errors
+                    console.error('Failed to remove item from cart');
+                }
+            })
+            .catch(error => console.error('Error:', error));
+        });
+    });
+});
+</script>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+      document.getElementById('clear-cart-btn').addEventListener('click', function() {
+          fetch('/store/users/cart/clear/', {
+              method: 'DELETE',
+              headers: {
+                  'X-CSRFToken': document.querySelector('[name=csrfmiddlewaretoken]').value,
+              },
+          })
+          .then(response => {
+        if (response.ok) {
+            // If the request was successful, clear the cart in the UI
+            document.querySelector('.totalQuantity').textContent = 0; // Update the cart counter in the navbar
+            localStorage.setItem('cartCount', 0); // Update the cart count in local storage
+            // Optionally, you can also clear the cart items list in the cart page if it's dynamically generated
+            // For example, if you have a function to clear the cart items list, you can call it here
+        } else {
+          // .then(response => {
+          //     if (response.ok) {
+          //         // If the request was successful, reload the cart page
+          //         location.reload();
+          //     } else {
+                  // Handle errors
+                  console.error('Failed to clear cart');
+              }
+          })
+          .catch(error => console.error('Error:', error));
+      });
+  });
+  </script>
 
 <!--Footer-->
 <footer class="bg-dark text-white pt-5 pb-4">

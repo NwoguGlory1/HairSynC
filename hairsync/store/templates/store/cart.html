@@ -272,10 +272,18 @@
                   },
               })
               .then(response => {
-                  if (response.ok) {
-                      // If the request was successful, reload the cart page
-                      location.reload();
-                  } else {
+            if (response.ok) {
+                // If the request was successful, clear the cart in the UI
+                document.querySelector('.totalQuantity').textContent = 0; // Update the cart counter in the navbar
+                localStorage.setItem('cartCount', 0); // Update the cart count in local storage
+                // Optionally, you can also clear the cart items list in the cart page if it's dynamically generated
+                // For example, if you have a function to clear the cart items list, you can call it here
+            } else {
+              // .then(response => {
+              //     if (response.ok) {
+              //         // If the request was successful, reload the cart page
+              //         location.reload();
+              //     } else {
                       // Handle errors
                       console.error('Failed to clear cart');
                   }
