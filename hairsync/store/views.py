@@ -648,11 +648,6 @@ def clear_entire_shopping_cart(request):
 
     return redirect('store:cart')
 
-    
-@require_http_methods(["GET"])   
-def runcheckout(request):
-    return render(request, 'store/checkout.html')
-
 
 """THE START OF CHECKOUT VIEWS"""
 @check_authentication
