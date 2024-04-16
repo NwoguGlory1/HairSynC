@@ -219,7 +219,8 @@
           updateCartTotals();
       }
   
-      function updateCartTotals() {
+
+function updateCartTotals() {
           var totalAmount = 0;
           var totalQuantity = 0;
   
@@ -231,9 +232,21 @@
               totalQuantity += parseInt(input.value);
           });
   
-          document.querySelector(".totalAmount").textContent = totalAmount.toFixed(2);
+          // document.querySelector(".totalAmount").textContent = totalAmount.toFixed(2);
           document.querySelector(".totalQuantity").textContent = totalQuantity;
       }
+      document.querySelectorAll("#shopcard tbody tr").forEach(function(row) {
+        var unitPrice =
+        parseFloat(row.querySelector(".txtprice").textContent.replace('$', ''));
+        var quantity = parseInt(row.querySelector("input[name=item]").value);
+
+        var itemTotal = unitPrice * quantity;
+
+        totalAmount += itemTotal;
+        totalQuantity += quantity;
+      }); 
+        
+
   </script>  
 
     <script>

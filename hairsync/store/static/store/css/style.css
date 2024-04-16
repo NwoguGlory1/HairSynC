@@ -418,15 +418,15 @@ form{
    }
 
    /* Custom checkmark */
-.form-check-input:checked::before {
-    content: "\2713"; /* Unicode for checkmark */
+/* .form-check-input:checked::before {
+    content: "2713"; 
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
     font-size: 1.2em;
     color: goldenrod !important; /* Checkmark color */
-   }
+    */
 
    /* Hide the default checkmark */
 .form-check-input {
