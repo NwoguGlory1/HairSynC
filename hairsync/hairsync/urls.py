@@ -20,9 +20,11 @@ from django.urls import include
 from django.conf import settings
 from django.conf.urls.static import static
 from django.http import Http404
+from store.views import index
 
 
 urlpatterns = [
+    path('', index, name='index'),
     path('store/', include('store.urls')),
     path('admin/', admin.site.urls),
     path("__debug__/", include("debug_toolbar.urls")),
