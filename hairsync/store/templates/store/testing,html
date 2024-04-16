@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-<input type="hidden" id="csrfToken" value="{{ csrf_token }}">
+
 <head>
   {% load static %}
   <meta charset="utf-8">
@@ -97,92 +97,90 @@
  </div>
 </nav>
 
-
-<!--Wavy-->
-<section id="wavy">
+<!--Hair Products-->
+<section id="hairproducts">
   <div class="container-fluid m-5">
-    <!-- <div class="m-5"> -->
-    <!-- <h1 class="text-center my-3">Wavy Hairs</h1> -->
+    <!-- <h1 class="text-center my-3">Hair Products</h1> -->
     <div class="hairs">
-      <!-- <div class="col-lg-4 col-md-4 col-12"> -->
-        <div>
-            <div class="card">
-              <img src="{% static 'store/images/blondewavy.png' %}" class="card-img-top">
-              <div class="card-body text-center">
-                <h5 class="card-title"><a href="{% url 'store:blondwavyhair' %}">Blond wavy Hair </a> $320</h5>
-                <form class="addToCartForm" method="post">
-                  {% csrf_token %}
-                  <input type="hidden" name="product_id" value="5">
-                  <button type="submit" class="btn signin">Add to Cart</button>
-                </form>
-           </div>
-         </div>
-       </div>      
-     </div>
+      <div>
+        <div class="card">
+        <img src="{% static 'store/images/HawaiianSilky.png' %}" class="card-img-top">
+        <div class="card-body text-center">
+          <h5 class="card-title" style="color: goldenrod">Hawaiian Silky Conditioner $90</h5>
+          <h6>Hawaiian Silky Miracle Worker 14 In 1 16 Oz.</h6>
+          <form id="addToCartForm" method="post">
+            <input type="hidden" name="product_id" value="10">
+            <button type="submit" class="btn signin"onclick="addToCart('Hawaiian Silky', 90)">Add to Cart</button>
+          </form>
+      </div>
+      </div>
+      </div>
+      </div>      
+    </div>
   </div>
- </section>
- 
- <script>
+</section>
+
+<script>
   var csrfToken = document.getElementById('csrfToken').value; // Define csrfToken globally
-  
+ 
   function updateCartCount() {
-        fetch(`/store/users/cart/item-count/`, {
-            headers: {
-              'X-CSRFToken': csrfToken
-            }
-        })
-        .then(response => response.json())
-        .then(data => {
-            var cartQuantity = document.querySelector('.quantity');
-            cartQuantity.textContent = data.cart_item_count;
-        })
-        .catch(error => {
-            console.error('An error occurred:', error);
-        });
+       fetch(`/store/users/cart/item-count/`, {
+           headers: {
+             'X-CSRFToken': csrfToken
+           }
+       })
+       .then(response => response.json())
+       .then(data => {
+           var cartQuantity = document.querySelector('.quantity');
+           cartQuantity.textContent = data.cart_item_count;
+       })
+       .catch(error => {
+           console.error('An error occurred:', error);
+       });
   }
-    
-  document.querySelectorAll('.addToCartForm').forEach(function(form) {
-     form.addEventListener('submit', function(event) {
-         event.preventDefault(); // Prevent the form from submitting normally
-         var productId = this.elements.product_id.value; // Get the product ID from the form
-         var quantity = 1; // Set the quantity to add
- 
-         Swal.fire({
-             icon: 'success',
-             title: 'Added to Cart',
-             text: 'Added',
-             timer: 2000, // Automatically close after 2 seconds
-             showConfirmButton: false,
-             position: 'top-end'
-         });
- 
-         fetch(`/store/users/cart/add/${productId}/`, {
-             method: 'POST',
-             headers: {
-                 'Content-Type': 'application/x-www-form-urlencoded',
-                 'X-CSRFToken': csrfToken // Include the CSRF token in the request headers
-             },
-             body: `quantity=${quantity}`
-         })
-         .then(response => response.json())
-         .then(data => {
-             if (data.success) {
-                 // Update the cart icon with the current quantity from the server response
-                 updateCartCount(); // Call the function to update the cart count
-             } else {
-                 // Handle error
-                 console.error('Failed to add product to cart.');
-             }
-         })
-         .catch(error => {
-             console.error('An error occurred:', error);
-         });
-     });
-  });
-  </script>    
    
- <!-- CSRF Token -->
- <input type="hidden" id="csrfToken" value="{{ csrf_token }}">
+  document.getElementById('addToCartForm').addEventListener('submit', function(event) {
+       event.preventDefault(); // Prevent the form from submitting normally
+       var productId = this.elements.product_id.value; // Get the product ID from the form
+       var quantity = 1; // Set the quantity to add
+      
+       
+       Swal.fire({
+        icon: 'success',
+        title: 'Added to Cart',
+        text: 'Added',
+        timer: 2000, // Automatically close after 2 seconds
+        showConfirmButton: false,
+        position: 'top-end'
+      });
+
+   
+       fetch(`/store/users/cart/add/${productId}/`, {
+           method: 'POST',
+           headers: {
+               'Content-Type': 'application/x-www-form-urlencoded',
+               'X-CSRFToken': csrfToken
+           },
+           body: `quantity=${quantity}`
+       })
+       .then(response => response.json())
+       .then(data => {
+           if (data.success) {
+               // Update the cart icon with the current quantity from the server response
+               updateCartCount(); // Call the function to update the cart count
+           } else {
+               // Handle error
+               console.error('Failed to add product to cart.');
+           }
+       })
+       .catch(error => {
+           console.error('An error occurred:', error);
+       });
+  });
+ </script>    
+  
+<!-- CSRF Token -->
+<input type="hidden" id="csrfToken" value="{{ csrf_token }}">
 
 <!--Footer-->
 <footer class="bg-dark text-white pt-5 pb-4">

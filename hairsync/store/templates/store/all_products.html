@@ -1,40 +1,42 @@
 <!DOCTYPE html>
 <html lang="en">
-
+<input type="hidden" id="csrfToken" value="{{ csrf_token }}">
 <head>
- {% load static %}
- <meta charset="utf-8">
- <meta content="width=device-width, initial-scale=1.0" name="viewport">
- <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  {% load static %}
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
  
- <title>HairSynC</title>
- <meta content="" name="description">
- <meta content="" name="keywords">
+  <title>HairSynC</title>
+  <meta content="" name="description">
+  <meta content="" name="keywords">
 
- <!-- Favicons -->
- <link href="{% static 'store/images/favicon.png' %}" rel="icon">
+  <!-- Favicons -->
+  <link href="{% static 'store/images/favicon.png' %}" rel="icon">
 
- <!-- Template Main CSS File -->
- <link rel="stylesheet" href="{% static 'store/css/style.css' %}">
+  <!-- Template Main CSS File -->
+  <link rel="stylesheet" href="{% static 'store/css/style.css' %}">
 
- <!-- Link to boostrap-->
- <link href="{% static 'store/css/all.min.css' %}" rel="stylesheet">
- <link href="{% static 'store/css/bootstrap.min.css' %}" rel="stylesheet">
- <link href="{% static 'store/css/bootstrap-icons.css' %}" rel="stylesheet">
+  <!-- Template Main CSS File 
+  <link href="login.html" rel="" > 
+  <link href="signup.html" rel="" > 
+  <link href="home.html" rel="" >
+  <link href="all Categories.html" rel="" >  
+  <link href="straight.html" rel="" > 
+  <link href="wavy.html" rel="">  
+  <link href="coily.html" rel="" > 
+  <link href="contact.html" rel="" >
+  
+-->
+
+  <!-- Link to boostrap-->
+  <link href="{% static 'store/css/all.min.css' %}" rel="stylesheet">
+  <link href="{% static 'store/css/bootstrap.min.css' %}" rel="stylesheet">
+  <link href="{% static 'store/css/bootstrap-icons.css' %}" rel="stylesheet">
   
 </head>
 <body>
 <!--Navbar-->
-<!-- <div class="container">
-  <header>
-      <h1> Shopping </h1>
-      <div aria-valuemax="shopping">
-          <i class="fa-solid fa-bag-shopping"></i>
-          <span class="quantity">0</span>
-      </div>
-  </header>
-</div> -->
-
 <nav class="navbar navbar-expand-xl navbar-dark" id="navbar">
   <div class="container-fluid">
     <a class="navbar-brand" href="{% url 'store:index' %}">
@@ -76,15 +78,6 @@
         <i class="fa-solid fa-bag-shopping"></i>
         <!-- <span class="quantity">0</span> This will display the number of items in the cart -->
         </a>
-        <!-- <div class="container"> -->
-        <!-- <div aria-valuemax="shopping">
-            <i class="fa-solid fa-bag-shopping"  style="color:#29f700;"></i>
-              <span class="quantity">0</span>
-        </div> -->
-        <!-- <button type="button" class="nav-link scrollto bg-danger" id="popcart" data-container="body" data-toggle="popover" data-placement="bottom" data-html="true" style="background-color: #1B1A55; color: #fff; border: none; border-radius: 8px; padding: 10px 20px; font-size: 16px; font-weight: bold; cursor: pointer;">
-          <a href="{ % url store:runcart' %}" style="color: inherit; text-decoration: none;">
-          <i class="fa-solid fa-cart-shopping" style="margin-right: 10px;"></i>Cart (<span id="cart" style="font-weight: normal;">0</span>)</a>
-        </button> -->
         {% if user.is_authenticated %}
         <li class="nav-item">
           <a class="nav-link" href="{% url 'store:userprofile' %}">{{ user.username }} Profile</a>
@@ -104,174 +97,196 @@
  </div>
 </nav>
 
-<!--All Products -->
+<!-- All Products -->
 <section id="all_categories">
-    <div class="container-fluid m-5">
+  <div class="container-fluid m-5">
       <h1 class="text-center my-3">All Products</h1>
       <div class="hairs">
-        <div>
+          <!-- Product Cards -->
+          <div>
+              <div class="card">
+                  <img src="{% static 'store/images/bonestraight12.png' %}" class="card-img-top">
+                  <div class="card-body text-center">
+                      <h5 class="card-title">
+                          <a href="{% url 'store:bonestraight' %}">Bonestraight Hair</a> $250
+                      </h5>
+                      <form class="addToCartForm" method="post">
+                          {% csrf_token %}
+                          <input type="hidden" name="product_id" value="1">
+                          <button type="submit" class="btn signin" onclick="addToCart('Bonestraight Hair', 250)">Add to Cart</button>
+                      </form>
+                  </div>
+              </div>
+          </div>
+          <div>
+              <div class="card">
+                  <img src="{% static 'store/images/doubledrawn.png' %}" class="card-img-top">
+                  <div class="card-body text-center">
+                      <h5 class="card-title">
+                          <a href="{% url 'store:doubledrawn' %}">Doubledrawn Hair</a> $120
+                      </h5>
+                      <form class="addToCartForm" method="post">
+                          {% csrf_token %}
+                          <input type="hidden" name="product_id" value="2">
+                          <button type="submit" class="btn signin" onclick="addToCart('Doubledrawn Hair', 120)">Add to Cart</button>
+                      </form>
+                  </div>
+              </div>
+          </div>
           <div class="card">
-            <img src="{% static 'store/images/bonestraight12.png' %}" class="card-img-top">
-            <div class="card-body text-center">
-                <h5 class="card-title"><a href="{% url 'store:bonestraight' %}">Bonestraight Hair </a> $250</h5>
-                <form id="addToCartForm" method="post">
-                  <input type="hidden" name="product_id" value="1">
-                  <button type="submit" class="btn signin">Add to Cart</button>
-                </form>
-              </div>
-            </div>
-          </div>
-          <div>
-            <div class="card">
-              <img src="{% static 'store/images/doubledrawn.png' %}" class="card-img-top">
-              <div class="card-body text-center">
-                <h5 class="card-title"><a href="{% url 'store:doubledrawn' %}">Doubledrawn Hair </a> $120</h5>
-                <form id="addToCartForm" method="post">
-                  <input type="hidden" name="product_id" value="2">
-                  <button type="submit" class="btn signin">Add to Cart</button>
-                </form>
-              </div>
-            </div>
-          </div>
-          <div>
-            <div class="card">
               <img src="{% static 'store/images/wavvyhair.png' %}" class="card-img-top">
               <div class="card-body text-center">
-                <h5 class="card-title"><a href="{% url 'store:wavyhair' %}">Wavy Hair </a> $300</h5>
-                <form id="addToCartForm" method="post">
-                  <input type="hidden" name="product_id" value="5">
-                  <button type="submit" class="btn signin">Add to Cart</button>
-                </form>
+                  <h5 class="card-title">
+                      <a href="{% url 'store:wavyhair' %}">Wavy Hair</a> $300
+                  </h5>
+                  <form class="addToCartForm" method="post">
+                      {% csrf_token %}
+                      <input type="hidden" name="product_id" value="6">
+                      <button type="submit" class="btn signin">Add to Cart</button>
+                  </form>
               </div>
-            </div>
           </div>
           <div>
-            <div class="card">
-              <img src="{% static 'store/images/blondewavy.png' %}" class="card-img-top">
-              <div class="card-body text-center">
-                <h5 class="card-title"><a href="{% url 'store:blondwavyhair' %}">Blond wavy Hair </a> $320</h5>
-                <form id="addToCartForm" method="post">
-                  <input type="hidden" name="product_id" value="6">
-                  <button type="submit" class="btn signin">Add to Cart</button>
-                </form>
+              <div class="card">
+                  <img src="{% static 'store/images/blondewavy.png' %}" class="card-img-top">
+                  <div class="card-body text-center">
+                      <h5 class="card-title">
+                          <a href="{% url 'store:blondwavyhair' %}">Blond wavy Hair</a> $320
+                      </h5>
+                      <form class="addToCartForm" method="post">
+                          {% csrf_token %}
+                          <input type="hidden" name="product_id" value="5">
+                          <button type="submit" class="btn signin">Add to Cart</button>
+                      </form>
+                  </div>
               </div>
-            </div>
           </div>
           <div>
-            <div class="card">
-              <img src="{% static 'store/images/pixiecurlsgold.png' %}" class="card-img-top">
-              <div class="card-body text-center">
-                <h5 class="card-title"><a href="{% url 'store:pixiecurls' %}">Pixie curls </a> $450</h5>
-                <form id="addToCartForm" method="post">
-                  <input type="hidden" name="product_id" value="3">
-                  <button type="submit" class="btn signin">Add to Cart</button>
-                </form>
+              <div class="card">
+                  <img src="{% static 'store/images/pixiecurlsgold.png' %}" class="card-img-top">
+                  <div class="card-body text-center">
+                      <h5 class="card-title">
+                          <a href="{% url 'store:pixiecurls' %}">Pixie curls</a> $450
+                      </h5>
+                      <form class="addToCartForm" method="post">
+                          {% csrf_token %}
+                          <input type="hidden" name="product_id" value="3">
+                          <button type="submit" class="btn signin" onclick="addToCart('Pixie curls', 450)">Add to Cart</button>
+                      </form>
+                  </div>
               </div>
-            </div>
           </div>
           <div>
-            <div class="card">
-              <img src="{% static 'store/images/watercurl.png' %}" class="card-img-top">
-              <div class="card-body text-center">
-                <h5 class="card-title"><a href="{% url 'store:watercurls' %}">Water curls </a> $300</h5>
-                <form id="addToCartForm" method="post">
-                  <input type="hidden" name="product_id" value="4">
-                  <button type="submit" class="btn signin">Add to Cart</button>
-                </form>
+              <div class="card">
+                  <img src="{% static 'store/images/watercurl.png' %}" class="card-img-top">
+                  <div class="card-body text-center">
+                      <h5 class="card-title">
+                          <a href="{% url 'store:watercurls' %}">Water curls</a> $300
+                      </h5>
+                      <form class="addToCartForm" method="post">
+                          {% csrf_token %}
+                          <input type="hidden" name="product_id" value="4">
+                          <button type="submit" class="btn signin" onclick="addToCart('Water Curls', 300)">Add to Cart</button>
+                      </form>
+                  </div>
               </div>
-            </div>
           </div>
           <div>
-            <div class="card">
-              <img src="{% static 'store/images/HawaiianSilky.png' %}" class="card-img-top">
-              <div class="card-body text-center">
-                <h5 class="card-title"><a href="{% url 'store:hawaiiansilky' %}">Hawaiian Silky</a> $90</h5>
-                <form id="addToCartForm" method="post">
-                  <input type="hidden" name="product_id" value="10">
-                  <button type="submit" class="btn signin">Add to Cart</button>
-                </form>
+              <div class="card">
+                  <img src="{% static 'store/images/HawaiianSilky.png' %}" class="card-img-top">
+                  <div class="card-body text-center">
+                      <h5 class="card-title">
+                          <a href="{% url 'store:hawaiiansilky' %}">Hawaiian Silky Conditioner</a> $90
+                      </h5>
+                      <form class="addToCartForm" method="post">
+                          {% csrf_token %}
+                          <input type="hidden" name="product_id" value="10">
+                          <button type="submit" class="btn signin" onclick="addToCart('Hawaiian Silky Conditioner', 90)">Add to Cart</button>
+                      </form>
+                  </div>
               </div>
-            </div>
           </div>
           <div>
-            <div class="card">
-              <img src="{% static 'store/images/orsconditioner.png' %}" class="card-img-top">
-              <div class="card-body text-center">
-                <h5 class="card-title"><a href="{% url 'store:orsconditioner' %}">Ors Conditioner </a> $70 </h5>
-                <form id="addToCartForm" method="post">
-                  <input type="hidden" name="product_id" value="9">
-                  <button type="submit" class="btn signin">Add to Cart</button>
-                </form>
-                </div>
+              <div class="card">
+                  <img src="{% static 'store/images/orsconditioner.png' %}" class="card-img-top">
+                  <div class="card-body text-center">
+                      <h5 class="card-title">
+                          <a href="{% url 'store:orsconditioner' %}">Ors Conditioner</a> $70
+                      </h5>
+                      <form class="addToCartForm" method="post">
+                          {% csrf_token %}
+                          <input type="hidden" name="product_id" value="9">
+                          <button type="submit" class="btn signin" onclick="addToCart('Ors Conditioner', 70)">Add to Cart</button>
+                      </form>
+                  </div>
               </div>
-            </div>
           </div>
-        </div>
       </div>
-    </section>
+  </div>
+</section>
+ 
+ <script>
+  var csrfToken = document.getElementById('csrfToken').value; // Define csrfToken globally
+  
+  function updateCartCount() {
+        fetch(`/store/users/cart/item-count/`, {
+            headers: {
+              'X-CSRFToken': csrfToken
+            }
+        })
+        .then(response => response.json())
+        .then(data => {
+            var cartQuantity = document.querySelector('.quantity');
+            cartQuantity.textContent = data.cart_item_count;
+        })
+        .catch(error => {
+            console.error('An error occurred:', error);
+        });
+  }
+    
+  document.querySelectorAll('.addToCartForm').forEach(function(form) {
+     form.addEventListener('submit', function(event) {
+         event.preventDefault(); // Prevent the form from submitting normally
+         var productId = this.elements.product_id.value; // Get the product ID from the form
+         var quantity = 1; // Set the quantity to add
+ 
+         Swal.fire({
+             icon: 'success',
+             title: 'Added to Cart',
+             text: 'Added',
+             timer: 2000, // Automatically close after 2 seconds
+             showConfirmButton: false,
+             position: 'top-end'
+         });
+ 
+         fetch(`/store/users/cart/add/${productId}/`, {
+             method: 'POST',
+             headers: {
+                 'Content-Type': 'application/x-www-form-urlencoded',
+                 'X-CSRFToken': csrfToken // Use the CSRF token retrieved earlier
+             },
+             body: `quantity=${quantity}`
+         })
+         .then(response => response.json())
+         .then(data => {
+             if (data.success) {
+                 // Update the cart icon with the current quantity from the server response
+                 updateCartCount(); // Call the function to update the cart count
+             } else {
+                 // Handle error
+                 console.error('Failed to add product to cart.');
+             }
+         })
+         .catch(error => {
+             console.error('An error occurred:', error);
+         });
+     });
+ });
+ </script>    
+   
+ <!-- CSRF Token -->
+ <input type="hidden" id="csrfToken" value="{{ csrf_token }}">
 
-    <script>
-      var csrfToken = document.getElementById('csrfToken').value; // Define csrfToken globally
-     
-      function updateCartCount() {
-           fetch(`/store/users/cart/item-count/`, {
-               headers: {
-                 'X-CSRFToken': csrfToken
-               }
-           })
-           .then(response => response.json())
-           .then(data => {
-               var cartQuantity = document.querySelector('.quantity');
-               cartQuantity.textContent = data.cart_item_count;
-           })
-           .catch(error => {
-               console.error('An error occurred:', error);
-           });
-      }
-       
-      document.getElementById('addToCartForm').addEventListener('submit', function(event) {
-           event.preventDefault(); // Prevent the form from submitting normally
-           var productId = this.elements.product_id.value; // Get the product ID from the form
-           var quantity = 1; // Set the quantity to add
-          
-           
-           Swal.fire({
-            icon: 'success',
-            title: 'Added to Cart',
-            text: 'Added',
-            timer: 2000, // Automatically close after 2 seconds
-            showConfirmButton: false,
-            position: 'top-end'
-          });
-    
-       
-           fetch(`/store/users/cart/add/${productId}/`, {
-               method: 'POST',
-               headers: {
-                   'Content-Type': 'application/x-www-form-urlencoded',
-                   'X-CSRFToken': csrfToken
-               },
-               body: `quantity=${quantity}`
-           })
-           .then(response => response.json())
-           .then(data => {
-               if (data.success) {
-                   // Update the cart icon with the current quantity from the server response
-                   updateCartCount(); // Call the function to update the cart count
-               } else {
-                   // Handle error
-                   console.error('Failed to add product to cart.');
-               }
-           })
-           .catch(error => {
-               console.error('An error occurred:', error);
-           });
-      });
-     </script>    
-      
-      <!-- CSRF Token -->
-      <input type="hidden" id="csrfToken" value="{{ csrf_token }}">
-    
 <!--Footer-->
 <footer class="bg-dark text-white pt-5 pb-4">
   <div class="container text-center text-md-left">
@@ -360,8 +375,6 @@
       </div>
     </div>
   </div>
-
-  
 </footer>
 
 {% if messages %}
@@ -379,148 +392,12 @@
             // Add more options as needed
         });
     </script>
-
-<script>
-  // Your JavaScript code
-
-  // Call updateCartCount to initialize the cart count
-  updateCartCount();
-</script>
-
 {% endfor %}
 {% endif %}
-
-<!-- <script>
-  const porductsListEl = document.querySelector(".hairs");
-</script>         -->
-
 <!-- Include SweetAlert.js -->
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
   <script src="{% static 'store/js/bootstrap.bundle.min.js' %}"></script>
   <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF"></script>
-  <script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
-  <!-- <script src="products.js"></script>
-  <script src="app.js"></script> -->
-
-  <script>
-      if (localStorage.getItem("cart") == null) {
-    var cart = {};
-  } else {
-    cart = JSON.parse(localStorage.getItem("cart"));
-    updateCart(cart);
-  }
-
-$(".container-fluid").on("click", ".divpr button", function () {
-  var idstr = this.id.toString();
-    console.log(idstr);
-
-    if (cart[idstr] != undefined) {
-      qty = cart[idstr][0] + 1;
-    } else {
-      qty = 1;
-      name = document.getElementById("name" + idstr).innerHTML;
-      price = document.getElementById("price" + idstr).innerHTML;
-      cart[idstr] = [qty, name, price];
-    }
-    updateCart(cart);
-
-    localStorage.setItem("cart", JSON.stringify(cart));
-    document.getElementById("cart").innerHTML = Object.keys(cart).length;
-    console.log(Object.keys(cart).length);
-    document.getElementById("popcart").click();
-  });
-
-  // add pop over to cart
-
-  $("#popcart").popover();
-
-  updatePopover(cart);
-  function updatePopover(cart) {
-    console.log("we are  inside update popover");
-
-    var popStr = "";
-    var popStr =
-      popStr +
-      "<h5> Your Goods </h5> <div class='mx-2 my-2'>";
-    var i = 1;
-    for (var item in cart) {
-      popStr = popStr + "<b>" + i + "</b>. ";
-      popStr =
-        popStr +
-        document.getElementById("name" + item).innerHTML.slice(0, 19) +
-        "..." +
-        "<b>" +
-        cart[item][0] +
-        "</b>" +
-        "Qty" +
-        "<br>";
-      i = i + 1;
-    }
-
-    popStr =
-      popStr +
-      "</div> <a href='/checkout'><button class='btn btn-success' id='clearCart'>Checkout</button></a>  <button class='btn btn-danger' onclick='clearCart()' id='clearCart'>ClearCart</button>";
-    document.getElementById("popcart").setAttribute("data-content", popStr);
-    $("#popcart").popover("show");
-    document.getElementById("popcart").click();
-  }
-
-  function clearCart() {
-    cart = JSON.parse(localStorage.getItem("cart"));
-    for (var item in cart) {
-      document.getElementById("div" + item).innerHTML =
-        '<button id="' +
-        item +
-        '" class="btn btn-danger cart">Add To Cart <i class="fa-solid fa-cart-shopping"></i></button>';
-    }
-    localStorage.clear();
-    cart = {};
-    updateCart(cart);
-
-    let clear = document.getElementById("popcart").click();
-    document.getElementById("popcart").click();
-  }
-
-  function updateCart(cart) {
-    var sum = 0;
-    for (var item in cart) {
-      sum = sum + cart[item][0];
-      document.getElementById("div" + item).innerHTML =
-        "<button id='minus" +
-        item +
-        "'class='btn btn-success minus'>-</button> <span id='val" +
-        item +
-        "''>" +
-        cart[item][0] +
-        "</span> <button id='plus" +
-        item +
-        "' class='btn btn-success plus'> + </button>";
-    }
-    localStorage.setItem("cart", JSON.stringify(cart));
-    document.getElementById("cart").innerHTML = sum;
-    console.log(cart);
-    updatePopover(cart);
-    document.getElementById("popcart").click();
-  }
-
-  //if plus or minus button is clicked change the cart as well as the display value
-  $(".divpr").on("click", "button.minus", function () {
-    a = this.id.slice(7, );
-    cart["pr" + a][0] = cart["pr" + a][0] - 1;
-    cart["pr" + a][0] = Math.max(0, cart["pr" + a][0]);
-    document.getElementById("valpr" + a).innerHTML = cart["pr" + a][0];
-    updateCart(cart);
-  });
-
-  $(".divpr").on("click", "button.plus", function () {
-    a = this.id.slice(6, );
-    cart["pr" + a][0] = cart["pr" + a][0] + 1;
-    document.getElementById("valpr" + a).innerHTML = cart["pr" + a][0];
-    updateCart(cart);
-  });
-</script>
-  </script>  
-
 </body>
 </html>

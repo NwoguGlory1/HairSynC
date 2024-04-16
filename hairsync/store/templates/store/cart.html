@@ -129,7 +129,7 @@
 
     <div class="container-fluid ms-auto">
       <div style="text-align: right; width: 100%; margin-right: 5em; margin-top: 30px;">
-        <a href="checkout.html" class="checkout"><b>CLICK TO CHECKOUT </b></a>
+        <a href="{% url 'store:checkout' %}" class="checkout"><b>CLICK TO CHECKOUT </b></a>
       </div>
         <!-- <div class="card" style="width: 40rem;"> -->
         <div id="shopcard" class="cart-card ">
@@ -170,7 +170,7 @@
                             <td class="text-center">
                                 <i class="bi bi-cart-dash"></i><input name="item" value="{{ item.quantity }}" size="2"><i class="bi bi-cart-plus-fill text-primary"></i>
                                 <input type="hidden" name="txtItem" value="{{ item.quantity }}">
-                                <button class="btn btn-danger remove-item" data-product-id="{{ item.product.id }}">Remove</button>
+                                <!--<button class="btn btn-danger remove-item" data-product-id="{{ item.product.id }}">Remove</button> -->
                                 <button id="clear-cart-btn" class="btn btn-danger">Clear Cart</button>
                             </td>
                         </tr>
@@ -236,61 +236,29 @@
       }
   </script>  
 
-  <script >
-    document.addEventListener('DOMContentLoaded', function() {
-        document.querySelectorAll('.remove-item').forEach(function(button) {
-            button.addEventListener('click', function() {
-                var productId = this.getAttribute('data-product-id');
-                fetch(`/store/users/cart/remove/${productId}/`, {
-                    method: 'DELETE',
-                    headers: {
-                        'X-CSRFToken': document.querySelector('[name=csrfmiddlewaretoken]').value,
-                    },
-                })
-                .then(response => {
-                    if (response.ok) {
-                        // If the request was successful, reload the cart page
-                        location.reload();
-                    } else {
-                        // Handle errors
-                        console.error('Failed to remove item from cart');
-                    }
-                })
-                .catch(error => console.error('Error:', error));
-            });
-        });
-    });
-    </script>
-
     <script>
       document.addEventListener('DOMContentLoaded', function() {
-          document.getElementById('clear-cart-btn').addEventListener('click', function() {
-              fetch('/store/users/cart/clear/', {
-                  method: 'DELETE',
-                  headers: {
-                      'X-CSRFToken': document.querySelector('[name=csrfmiddlewaretoken]').value,
-                  },
-              })
-              .then(response => {
-            if (response.ok) {
-                // If the request was successful, clear the cart in the UI
-                document.querySelector('.totalQuantity').textContent = 0; // Update the cart counter in the navbar
-                localStorage.setItem('cartCount', 0); // Update the cart count in local storage
-                // Optionally, you can also clear the cart items list in the cart page if it's dynamically generated
-                // For example, if you have a function to clear the cart items list, you can call it here
-            } else {
-              // .then(response => {
-              //     if (response.ok) {
-              //         // If the request was successful, reload the cart page
-              //         location.reload();
-              //     } else {
-                      // Handle errors
-                      console.error('Failed to clear cart');
-                  }
-              })
-              .catch(error => console.error('Error:', error));
-          });
-      });
+        document.getElementById('clear-cart-btn').addEventListener('click', function() {
+            fetch('/store/users/cart/clear/', {
+                method: 'DELETE',
+                headers: {
+                    'X-CSRFToken': document.querySelector('[name=csrfmiddlewaretoken]').value,
+                },
+            })
+            .then(response => {
+                if (response.ok) {
+                    // If the request was successful, clear the cart in the UI
+                    document.querySelector('.totalQuantity').textContent = 0; // Update the cart counter in the navbar
+                    // Optionally, you can also clear the cart items list in the cart page if it's dynamically generated
+                    // For example, if you have a function to clear the cart items list, you can call it here
+                } else {
+                    // Handle errors
+                    console.error('Failed to clear cart');
+                }
+            })
+            .catch(error => console.error('Error:', error));
+        });
+    });    
       </script>
       
 <!--Footer-->
