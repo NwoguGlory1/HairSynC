@@ -32,7 +32,7 @@
 <body class="bg-light">
  <div class="container">
       <div class="py-5 text-center">
-          <h2> Checkout Page. </h2>
+          <h2> Checkout Page </h2>
           <div id="shopcard" class="checkout-card">
             <div class="mx-auto mt-5 shadow-lg rounded-0" style="width: 40rem;">
               <div class="form">
@@ -43,7 +43,7 @@
                     <tr>
                       <th scope="col">Product</th>
                       <th scope="col">Quantity</th>
-                      <th scope="col">Price</th>
+                      <th scope="col">Price ($)</th>
                     </tr>
                  </thead>
                  <tbody>
@@ -56,7 +56,7 @@
                     {% endfor %}
                  </tbody>
                 </table>
-                <p>Total Amount: {{ total_amount }}</p>
+                <p>Total Amount: ${{ total_amount }}</p>
               </div>
             </div>
           </div>
@@ -64,55 +64,95 @@
           <div class="container checkout">
             <!-- Add Address Form -->
             {% if not request.user.has_saved_address %}
-            <form method="post" action="{% url 'store:add_address' %}" id="addAddressForm">
-              {% csrf_token %}
-              <div class="form-group">
-                <label for="streetAddress">Street Address</label>
-                <input type="text" class="form-control" id="streetAddress" name="street_address" required>
-              </div>
-              <div class="form-group">
-                <label for="town">Town</label>
-                <input type="text" class="form-control" id="town" name="town" required>
-              </div>
-              <div class="form-group">
-                <label for="zipcode">Zipcode</label>
-                <input type="text" class="form-control" id="zipcode" name="zipcode" required>
-              </div>
-              <div class="form-group">
-                <label for="county">County</label>
-                <input type="text" class="form-control" id="county" name="county" required>
-              </div>
-              <div class="form-group">
-                <label for="phoneNumber1">Phone Number 1</label>
-                <input type="text" class="form-control" id="phoneNumber1" name="phone_number_1" required>
-              </div>
-              <div class="form-group">
-                <label for="phoneNumber2">Phone Number 2</label>
-                <input type="text" class="form-control" id="phoneNumber2" name="phone_number_2" required>
-              </div>
-              <div class="form-group">
-                <label for="additionalDetails">Additional Details</label>
-                <input type="text" class="form-control" id="additionalDetails" name="additional_details">
-              </div>
-              <button type="submit" class="btn btn-primary">Add Address</button>
+            <form method="post" action="{% url 'store:add_address' %}" id="addAddressForm" novalidate>
+                {% csrf_token %}
+                <div class="row g-3">
+                    <div class="col-sm-6">
+                        <label for="streetAddress" class="form-label">Street Address</label>
+                        <input type="text" class="form-control" id="streetAddress" name="street_address" placeholder="Input your address" required>
+                        <div class="invalid-feedback">Valid address is required.</div>
+                    </div>
+                    <div class="col-sm-6">
+                        <label for="town" class="form-label">Town</label>
+                        <input type="text" class="form-control" id="town" name="town" required>
+                        <div class="invalid-feedback">Valid town is required.</div>
+                    </div>
+                    <div class="col-sm-6">
+                        <label for="zipcode" class="form-label">Zipcode</label>
+                        <input type="text" class="form-control" id="zipcode" name="zipcode" required>
+                        <div class="invalid-feedback">Valid zipcode is required.</div>
+                    </div>
+                    <div class="col-sm-6">
+                        <label for="county" class="form-label">County</label>
+                        <input type="text" class="form-control" id="county" name="county" required>
+                        <div class="invalid-feedback">Valid county is required.</div>
+                    </div>
+                    <div class="col-sm-6">
+                        <label for="phoneNumber1" class="form-label">Phone Number 1</label>
+                        <input type="text" class="form-control" id="phoneNumber1" name="phone_number_1" required>
+                        <div class="invalid-feedback">Valid phone number is required.</div>
+                    </div>
+                    <div class="col-sm-6">
+                        <label for="phoneNumber2" class="form-label">Phone Number 2</label>
+                        <input type="text" class="form-control" id="phoneNumber2" name="phone_number_2" required>
+                        <div class="invalid-feedback">Valid phone number is required.</div>
+                    </div>
+                    <div class="col-sm-6">
+                        <label for="additionalDetails" class="form-label">Additional Details</label>
+                        <input type="text" class="form-control" id="additionalDetails" name="additional_details">
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-primary">Add Address</button>
             </form>
             {% endif %}
-
+        
             <!-- Select Shipping Option -->
-            <form method="post" action="{% url 'store:process_checkout' %}" id="checkoutForm">
-              {% csrf_token %}
-              <div class="form-group">
-                <label for="shippingOption">Select Shipping Option</label>
-                <select class="form-control" id="shippingOption" name="shipping_option" required>
-                 <option selected>Select a shipping option</option>
-                 <!-- Shipping options will be populated here -->
-                </select>
-              </div>
-              <button type="submit" class="btn btn-primary">Proceed to Payment</button>
+            <form method="post" action="{% url 'store:process_checkout' %}" id="checkoutForm" novalidate>
+                {% csrf_token %}
+                <div class="row g-3">
+                    <div class="col-sm-6">
+                        <label for="shippingOption" class="form-label">Available Delivery Option(Deliver to me)</label>
+                        <select id="shippingOption" class="form-select" name="shipping_option" required>
+                            <option selected>Select a shipping option</option>
+                            <!-- Shipping options will be populated here -->
+                        </select>
+                        <div class="invalid-feedback">Valid shipping option is required.</div>
+                    </div>
+                    <div class="col-sm-6">
+                        <label for="shippingCompany" class="form-label">Choose Shipping Company</label>
+                        <select id="shippingCompany" class="form-select" name="shipping_company" required>
+                            <option selected>Click to choose</option>
+                            <option value="company1">Shipping Company A</option>
+                            <option value="company2">Shipping Company B</option>
+                        </select>                
+                        <div class="invalid-feedback">Valid shipping company is required.</div>
+                    </div>
+                    <div class="col-sm-6">
+                        <label for="paymentOption" class="form-label">Choose Payment Option</label>
+                        <select id="paymentOption" class="form-select" name="payment_option" required>
+                            <option selected>Click to choose</option>
+                            <option value="flutterwave">Flutterwave</option>
+                            <option value="paystack">Paystack</option>
+                        </select>                
+                        <div class="invalid-feedback">Valid payment option is required.</div>
+                    </div>
+                </div>
+                <div class="row g-3">
+                    <div class="col-md-6">
+                        <label for="phoneNumber" class="form-label">Phone number</label>
+                        <input id="phoneNumber" type="number" class="form-control" placeholder="1234" required>
+                        <div class="invalid-feedback">Valid phone number is required.</div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-check">
+                            <input id="saveInfo" type="checkbox" class="form-check-input" name="save_info" checked>
+                            <label for="saveInfo" class="form-check-label">Save this info</label>
+                        </div>
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-primary">Proceed to Payment</button>
             </form>
-          </div>
-      </div>
- </div>
+        </div>        
 </body>
 
 <!--Footer-->

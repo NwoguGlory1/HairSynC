@@ -79,7 +79,7 @@ urlpatterns = [
     # Shipping and Address
     path('shipping-options/', views.get_available_shipping_options, name='get-shipping-options'),
     path('users/addresses/', views.get_user_saved_addresses, name='get-user-addresses'),
-    path('users/addresses/create/', views.add_address, name='add-address'),
+    #path('users/addresses/create/', views.add_address, name='add-address'),
     path('add_address', views.add_address, name='add_address'),
     path('users/addresses/<int:id>/update/', views.update_details_of_address_with_address_id, name='update-address-details'),
     path('users/addresses/<int:id>/delete/', views.delete_address_with_address_id, name='delete-address'),
