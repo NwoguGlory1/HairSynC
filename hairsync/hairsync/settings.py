@@ -34,6 +34,8 @@ ALLOWED_HOSTS = [
     'hairsync.onrender.com',
 ]
 
+# Use Whitenoise to serve static files
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 # Application definition
 
@@ -53,6 +55,7 @@ INSTALLED_APPS = [
 MIDDLEWARE = [
      # ADDED THE CORS HEADER
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'corsheaders.middleware.CorsMiddleware', # CORS middleware, ADDED THIS!!!!
     'django.middleware.common.CommonMiddleware',
