@@ -16,6 +16,9 @@
 
   <!-- Template Main CSS File -->
   <link rel="stylesheet" href="{% static 'store/css/style.css' %}">
+  <link href="{% static 'store/css/all.min.css' %}" rel="stylesheet">
+  <link href="{% static 'store/css/bootstrap.min.css' %}" rel="stylesheet">
+  <link href="{% static 'store/css/bootstrap-icons.css' %}" rel="stylesheet">
 
   <!-- Template Main CSS File 
   <link href="login.html" rel="" > 
@@ -51,7 +54,7 @@
             <a class="nav-link" href="{% url 'store:index' %}"></a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="">View Orders</a>
+              <a class="nav-link" href="/store/users/cart/">View Orders</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="{% url 'store:logout' %}">Log Out</a>

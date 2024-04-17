@@ -381,10 +381,11 @@ form{
     padding: 20px;
 }
 
+/
 .checkout
 {
     text-decoration: none;
-    background-color:#29f700;
+    background-color:black
     padding: 1em 2em;
     color: black;
     border-radius: 8px;
@@ -397,6 +398,7 @@ form{
 /* th{
     padding-left: 20px;
 } */
+
 
 /****Userprofile****/
 .navbar-links{
@@ -416,6 +418,23 @@ form{
     background-color: black; /* Checked color */
     border-color: goldenrod; /* Checked border color */
    }
+
+   .disabled {
+    pointer-events: none;
+    cursor: default; 
+   }
+
+   .checkout-card {
+    width: 900px;
+    height: 400px;
+    background-color: white;
+    border: none !important;
+    display: flex;
+    /* flex-direction: column; */
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
 
    /* Custom checkmark */
 /* .form-check-input:checked::before {

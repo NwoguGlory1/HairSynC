@@ -31,6 +31,7 @@
   
 <body class="bg-light">
  <div class="container">
+  <div class="checkout-card">
       <div class="py-5 text-center">
           <h2> Checkout Page </h2>
           <div id="shopcard" class="checkout-card">
@@ -66,6 +67,7 @@
             {% if not request.user.has_saved_address %}
             <form method="post" action="{% url 'store:add_address' %}" id="addAddressForm" novalidate>
                 {% csrf_token %}
+                <button type="submit" class="btn btn-primary disabled" style="background-color: #29f700;">Additional Details</button>
                 <div class="row g-3">
                     <div class="col-sm-6">
                         <label for="streetAddress" class="form-label">Street Address</label>
@@ -98,30 +100,26 @@
                         <div class="invalid-feedback">Valid phone number is required.</div>
                     </div>
                     <div class="col-sm-6">
-                        <label for="additionalDetails" class="form-label">Additional Details</label>
+                        <label for="additionalDetails" class="form-label">Any Other Details</label>
                         <input type="text" class="form-control" id="additionalDetails" name="additional_details">
                     </div>
                 </div>
-                <button type="submit" class="btn btn-primary">Add Address</button>
             </form>
             {% endif %}
         
             <!-- Select Shipping Option -->
             <form method="post" action="{% url 'store:process_checkout' %}" id="checkoutForm" novalidate>
                 {% csrf_token %}
+                <button type="submit" class="btn btn-primary" style="background-color: #29f700;">Payment Details</button>
                 <div class="row g-3">
                     <div class="col-sm-6">
-                        <label for="shippingOption" class="form-label">Available Delivery Option(Deliver to me)</label>
-                        <select id="shippingOption" class="form-select" name="shipping_option" required>
-                            <option selected>Select a shipping option</option>
-                            <!-- Shipping options will be populated here -->
-                        </select>
-                        <div class="invalid-feedback">Valid shipping option is required.</div>
-                    </div>
-                    <div class="col-sm-6">
-                        <label for="shippingCompany" class="form-label">Choose Shipping Company</label>
+                        <!-- <div class="invalid-feedback">Valid shipping option is required.</div>
+                    </div> -->
+                    <!-- <div class="col-sm-6"> -->
+                      <label for="shippingCompany" class="form-label">Available Delivery Option(Deliver to me)</label>
+                        <!-- <label for="shippingCompany" class="form-label">Choose Shipping Company</label> -->
                         <select id="shippingCompany" class="form-select" name="shipping_company" required>
-                            <option selected>Click to choose</option>
+                            <option selected>Choose Shipping Company</option>
                             <option value="company1">Shipping Company A</option>
                             <option value="company2">Shipping Company B</option>
                         </select>                
@@ -137,20 +135,23 @@
                         <div class="invalid-feedback">Valid payment option is required.</div>
                     </div>
                 </div>
-                <div class="row g-3">
+                <!-- <div class="row g-3">
                     <div class="col-md-6">
                         <label for="phoneNumber" class="form-label">Phone number</label>
                         <input id="phoneNumber" type="number" class="form-control" placeholder="1234" required>
                         <div class="invalid-feedback">Valid phone number is required.</div>
-                    </div>
+                    </div> -->
                     <div class="col-md-6">
                         <div class="form-check">
                             <input id="saveInfo" type="checkbox" class="form-check-input" name="save_info" checked>
-                            <label for="saveInfo" class="form-check-label">Save this info</label>
+                            <label for="saveInfo" class="form-check-label" style="align-items: left;">Save this info</label>
                         </div>
                     </div>
+                    <div style="text-align: right; width: 100%; margin-right: 5em; margin-top: 30px;">
+                      <a href="" class="checkout"><b>SUBMIT</b></a>
+                    </div>
+                  </div>
                 </div>
-                <button type="submit" class="btn btn-primary">Proceed to Payment</button>
             </form>
         </div>        
 </body>
