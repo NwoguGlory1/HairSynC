@@ -682,11 +682,35 @@ def checkout(request):
 @check_authentication
 def process_checkout(request):
     if request.method == 'POST':
-        # Process the form data and create an order
-        # This might involve redirecting to a payment gateway
-        return render(request, 'store/submit.html')
+        # Example: Extracting form data
+        street_address = request.POST.get('street_address')
+        town = request.POST.get('town')
+        zipcode = request.POST.get('zipcode')
+        county = request.POST.get('county')
+        phone_number_1 = request.POST.get('phone_number_1')
+        phone_number_2 = request.POST.get('phone_number_2')
+        additional_details = request.POST.get('additional_details')
+        shipping_option = request.POST.get('shipping_option')
+
+        # Create an order in the database
+        order = Order.objects.create(
+            user=request.user,
+            street_address=street_address,
+            town=town,
+            zipcode=zipcode,
+            county=county,
+            phone_number_1=phone_number_1,
+            phone_number_2=phone_number_2,
+            additional_details=additional_details,
+            shipping_option=shipping_option,
+            # Add more fields as necessary
+        )
+
+        # Pass the order object to the template
+        return render(request, 'store/submit.html', {'order': order})
     else:
         return redirect('store/checkout')
+
 
 
 

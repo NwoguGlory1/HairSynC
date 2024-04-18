@@ -11,24 +11,31 @@
     <meta content="" name="description">
     <meta content="" name="keywords">
 
-  <!-- Favicons -->
-  <link href="{% static 'store/images/favicon.png' %}" rel="icon">
+ <!-- Favicons -->
+ <link href="{% static 'store/images/favicon.png' %}" rel="icon">
 
-  <!-- Template Main CSS File -->
-  <link rel="stylesheet" href="{% static 'store/css/style.css' %}">
-  <link href="{% static 'store/css/all.min.css' %}" rel="stylesheet">
-  <link href="{% static 'store/css/bootstrap.min.css' %}" rel="stylesheet">
-  <link href="{% static 'store/css/bootstrap-icons.css' %}" rel="stylesheet">
+ <!-- Template Main CSS File -->
+ <link rel="stylesheet" href="{% static 'store/css/style.css' %}">
+ <link href="{% static 'store/css/all.min.css' %}" rel="stylesheet">
+ <link href="{% static 'store/css/bootstrap.min.css' %}" rel="stylesheet">
+ <link href="{% static 'store/css/bootstrap-icons.css' %}" rel="stylesheet">
 
-
-  <!-- Link to boostrap-->
-  <link href="{% static 'store/css/all.min.css' %}" rel="stylesheet">
-  <link href="{% static 'store/css/bootstrap.min.css' %}" rel="stylesheet">
-  <link href="{% static 'store/css/bootstrap-icons.css' %}" rel="stylesheet">
-  
 </head>
 <body>  
  <h1> SUCCESSFUL!!!</h1>
  <i><b>Thank you for your patronage...</b></i>
+
+ <!-- Display order details -->
+ <div>
+     <h2>Order Details:</h2>
+     <p>Street Address: {{ order.street_address }}</p>
+     <p>Town: {{ order.town }}</p>
+     <p>Zipcode: {{ order.zipcode }}</p>
+     <p>County: {{ order.county }}</p>
+     <p>Phone Number 1: {{ order.phone_number_1 }}</p>
+     <p>Phone Number 2: {{ order.phone_number_2 }}</p>
+     <p>Additional Details: {{ order.additional_details }}</p>
+     <p>Shipping Option: {{ order.shipping_option }}</p>
+ </div>
 </body>
-</html> 
+</html>
