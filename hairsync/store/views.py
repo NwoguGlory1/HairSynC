@@ -682,7 +682,7 @@ def checkout(request):
 @check_authentication
 def process_checkout(request):
     if request.method == 'POST':
-        # Example: Extracting form data
+        # Extracting form data
         street_address = request.POST.get('street_address')
         town = request.POST.get('town')
         zipcode = request.POST.get('zipcode')
@@ -690,7 +690,7 @@ def process_checkout(request):
         phone_number_1 = request.POST.get('phone_number_1')
         phone_number_2 = request.POST.get('phone_number_2')
         additional_details = request.POST.get('additional_details')
-        shipping_option = request.POST.get('shipping_option')
+        # shipping_option = request.POST.get('shipping_option')
 
         # Create an order in the database
         order = Order.objects.create(
@@ -702,17 +702,20 @@ def process_checkout(request):
             phone_number_1=phone_number_1,
             phone_number_2=phone_number_2,
             additional_details=additional_details,
-            shipping_option=shipping_option,
-            # Add more fields as necessary
+           # shipping_option=shipping_option,
+    
         )
 
-        # Pass the order object to the template
-        return render(request, 'store/submit.html', {'order': order})
+        # Redirect to the submit page, passing the order ID
+        return redirect('store:success', order_id=order.id)
     else:
-        return redirect('store/checkout')
+        # If the request method is not POST, redirect back to the checkout page
+        return redirect('store:checkout')
 
 
-
+def success(request, order_id):
+    order = get_object_or_404(Order, id=order_id)
+    return render(request, 'store/submit.html', {'order': order})
 
 """THE START OF ORDER MANAGEMENT"""
 @require_http_methods(["GET"])

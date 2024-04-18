@@ -69,6 +69,7 @@ urlpatterns = [
     # Checkout
     path('checkout/', views.checkout, name='checkout'),
     path('process_checkout/', views.process_checkout, name='process_checkout'),
+    path('success/<int:order_id>/', views.success, name='success'),
 
 
     # Order Management
