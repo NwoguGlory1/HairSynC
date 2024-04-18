@@ -42,6 +42,11 @@ def index(request):
     return render(request, 'store/index.html')
 
 
+@require_http_methods(["GET"])
+def about_us(request):
+    return render(request, 'store/about.html')
+
+
 """REGISTER, LOGIN, AND LOGOUT VIEWS"""
 @csrf_exempt
 @require_http_methods(["POST"])
@@ -679,7 +684,7 @@ def process_checkout(request):
     if request.method == 'POST':
         # Process the form data and create an order
         # This might involve redirecting to a payment gateway
-        return redirect('checkout_success')
+        return render(request, 'store/submit.html')
     else:
         return redirect('store/checkout')
 
