@@ -68,7 +68,7 @@ urlpatterns = [
 
     # Checkout
     path('checkout/', views.checkout, name='checkout'),
-    path('checkout/process/', views.process_checkout, name='process_checkout'),
+    path('process_checkout/', views.process_checkout, name='process_checkout'),
 
 
     # Order Management
