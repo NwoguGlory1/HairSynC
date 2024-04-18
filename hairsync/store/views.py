@@ -714,9 +714,9 @@ def process_checkout(request):
 
 
 @require_http_methods(["GET"])
-def success(request, order_id):
-    order = get_object_or_404(Order, id=order_id)
-    return render(request, 'store/submit.html', {'order': order})
+def success(request):
+    return render(request, 'store/submit.html')
+
 
 """THE START OF ORDER MANAGEMENT"""
 @require_http_methods(["GET"])
