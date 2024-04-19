@@ -2,6 +2,7 @@
 <html lang="en">
 
 <head>
+  {% load static %}
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -23,36 +24,36 @@
   
 </head>
 <body>
-  <!--Navbar-->
-  <nav class="navbar navbar-expand-lg navbar-dark" id="navbar">
-    <div class="container-fluid">
-      <a class="navbar-brand" href="#home">
-        <img class="d-inline-block align-text-top" src="Logo.png" alt="logo" width="30" height="24">HairSynC
-      </a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarScroll" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-       </button>
-      <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav m-auto my-2 my-lg-0">
-          <li class="nav-item">
-            <a class="nav-link" href="#home"></a>
+<!--Navbar-->
+<nav class="navbar navbar-expand-xl navbar-dark" id="navbar">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="{% url 'store:index' %}">
+      <img class="d-inline-block align-text-top" src="{% static 'store/images/Logo.png' %}" alt="logo" width="30" height="24">HairSynC
+    </a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarScroll" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+     </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav m-auto my-2 my-lg-0">
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'store:index' %}"></a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#all_categories">All Categories</a>
+            <a class="nav-link" href="{% url 'store:products' %}">All Products</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#straight">Straight</a>
+            <a class="nav-link" href="{% url 'store:straight' %}">Straight Hairs</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#wavy">Wavy</a>
+            <a class="nav-link" href="{% url 'store:wavy' %}">Wavy Hairs</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#coily">Coily</a>
+            <a class="nav-link" href="{% url 'store:coily' %}">Coily Hairs</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#hairproducts">Hair Products</a>
+            <a class="nav-link" href="{% url 'store:hair_products' %}">Hair Products</a>
           </li>
-          <!-- <li class="nav-item">
+            <!-- <li class="nav-item">
             <a class="nav-link" href="#contact">Contact</a>
           </li>  -->
         </ul>
@@ -60,17 +61,36 @@
           <input type="search" placeholder="Search" aria-label="Search">
           <button type="submit">Search</button>
         </form>
-        <button class="btn ms-auto sign" p-2 my-lg-0 my-2>Log In</button>
-        <button class="btn ms-auto sign" p-2 my-lg-0 my-2>Sign Up</button>
+        <!-- cart icon on the nav bar -->
+        <a href="/store/users/cart/" class="cart-icon">
+        <i class="fa-solid fa-bag-shopping"></i>
+        <!-- <span class="quantity">0</span> This will display the number of items in the cart -->
+        </a>
+        {% if user.is_authenticated %}
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'store:userprofile' %}">{{ user.username }} Profile</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'store:logout' %}">Logout</a>
+        </li>
+      {% else %}
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'store:login_page' %}">Log In</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'store:register_form' %}">Sign Up</a>
+        </li>
+      {% endif %}
     </div>
-  </nav>
+ </div>
+</nav>
 
 <!-- About-->
 <section id="about">
   <div class="container-fluid">
       <div class="row">
         <div class="col-lg-6 col-md-6 col-12">
-          <img src=""  alt="Our pix" class="img-fluid">
+          <img src="{% static 'store/images/wavvyhair.png' %}"  alt="Our pix" class="img-fluid">
         </div>
         <div class=" col-lg-6 col-md-6 col-12 p-lg-5 p-2 my-5">
              <h1> About Us</h1>
@@ -90,25 +110,30 @@
   <div class="container text-center text-md-left">
     <div class="row text-center text-md text-md-left">
       <div class="col-md-3 col-lg-3 col-xl-3 mx auto mt-3">
+<<<<<<< HEAD
         <h5 class="mb-4 font-weight-bold text-warning">ABOUT HairSynC</a>
           <p> Built by Daraja & Fae </p>
+=======
+        <h5 class="mb-4 font-weight-bold text-warning"><a href="about.html" class="text-decoration-none text-warning">ABOUT HairSynC</a>
+          <h6> Built by Daraja & Fae </h6>
+>>>>>>> 295585d480750d36fc842aa43e05324865a80b29
         </div>
         <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mt-3">
           <h5 class="text-uppercase mb-4 font-weight-bold text-warning">Products</h5>
           <p>
-            <a href="#all_categories" class="text-white" style="text-decoration: none;">All Categories</a>
+            <a href="{% url 'store:products' %}" class="text-white" style="text-decoration: none;">All Products</a>
           </p>
           <p>
-            <a href="#straight" class="text-white" style="text-decoration: none;">Straight</a>
+            <a href="{% url 'store:straight' %}" class="text-white" style="text-decoration: none;">Straight</a>
           </p>
           <p>
-            <a href="#wavy" class="text-white" style="text-decoration: none;">Wavy</a>
+            <a href="{% url 'store:wavy' %}" class="text-white" style="text-decoration: none;">Wavy</a>
           </p>
           <p>
-            <a href="#coily" class="text-white" style="text-decoration: none;">Coily</a>
+            <a href="{% url 'store:coily' %}" class="text-white" style="text-decoration: none;">Coily</a>
           </p>
           <p>
-            <a href="#hairproducts" class="text-white" style="text-decoration: none;">Hair Products</a>
+            <a href="{% url 'store:hair_products' %}" class="text-white" style="text-decoration: none;">Hair Products</a>
           </p>
         </div>
         <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mt-3">
@@ -123,7 +148,7 @@
             <a href="#" class="text-white" style="text-decoration: none;">Return Policy</a>
           </p>
           <p>
-            <a href="#contact.html" class="text-white" style="text-decoration: none;">About Us</a>
+            <a href="{% url 'store:about_us' %}"class="text-white" style="text-decoration: none;">About Us</a>
           </p>
         </div>
         <div class="col-md-4 col-lg-3 col-xl-2 mx-auto mt-3">
@@ -194,7 +219,7 @@
 {% endif %}
 <!-- Include SweetAlert.js -->
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
-  <script src="store/js/bootstrap.bundle.min.js"></script>
+  <script src="{% static 'store/js/bootstrap.bundle.min.js' %}"></script>
   <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF"></script>
 </body>

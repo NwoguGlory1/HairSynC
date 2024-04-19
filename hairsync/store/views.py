@@ -42,6 +42,11 @@ def index(request):
     return render(request, 'store/index.html')
 
 
+@require_http_methods(["GET"])
+def about_us(request):
+    return render(request, 'store/about.html')
+
+
 """REGISTER, LOGIN, AND LOGOUT VIEWS"""
 @csrf_exempt
 @require_http_methods(["POST"])
@@ -677,12 +682,40 @@ def checkout(request):
 @check_authentication
 def process_checkout(request):
     if request.method == 'POST':
-        # Process the form data and create an order
-        # This might involve redirecting to a payment gateway
-        return redirect('checkout_success')
-    else:
-        return redirect('store/checkout')
+        # Extracting form data
+        street_address = request.POST.get('street_address')
+        town = request.POST.get('town')
+        zipcode = request.POST.get('zipcode')
+        county = request.POST.get('county')
+        phone_number_1 = request.POST.get('phone_number_1')
+        phone_number_2 = request.POST.get('phone_number_2')
+        additional_details = request.POST.get('additional_details')
+        # shipping_option = request.POST.get('shipping_option')
 
+        # Create an order in the database
+        order = Order.objects.create(
+            user=request.user,
+            street_address=street_address,
+            town=town,
+            zipcode=zipcode,
+            county=county,
+            phone_number_1=phone_number_1,
+            phone_number_2=phone_number_2,
+            additional_details=additional_details,
+           # shipping_option=shipping_option,
+    
+        )
+
+        # Redirect to the submit page, passing the order ID
+        return redirect('store:success', order_id=order.id)
+    else:
+        # If the request method is not POST, redirect back to the checkout page
+        return redirect('store:checkout')
+
+
+@require_http_methods(["GET"])
+def success(request):
+    return render(request, 'store/submit.html')
 
 
 """THE START OF ORDER MANAGEMENT"""
