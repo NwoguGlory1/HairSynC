@@ -134,12 +134,6 @@
                         <div class="invalid-feedback">Valid payment option is required.</div>
                     </div>
                 </div>
-                <!-- <div class="row g-3">
-                    <div class="col-md-6">
-                        <label for="phoneNumber" class="form-label">Phone number</label>
-                        <input id="phoneNumber" type="number" class="form-control" placeholder="1234" required>
-                        <div class="invalid-feedback">Valid phone number is required.</div>
-                    </div> -->
                     <div class="col-md-6">
                         <div class="form-check">
                             <input id="saveInfo" type="checkbox" class="form-check-input" name="save_info" checked>
@@ -160,7 +154,7 @@
   <div class="container text-center text-md-left">
     <div class="row text-center text-md text-md-left">
       <div class="col-md-3 col-lg-3 col-xl-3 mx auto mt-3">
-        <h5 class="mb-4 font-weight-bold text-warning"><a href="about.html" class="text-decoration-none text-warning">ABOUT HairSynC</a>
+        <h5 class="mb-4 font-weight-bold text-warning">ABOUT HairSynC</a>
           <h6> Built by Daraja & Fae </h6>
         </div>
         <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mt-3">
@@ -286,5 +280,40 @@
       .catch(error => console.error('Error fetching shipping options:', error));
  });
 </script>
-</body>
+
+<!-- Form Validation Script -->
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+      // Function to validate form fields
+      function validateForm(form) {
+          var requiredFields = form.querySelectorAll('[required]');
+          var missingFields = [];
+  
+          requiredFields.forEach(function(field) {
+              if (!field.value) {
+                  missingFields.push(field.name);
+              }
+          });
+  
+          if (missingFields.length > 0) {
+              alert('Please fill out the following fields: ' + missingFields.join(', '));
+              return false; // Prevent form submission
+          }
+          return true; // All required fields are filled out
+      }
+  
+      // Attach event listeners to both forms
+      document.getElementById('addAddressForm').addEventListener('submit', function(event) {
+          if (!validateForm(this)) {
+              event.preventDefault();
+          }
+      });
+  
+      document.getElementById('checkoutForm').addEventListener('submit', function(event) {
+          if (!validateForm(this)) {
+              event.preventDefault();
+          }
+      });
+  });
+  </script>
 </html>

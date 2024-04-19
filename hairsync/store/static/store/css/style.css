@@ -152,9 +152,6 @@ form.search {
     border-radius:15px;
 }
 
-/* .btn search{
-    margin-top: 3px;
-} */
 
 .log{
     margin-right: 4px !important ;
@@ -213,12 +210,6 @@ section{
 .signin button:hover{
     background-color: white;
 }
-
-/* .btn signin button{
-    border-radius: 50px;
-    width: 10rem;
-} */
-
 
 
 /****About****/
@@ -424,35 +415,3 @@ form{
     -webkit-appearance: none;
     -moz-appearance: none;
    }
-
-/* .sidebar{
-    background-color: #333;
-    color: white;
-    height: 100%;
-}
-
-.sidebar a{
-    margin-left: 10px;
-    display: block;
-    color: white;
-    padding-bottom: 10px;
-    font-size: 30px;
-    text-decoration: none;
-} */
-
-
-/****Footer****/
-/* footer{
-    width: 100%;
-    height: 50px;
-    background: rgba(0,0,0,.8);
-    margin-top: -30px;
-    color: black;
-    padding: 10px;
-}
-
-footer a {
-    color: white;
-    text-decoration: none;
-    /* text-align: center;
-} */
