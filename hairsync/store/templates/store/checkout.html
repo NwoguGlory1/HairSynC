@@ -66,7 +66,7 @@
             {% if not request.user.has_saved_address %}
             <form method="post" action="{% url 'store:add_address' %}" id="addAddressForm" novalidate>
                 {% csrf_token %}
-                <button type="submit" class="btn btn-primary disabled" style="background-color: #29f700;">Additional Details</button>
+                <button type="submit" style="background-color: #29f700;">Additional Details</button>
                 <div class="row g-3">
                     <div class="col-sm-6">
                         <label for="streetAddress" class="form-label">Street Address</label>
@@ -109,7 +109,7 @@
             <!-- Select Shipping Option -->
             <form method="post" action="{% url 'store:process_checkout' %}" id="checkoutForm" novalidate>
                 {% csrf_token %}
-                <button type="submit" class="btn btn-primary" style="background-color: #29f700;">Payment Details</button>
+                <button type="submit" style="background-color: #29f700;">Payment Details</button>
                 <div class="row g-3">
                     <div class="col-sm-6">
                         <!-- <div class="invalid-feedback">Valid shipping option is required.</div>
