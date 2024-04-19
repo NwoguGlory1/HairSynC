@@ -7,6 +7,8 @@ urlpatterns = [
     # Home Page
     path('', views.index, name='index'), # Home page
 
+    path('about_us/', views.about_us, name='about_us'),
+
     # Register, login, and logout
     path('register/', views.register, name='register'), # User registration
     path('register_form/', views.register_form, name='register_form'),
@@ -66,7 +68,8 @@ urlpatterns = [
 
     # Checkout
     path('checkout/', views.checkout, name='checkout'),
-    path('checkout/process/', views.process_checkout, name='process_checkout'),
+    path('process_checkout/', views.process_checkout, name='process_checkout'),
+    path('success/', views.success, name='success'),
 
 
     # Order Management
