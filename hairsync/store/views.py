@@ -148,7 +148,7 @@ def login_view(request):
             "code": "missing_form_value",
             "details": f"The required field {str(e)} was not provided in the request."
         }, status=400)
-    return render(request, 'login.html')
+    #return render(request, 'login.html')
 
 @require_http_methods(["GET"])  
 def login_page(request):
