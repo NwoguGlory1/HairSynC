@@ -28,14 +28,7 @@
  <div class="login-page container-fluid">
     <form class="mt-4" method="post" action="{% url 'store:login' %}">
       {% csrf_token %}
-      <h4 class="text-center">Login</h4>
-
-      {% if error %}
-      <div class="alert alert-danger" role="alert">
-        {{ error }}
-      </div>
-      {% endif %}
-      
+      <h4 class="text-center">Login</h4>  
       <div class="mb-3 mt-5">
         <label for="username" class="form-label">User Name</label>
         <input type="text" class="form-control" placeholder="Enter Username" id="username" name="username" required>
