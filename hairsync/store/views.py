@@ -131,15 +131,10 @@ def login_view(request):
             # Redirect to /store/ after successful login
             return HttpResponseRedirect('/store/')
         else:
-            #return render(request, 'login.html', {
-             #   "error": "Authentication failed. Please verify your username/email and password.",
-              #  "code": "authentication_failed",
-               # "details": "The provided credentials do not match our records."
-            #})
             return JsonResponse({
-              "error": "Authentication failed. Please verify your username/email and password.",
-               "code": "authentication_failed",
-               "details": "The provided credentials do not match our records."
+                "error": "Authentication failed. Please verify your username/email and password.",
+                "code": "authentication_failed",
+                "details": "The provided credentials do not match our records."
             }, status=401)
 
     except MultiValueDictKeyError as e:
@@ -149,6 +144,7 @@ def login_view(request):
             "details": f"The required field {str(e)} was not provided in the request."
         }, status=400)
 
+    
 @require_http_methods(["GET"])  
 def login_page(request):
     return render(request, 'store/login.html')
