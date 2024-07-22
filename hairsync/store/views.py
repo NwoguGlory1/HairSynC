@@ -1,7 +1,7 @@
 """HairSynC Store Views"""
 """Using csrf_exempt"""
 from django.contrib.auth import authenticate, login, logout
-from django.db.models import F, ExpressionWrapper, fields, Sum, Q
+from django.db.models import F, ExpressionWrapper, fields, Sum, Q, FloatField
 from django.db import IntegrityError, transaction
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, get_object_or_404, redirect
@@ -18,6 +18,7 @@ from .models import Product, CategoryManager, Category, User, Order, ShoppingCar
 from django.utils.datastructures import MultiValueDictKeyError
 from django.core.exceptions import ValidationError, MultipleObjectsReturned, PermissionDenied, ObjectDoesNotExist
 from django.http import QueryDict
+from django.core import serializers
 from django.core.serializers import serialize
 from django.forms.models import model_to_dict
 from django.contrib import messages
@@ -41,6 +42,11 @@ def index(request):
     return render(request, 'store/index.html')
 
 
+@require_http_methods(["GET"])
+def about_us(request):
+    return render(request, 'store/about.html')
+
+
 """REGISTER, LOGIN, AND LOGOUT VIEWS"""
 @csrf_exempt
 @require_http_methods(["POST"])
@@ -58,10 +64,12 @@ def register(request):
 
         # Check if all required fields are provided
         if not all([username, email, first_name, last_name, password, confirm_password]):
-            return JsonResponse({"error": "All fields are required"}, status=400)
+            messages.error(request, "All fields are required")
+            return redirect('store:register_form')
         
         if password != confirm_password:
-            return JsonResponse({"error": "Passwords do not match"}, status=400)
+            messages.error(request, "Passwords do not match")
+            return redirect(reverse('store:register_form'))
 
         user = User.objects.create_user(username=username, email=email, first_name=first_name, last_name=last_name, password=password,)
         user.save()
@@ -79,10 +87,12 @@ def register(request):
         return redirect('/store/')
 
     except IntegrityError:
-        return JsonResponse({"error": "Username or email already exists"}, status=409)
+        messages.error(request, "Username or email already exists")
+        return redirect(reverse('store:register_form'))
 
     except ValidationError as e:
-        return JsonResponse({"error": str(e)}, status=400)
+        messages.error(request, str(e))
+        return redirect(reverse('store:register_form'))
     
     
 @require_http_methods(["GET"])   
@@ -121,11 +131,16 @@ def login_view(request):
             # Redirect to /store/ after successful login
             return HttpResponseRedirect('/store/')
         else:
-            return JsonResponse({
+            return render(request, 'login.html', {
                 "error": "Authentication failed. Please verify your username/email and password.",
                 "code": "authentication_failed",
                 "details": "The provided credentials do not match our records."
-            }, status=401)
+            })
+            #return JsonResponse({
+             #   "error": "Authentication failed. Please verify your username/email and password.",
+             #   "code": "authentication_failed",
+             #   "details": "The provided credentials do not match our records."
+            #}, status=401)
 
     except MultiValueDictKeyError as e:
         return JsonResponse({
@@ -133,6 +148,7 @@ def login_view(request):
             "code": "missing_form_value",
             "details": f"The required field {str(e)} was not provided in the request."
         }, status=400)
+    return render(request, 'login.html')
 
     
 @require_http_methods(["GET"])  
@@ -143,7 +159,7 @@ def login_page(request):
 @csrf_exempt
 def logout_view(request):
     logout(request)
-    return JsonResponse({"message": "success"})
+    return redirect('store:index')
 
 def check_user_authentication(request):
     if request.user.is_authenticated:
@@ -157,12 +173,12 @@ def check_user_authentication(request):
 def list_all_products(request):
     all_products = Product.objects.all()
 
-    if all_products.exists():
-        # Serialize the queryset to JSON format
-        products_json = serialize('json', all_products)
-        return JsonResponse(products_json, safe=False)
-    else:
-        return JsonResponse({"error": "No products found, add a product and try again."}, status=404)
+    if not all_products.exists():
+        # Raise a Http404 exception if no products are found
+        raise Http404("No products found, add a product and try again.")
+
+    # If products exist, render the all_products.html template
+    return render(request, 'store/all_products.html', {'all_products': all_products})
 
 
 @require_http_methods(["GET"])
@@ -175,6 +191,45 @@ def fetch_product_by_id(request, id):
 
     except Product.DoesNotExist:
         return JsonResponse({"error": f"Product with ID: {id} was not found."}, status=404)
+
+
+@require_http_methods(["GET"])   
+def bonestraight(request):
+    return render(request, 'store/bonestraight.html')
+
+
+@require_http_methods(["GET"])   
+def blondwavyhair(request):
+    return render(request, 'store/blondwavyhair.html')
+
+
+@require_http_methods(["GET"])   
+def doubledrawn(request):
+    return render(request, 'store/doubledrawn.html')
+
+
+@require_http_methods(["GET"])   
+def hawaiiansilky(request):
+    return render(request, 'store/hawaiiansilky.html')
+
+@require_http_methods(["GET"])   
+def pixiecurl(request):
+    return render(request, 'store/pixiecurl.html')
+
+
+@require_http_methods(["GET"])   
+def orsconditioner(request):
+    return render(request, 'store/orsconditioner.html')
+
+
+@require_http_methods(["GET"])   
+def watercurls(request):
+    return render(request, 'store/watercurls.html')
+
+
+@require_http_methods(["GET"])   
+def wavyhair(request):
+    return render(request, 'store/blackwavyhair.html')
 
 
 @csrf_exempt
@@ -402,22 +457,40 @@ def get_category_by_name(request, category_name):
     except Category.DoesNotExist:
         return JsonResponse({"error": f"Category with name: {category_name} does not exist."}, status=404)
 
+@csrf_exempt
+@require_http_methods(["GET"])
+def straight_category(request):
+    return render(request, 'store/straight.html')
+
+
+@require_http_methods(["GET"])
+def hair_products_category(request):
+    return render(request, 'store/hair_products.html')
+
+
+@require_http_methods(["GET"])
+def coily_category(request):
+    return render(request, 'store/coily.html')
+
+
+@require_http_methods(["GET"])
+def wavy_category(request):
+    return render(request, 'store/wavy.html')
+
 
 """USER PROFILE MANAGEMENT"""
-@check_authentication
+#@check_authentication
 @require_http_methods(["GET"])
 def get_user_profile(request):
-    try:
-        specific_user = User.objects.get(id=request.user.id)
-        return JsonResponse({
+    specific_user = User.objects.get(id=request.user.id)
+    user_details = {
             'id': specific_user.id,
             'username': specific_user.username,
             'email': specific_user.email,
             'first_name': specific_user.first_name,
-            'last_name': specific_user.last_name
-        }, safe=False)
-    except User.DoesNotExist:
-        return JsonResponse({"error": "User does not exist."}, status=404)
+            'last_name': specific_user.last_name,
+    }
+    return render(request, 'store/userprofile.html', {'user': user_details})
 
 
 @check_authentication
@@ -457,32 +530,51 @@ def list_orders_placed_by_user(request):
         return JsonResponse({'orders': orders_data}, safe=False)
     except Order.DoesNotExist:
         return JsonResponse({"error": "No orders found for the user."}, status=404)
-
+    
 
 
 """THE START OF SHOPPING CART MANAGEMENT"""
+@csrf_exempt
 @check_authentication
 @require_http_methods(["GET"])
 def get_user_shopping_cart_contents(request):
     try:
         user_id = request.user.id
         cart_contents = ShoppingCart.objects.get(user=user_id)
-
         cart_items = CartItem.objects.filter(cart=cart_contents)
-
-        # Serialize the cart items to JSON format
-        cart_items_json = serialize('json', cart_items)
-
-        return JsonResponse(cart_items_json, safe=False)
-
+        # Calculate total price for each item here
+        for item in cart_items:
+            item.total_price = item.product.price * item.quantity
+        total_amount = sum(item.total_price for item in cart_items)
+        print("Total Amount:", total_amount)
+        return render(request, 'store/cart.html', {
+            'cart_items': cart_items,
+            'total_amount': total_amount,
+            'cart_item_count': cart_items.count()
+        })
     except ShoppingCart.DoesNotExist:
-        return JsonResponse({"error": "Shopping cart not found for the user."}, status=404)
+        return render(request, 'store/cart.html', {
+            'cart_items': [],
+            'total_amount': 0,
+            'cart_item_count': 0
+        })
 
-    except TypeError:
-        return JsonResponse({"error": "An error occurred while retrieving the shopping cart contents."}, status=500)
+
+@csrf_exempt
+@require_http_methods(["GET"])
+def get_cart_item_count(request):
+    try:
+        user_id = request.user.id
+        cart_contents = ShoppingCart.objects.get(user=user_id)
+        cart_items = CartItem.objects.filter(cart=cart_contents)
+        cart_item_count = cart_items.count()
+        return JsonResponse({'cart_item_count': cart_item_count})
+    except ShoppingCart.DoesNotExist:
+        return JsonResponse({'cart_item_count': 0})
 
 
 @check_authentication
+@csrf_exempt
 @require_http_methods(["POST"])
 def add_product_to_cart(request, productId):
     try:
@@ -491,15 +583,15 @@ def add_product_to_cart(request, productId):
 
         product = Product.objects.get(product_id=productId)
         if quantity > product.quantity_in_stock:
-           return JsonResponse({"error": f"Please reduce the quantity to {product.quantity_in_stock} or less, as the current stock is {quantity} items."}, safe=False)
-
+            messages.error(request, f"Please reduce the quantity to {product.quantity_in_stock} or less, as the current stock is {quantity} items.")
+            return redirect('store:cart') # Redirect back to the cart page with an error message
 
         try:
             # Try to get an existing cart item
             existing_cart_item = CartItem.objects.get(cart=ShoppingCart.objects.get(user=user_id), product=product)
             existing_cart_item.quantity += quantity
             existing_cart_item.save()
-            return JsonResponse(existing_cart_item.to_dict(), safe=False)
+            messages.success(request, f"Updated quantity of {product.name} in your cart.")
         except CartItem.DoesNotExist:
             # If no existing cart item, create a new one
             try:
@@ -510,52 +602,126 @@ def add_product_to_cart(request, productId):
                 cart.save()
             new_cart_item = CartItem(cart=cart, product=product, quantity=quantity)
             new_cart_item.save()
-            return JsonResponse({"success": True}, safe=False)
+            messages.success(request, f"{product.name} added to your cart.")
+
+        return redirect('store:cart') # Redirect to the cart page
 
     except Product.DoesNotExist:
-        return JsonResponse({"error": f"Product with ID: {productId} not found."}, status=404)
+        messages.error(request, f"Product with ID: {productId} not found.")
+        return redirect('store:cart') # Redirect back to the cart page with an error message
     except MultiValueDictKeyError as e:
-        return JsonResponse({"error": f"The form value for attribute {str(e)} is missing."}, status=400)
+        messages.error(request, f"The form value for attribute {str(e)} is missing.")
+        return redirect('store:cart') # Redirect back to the cart page with an error message
 
-
+@csrf_exempt
 @check_authentication
+@csrf_exempt
 @require_http_methods(["DELETE"])
 def remove_product_from_user_cart(request, productId):
     try:
         user_id = request.user.id
         cart_item_to_delete = CartItem.objects.get(cart=ShoppingCart.objects.get(user=user_id), product=Product.objects.get(product_id=productId))
 
-        cart_item_to_delete_details = cart_item_to_delete.to_dict()
 
         cart_item_to_delete.delete()
 
-        return JsonResponse({"message": "Item deleted", "item_details": cart_item_to_delete_details}, safe=False)
+        messages.success(request, "Item removed from cart.")
 
     except ShoppingCart.DoesNotExist:
-        return JsonResponse({"error": f"User with ID: {user_id} does not have an active cart."}, status=404)
+        messages.error(request, f"User with ID: {user_id} does not have an active cart.")
 
     except Product.DoesNotExist:
-        return JsonResponse({"error": f"Product with ID: {productId} not found in cart."}, status=404)
+        messages.error(request, f"Product with ID: {productId} not found in cart.")
 
     except CartItem.DoesNotExist:
-        return JsonResponse({"error": f"CartItem does not exist."}, status=404)
+        messages.error(request, f"CartItem does not exist.")
+
+    return redirect('store:cart')
 
 
+@csrf_exempt
 @check_authentication
 @require_http_methods(["DELETE", "POST"])
 def clear_entire_shopping_cart(request):
     try:
         user_id = request.user.id
+
         cart_to_clear = ShoppingCart.objects.get(user=user_id)
 
         cart_to_clear_items = CartItem.objects.filter(cart=cart_to_clear)
 
         cart_to_clear_items.delete()
 
-        return JsonResponse({"message": "Cart cleared"}, safe=False)
+        messages.success(request, "Cart cleared.")
 
     except ShoppingCart.DoesNotExist:
-        return JsonResponse({"error": f"User with ID: {user_id} does not have a cart."}, status=404)
+        messages.error(request, f"User with ID: {user_id} does not have a cart.")
+
+    return redirect('store:cart')
+
+
+"""THE START OF CHECKOUT VIEWS"""
+@check_authentication
+@require_http_methods(["GET"])
+def checkout(request):
+    try:
+        user_id = request.user.id
+        cart_contents = ShoppingCart.objects.get(user=user_id)
+        cart_items = CartItem.objects.filter(cart=cart_contents)
+        # Calculate total price for each item here
+        for item in cart_items:
+            item.total_price = item.product.price * item.quantity
+        total_amount = sum(item.total_price for item in cart_items)
+        return render(request, 'store/checkout.html', {
+            'cart_items': cart_items,
+            'total_amount': total_amount,
+            'cart_item_count': cart_items.count()
+        })
+    except ShoppingCart.DoesNotExist:
+        return render(request, 'store/checkout.html', {
+            'cart_items': [],
+            'total_amount': 0,
+            'cart_item_count': 0
+        })
+
+
+@check_authentication
+def process_checkout(request):
+    if request.method == 'POST':
+        # Extracting form data
+        street_address = request.POST.get('street_address')
+        town = request.POST.get('town')
+        zipcode = request.POST.get('zipcode')
+        county = request.POST.get('county')
+        phone_number_1 = request.POST.get('phone_number_1')
+        phone_number_2 = request.POST.get('phone_number_2')
+        additional_details = request.POST.get('additional_details')
+        # shipping_option = request.POST.get('shipping_option')
+
+        # Create an order in the database
+        order = Order.objects.create(
+            user=request.user,
+            street_address=street_address,
+            town=town,
+            zipcode=zipcode,
+            county=county,
+            phone_number_1=phone_number_1,
+            phone_number_2=phone_number_2,
+            additional_details=additional_details,
+           # shipping_option=shipping_option,
+    
+        )
+
+        # Redirect to the submit page, passing the order ID
+        return redirect('store:success', order_id=order.id)
+    else:
+        # If the request method is not POST, redirect back to the checkout page
+        return redirect('store:checkout')
+
+
+@require_http_methods(["GET"])
+def success(request):
+    return render(request, 'store/submit.html')
 
 
 """THE START OF ORDER MANAGEMENT"""
@@ -582,6 +748,7 @@ def get_details_of_order_with_order_id(request, id):
 
 @require_http_methods(["POST"])
 def create_new_order(request):
+   def create_new_order(request):
     try:
         user_id = request.user.id
         user_cart = ShoppingCart.objects.get(user=user_id)
@@ -590,7 +757,7 @@ def create_new_order(request):
         if not cart_items:
             return JsonResponse({"error": "User has no items in cart."}, status=404)
         
-        total_cost_of_cart_items = CartItem.objects.filter(cart=user_cart).aggregate(total_cost=Sum(ExpressionWrapper(F('quantity') * F('product__price'), output_field=fields.FloatField())))
+        total_cost_of_cart_items = CartItem.objects.filter(cart=user_cart).aggregate(total_cost=Sum(ExpressionWrapper(F('quantity') * F('product__price'), output_field=FloatField())))
         total_cost = total_cost_of_cart_items.get('total_cost', 0) or 0
 
         new_order = Order(user=User.objects.get(id=user_id), total_amount=total_cost, order_status='ACTIVE')
@@ -607,10 +774,11 @@ def create_new_order(request):
 
         clear_entire_shopping_cart(request)
 
+        return JsonResponse({"success": True, "order_id": new_order.id}, safe=False)
+
     except ShoppingCart.DoesNotExist:
         return JsonResponse({"error": f"User with ID: {user_id} has no items in cart."}, status=404)
 
-    return JsonResponse({"success": True}, safe=False)
 
 
 @require_http_methods(["PUT"])
@@ -646,7 +814,7 @@ def get_user_saved_addresses(request):
 
 @check_authentication
 @require_http_methods(["POST"])
-def add_address_to_user_profile(request):
+def add_address(request):
     try:
         user_id = request.user.id
         data = request.POST
@@ -659,13 +827,17 @@ def add_address_to_user_profile(request):
 
         new_address.save()
 
-        return JsonResponse({"message": "address created successfully"})
+        messages.success(request, "Address created successfully")
+
+        return redirect('store:checkout')
     
     except User.DoesNotExist:
-        return JsonResponse({"error": f"User with ID: {user_id} does not exist."}, status=404)
+        messages.error(request, f"User with ID: {user_id} does not exist.")
+        return redirect('store:checkout')
     
     except KeyError as e:
-        return JsonResponse({"error": f"The form value for attribute {str(e)} is missing."}, status=400)
+        messages.error(request, f"The form value for attribute {str(e)} is missing.")
+        return redirect('store:checkout')
 
 
 @check_authentication
