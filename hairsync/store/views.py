@@ -136,8 +136,8 @@ def login_view(request):
             #     "code": "authentication_failed",
             #     "details": "The provided credentials do not match our records."
             # }, status=401)  
-            messages.success(request, ("There is an error "))
-            return redirect('login')
+            messages.error(request, ("There is an error "))
+            return redirect('login_page')
     
     except MultiValueDictKeyError as e:
         return JsonResponse({
