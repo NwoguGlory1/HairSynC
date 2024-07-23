@@ -28,12 +28,16 @@
  <div class="login-page container-fluid">
     <!-- Messages display -->
     {% if messages %}
-    <ul class="messages">
-        {% for message in messages %}
-        <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
-        {% endfor %}
-    </ul>
-    {% endif %}
+     {% for message in messages %}
+     <div class="alert alert-warning alert-dismissable fade show" role="alert">  
+      {{ message }}
+      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+      {% endfor %}
+    {%  endif %}
+  {% block content %}
+  {% endblock %}
+</div>
+
     <form class="mt-4" method="post" action="{% url 'store:login' %}">
       {% csrf_token %}
       <h4 class="text-center">Login</h4>
