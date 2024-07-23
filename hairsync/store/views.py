@@ -131,14 +131,14 @@ def login_view(request):
             # Redirect to /store/ after successful login
             return HttpResponseRedirect('/store/')
         else:
-            # return JsonResponse({
-            #     "error": "Authentication failed. Please verify your username/email and password.",
-            #     "code": "authentication_failed",
-            #     "details": "The provided credentials do not match our records."
-            # }, status=401)  
-            messages.error(request, ("There is an error "))
-            return redirect('login_page')
-    
+            return JsonResponse({
+                "error": "Authentication failed. Please verify your username/email and password.",
+                "code": "authentication_failed",
+                "details": "The provided credentials do not match our records."
+            }, status=401)  
+            # messages.error(request, ("There is an error "))
+            # return redirect('login_page')
+
     except MultiValueDictKeyError as e:
         return JsonResponse({
             "error": f"The form value for attribute {str(e)} is missing",
