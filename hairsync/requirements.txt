@@ -16,7 +16,6 @@ charset-normalizer==3.3.2
 click==8.1.7
 cryptography==42.0.5
 distlib==0.3.8
--e git+https://github.com/fae713/django.git@921670c6943e9c532137b7d164885f2d3ab436b8#egg=Django
 django-cors-headers==4.3.1
 django-debug-toolbar==4.3.0
 docutils==0.20.1
